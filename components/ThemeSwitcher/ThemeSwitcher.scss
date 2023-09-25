@@ -1,0 +1,62 @@
+@import "~/assets/scss/vars";
+
+$icon-size: 19px;
+
+.switcher {
+	&__container {
+		display: flex;
+		gap: 25px;
+		align-items: center;
+		justify-content: center;
+
+		width: 100%;
+		max-width: 235px;
+		min-height: 48px;
+
+		background-color: var(--color-background);
+		border-radius: 5px;
+	}
+
+	&__icon {
+		width: $icon-size;
+		height: $icon-size;
+
+		svg path {
+			fill: $medium-gray;
+		}
+	}
+
+	&__button {
+		position: relative;
+
+		width: 100%;
+		max-width: 40px;
+		min-height: 20px;
+
+		background-color: $dark-blue;
+		border-radius: 10px;
+
+		&::after {
+			content: "";
+
+			position: absolute;
+			top: 50%;
+			left: 0;
+			transform: translate(5px, -50%);
+
+			width: 14px;
+			height: 14px;
+
+			background-color: $white;
+			border-radius: 50%;
+
+			transition: transform 0.3s ease;
+		}
+
+		&--dark {
+			&::after {
+				transform: translate(21px, -50%);
+			}
+		}
+	}
+}

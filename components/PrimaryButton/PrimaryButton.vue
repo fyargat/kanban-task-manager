@@ -5,5 +5,5 @@
 <script setup lang="ts"></script>
 
 <style scoped lang="scss">
-@use "./PrimaryButton";
+@use "./PrimaryButton.scss";
 </style>

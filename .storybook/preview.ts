@@ -12,6 +12,13 @@ const preview: Preview = {
 			},
 		},
 	},
+	decorators: [
+		(story) => ({
+			components: { story },
+			template:
+				'<div class="light" style="background-color: white;"><story /></div>',
+		}),
+	],
 };
 
 export default preview;
