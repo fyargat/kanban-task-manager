@@ -1,0 +1,59 @@
+// Colors
+
+$black: #000;
+$white: #fff;
+$red: #ea5555;
+$dark-blue: #635fc7;
+$very-light-blue: #f0effa;
+$light-blue: #a8a4ff;
+$light-gray: #f4f7fd;
+$light-gray-line: #e4ebfa;
+$medium-gray: #828fa3;
+$dark-gray: #2b2c37;
+$dark-gray-line: #3e3f4e;
+$very-dark-gray: #20212c;
+$card-shadow: rgb(54 78 126 / 10.2%);
+$overlay: rgb(0 0 0 / 50%);
+$medium-gray-opacity: rgb(130 143 163 / 40%);
+$medium-gray-gradient: linear-gradient(
+	to bottom,
+	rgb(121 132 147 / 20%),
+	rgb(130 143 163 / 10%),
+	rgb(130 143 163 / 0%)
+);
+$dark-blue-opacity: rgb(99 95 199 / 25%);
+
+// Color maps
+
+$light: (
+	background: $light-gray,
+	scroll: $medium-gray,
+	border-line: $light-gray-line,
+	main: $white,
+	title: $black,
+	subtitle: $medium-gray,
+	board: $white,
+	theme-switch-box: $light-gray,
+	add-button: $very-light-blue,
+	ellipsis: $light-gray-line,
+	checked: rgb(0 0 0 / 50%),
+);
+$dark: (
+	background: $very-dark-gray,
+	scroll: $dark-gray-line,
+	border-line: $dark-gray-line,
+	main: $dark-gray,
+	title: $white,
+	subtitle: $white,
+	board: $very-dark-gray,
+	theme-switch-box: $very-dark-gray,
+	add-button: $white,
+	ellipsis: $very-dark-gray,
+	checked: rgb(255 255 255 / 50%),
+);
+
+// Device resolution
+
+$mobile-resolution: 767px;
+$tablet-resolution: 1023px;
+$desktop-resolution: 1024px;

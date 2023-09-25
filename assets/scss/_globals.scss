@@ -1,0 +1,25 @@
+* {
+	margin: 0;
+}
+
+html,
+body {
+	height: 100%;
+}
+
+body {
+	font-family: "Plus Jakarta Sans", Arial, sans-serif;
+	font-weight: 500;
+	font-style: normal;
+	line-height: 1.5;
+	color: var(--color-title);
+
+	background-color: var(--color-background);
+}
+
+input,
+button,
+textarea,
+select {
+	font: inherit;
+}

@@ -2,4 +2,5 @@
 export default defineNuxtConfig({
 	devtools: { enabled: true },
 	modules: ["@nuxtjs/stylelint-module", "@nuxtjs/storybook"],
+	css: ["~/assets/scss/index.scss"],
 });
