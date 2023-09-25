@@ -1,0 +1,49 @@
+@import "~/assets/scss/vars";
+
+.task-card {
+	&__container {
+		cursor: grab;
+
+		display: flex;
+		flex-direction: column;
+
+		width: 100%;
+		min-height: 5.5rem;
+		margin-bottom: 1.5rem;
+		padding: 1.5rem 1rem;
+
+		font-weight: 700;
+		text-align: left;
+
+		background-color: var(--color-main);
+		border: 1px solid rgb(134 134 134 / 10%);
+		border-radius: 8px;
+		box-shadow: 0 4px 6px #364e7e1a;
+
+		transition: filter 0.2s ease;
+
+		&:hover {
+			filter: opacity(45%);
+		}
+	}
+
+	&__title {
+		overflow: hidden;
+		display: -webkit-box;
+
+		margin-bottom: 0.5rem;
+
+		font-size: 0.9375rem;
+		color: var(--color-title);
+		text-overflow: ellipsis;
+		word-break: break-word;
+
+		-webkit-box-orient: vertical;
+		-webkit-line-clamp: 3;
+	}
+
+	&__subtask-count {
+		font-size: 0.75rem;
+		color: $medium-gray;
+	}
+}
