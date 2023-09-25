@@ -14,11 +14,14 @@
     "lintfix": "prettier --write --list-different . && yarn lint:js --fix",
     "lint:style": "stylelint **/*.{css,scss,vue}",
     "prepare": "husky install",
-    "lint-staged": "lint-staged"
+    "lint-staged": "lint-staged",
+    "storybook": "storybook dev --port 6006",
+    "build-storybook": "storybook build"
   },
   "devDependencies": {
     "@nuxt/devtools": "latest",
     "@nuxtjs/eslint-config-typescript": "^12.1.0",
+    "@nuxtjs/storybook": "7.0.0",
     "@nuxtjs/stylelint-module": "^5.1.0",
     "@typescript-eslint/parser": "^6.7.2",
     "eslint": "^8.50.0",
@@ -36,6 +39,18 @@
     "stylelint-config-recommended-vue": "^1.5.0",
     "stylelint-config-standard-scss": "^11.0.0",
     "stylelint-order": "^6.0.3",
-    "typescript": "^5.2.2"
+    "typescript": "^5.2.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "storybook": "next",
+    "@types/node": "^18.17.5",
+    "@storybook/vue3": "7.4.4",
+    "@storybook-vue/nuxt": "0.1.1",
+    "@storybook/addon-links": "7.4.4",
+    "@storybook/builder-vite": "7.4.4",
+    "@storybook/addon-essentials": "7.4.4",
+    "@storybook/addon-interactions": "7.4.4",
+    "@storybook/testing-library": "^0.2.0",
+    "@storybook/blocks": "7.4.4"
   }
 }
