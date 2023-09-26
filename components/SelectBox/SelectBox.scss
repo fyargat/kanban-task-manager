@@ -1,0 +1,102 @@
+@import "~/assets/scss/vars";
+
+.select-box {
+	&__container {
+		position: relative;
+		display: flex;
+		width: 100%;
+	}
+}
+
+.control {
+	display: flex;
+	justify-content: space-between;
+
+	width: 100%;
+	padding: 0.5rem 1rem;
+
+	font-size: 0.8125rem;
+	color: var(--color-title);
+	text-transform: capitalize;
+
+	background: transparent;
+	border: 2px solid rgb(130 143 163 / 40%);
+	border-radius: 4px;
+
+	transition: border-color 0.2s ease;
+
+	&:focus {
+		border-color: $dark-blue;
+	}
+
+	&__text {
+		overflow: hidden;
+		margin-right: 1rem;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+
+	&__icon {
+		transition: transform 0.3s ease;
+	}
+
+	&--open {
+		.control__icon {
+			transform: rotate(180deg);
+		}
+	}
+}
+
+.list {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	transform: translateY(3rem);
+
+	overflow: hidden;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+
+	width: 100%;
+	height: fit-content;
+	padding: 1rem 0;
+
+	text-overflow: ellipsis;
+	white-space: nowrap;
+
+	background: var(--color-board);
+	border: 1px solid var(--color-bg);
+	border-radius: 4px;
+	box-shadow: 0 0 8px $box-shadow-color;
+
+	// animation: fadeIn 0.2s ease-in-out;
+
+	&__item {
+		display: flex;
+		width: 100%;
+
+		&:not(:last-of-type) {
+			margin-bottom: 0.5rem;
+		}
+	}
+
+	&__item-button {
+		display: flex;
+
+		width: 100%;
+		padding: 0;
+		padding: 0 1rem;
+
+		font-size: 0.8125rem;
+		color: $medium-gray;
+		text-transform: capitalize;
+
+		transition: all 0.2s ease;
+
+		&:hover {
+			font-weight: 700;
+			color: var(--color-title);
+		}
+	}
+}

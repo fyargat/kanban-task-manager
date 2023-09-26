@@ -1,0 +1,56 @@
+<template>
+	<div class="select-box__container">
+		<button
+			class="select-box__control control"
+			:class="{
+				'control--open': isOpen,
+			}"
+			@click="isOpen = !isOpen"
+		>
+			<p class="control__text">{{ selectedOption.name }}</p>
+
+			<div class="control__icon">
+				<svg width="10" height="7" xmlns="http://www.w3.org/2000/svg">
+					<path
+						stroke="#635FC7"
+						stroke-width="2"
+						fill="none"
+						d="m1 1 4 4 4-4"
+					></path>
+				</svg>
+			</div>
+		</button>
+
+		<ul v-if="isOpen" class="select-box__list list" @click.stop="">
+			<li v-for="option in options" :key="option.id" class="list__item">
+				<button class="list__item-button" @click="selectOption(option)">
+					{{ option.name }}
+				</button>
+			</li>
+		</ul>
+	</div>
+</template>
+
+<script setup lang="ts">
+import { Column } from "~/types";
+
+interface Props {
+	options: Column[];
+	selectedOption: Column;
+}
+
+const emit = defineEmits(["updateSelectedOption"]);
+
+defineProps<Props>();
+
+const isOpen = ref<boolean>(false);
+
+const selectOption = (option: Column) => {
+	emit("updateSelectedOption", option);
+	isOpen.value = false;
+};
+</script>
+
+<style scoped lang="scss">
+@use "./SelectBox.scss";
+</style>
