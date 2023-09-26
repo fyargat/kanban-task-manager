@@ -4,7 +4,6 @@ export default defineNuxtConfig({
 	modules: ["@nuxtjs/stylelint-module", "@nuxtjs/storybook"],
 	css: ["~/assets/scss/index.scss"],
 	components: {
-		global: true,
-		dirs: ["~/components"],
+		dirs: [],
 	},
 });
