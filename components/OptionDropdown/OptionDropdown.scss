@@ -1,0 +1,82 @@
+@import "~/assets/scss/vars";
+
+.option-dropdown {
+	&__container {
+		position: relative;
+	}
+
+	&__control {
+		cursor: pointer;
+
+		position: relative;
+
+		display: flex;
+		align-items: center;
+		justify-content: center;
+
+		min-width: 22px;
+		height: 38px;
+		margin-left: 1rem;
+
+		color: $medium-gray;
+
+		opacity: 1;
+		border: 0;
+		border-radius: 10px;
+
+		transition:
+			background-color 0.2s ease,
+			color 0.2s ease;
+
+		&:hover {
+			background-color: var(--color-ellipsis);
+		}
+	}
+
+	&__list {
+		position: absolute;
+		top: 130%;
+		right: 0;
+
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+
+		width: 12rem;
+		padding: 1rem;
+
+		font-size: 10px;
+		color: var(--color-title);
+
+		background-color: var(--color-board);
+		border: 1px solid var(--color-bg);
+		border-radius: 8px;
+		box-shadow: 0 0 8px $box-shadow-color;
+
+		animation: fadeIn 0.3s ease;
+	}
+
+	&__item {
+		display: flex;
+		width: 100%;
+		transition: opacity 0.2s ease;
+
+		button {
+			flex: auto;
+			color: $medium-gray;
+			text-align: left;
+		}
+
+		&:hover {
+			opacity: 0.6;
+		}
+
+		&--delete {
+			margin-top: 0.5rem;
+
+			button {
+				color: $red;
+			}
+		}
+	}
+}
