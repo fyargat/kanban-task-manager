@@ -2,6 +2,16 @@ import { action } from "@storybook/addon-actions";
 import type { Meta, StoryObj } from "@storybook/vue3";
 import TaskCard from "~/components/TaskCard/TaskCard.vue";
 
+const task = {
+	id: "1",
+	name: "Task 1",
+	subtasks: [
+		{ id: "1", name: "Subtask 1", checked: false },
+		{ id: "2", name: "Subtask 2", checked: true },
+	],
+	status: "Doing",
+};
+
 const meta = {
 	title: "UI/TaskCard",
 	component: TaskCard,
@@ -19,9 +29,7 @@ const meta = {
 		},
 	}),
 	args: {
-		title: "Launch version one",
-		doneSubtaskCount: 1,
-		subtaskCount: 10,
+		task,
 	},
 } satisfies Meta<typeof TaskCard>;
 

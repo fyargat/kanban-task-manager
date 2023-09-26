@@ -1,0 +1,58 @@
+@import "~/assets/scss/vars";
+
+.board-column {
+	&__container {
+		user-select: none;
+
+		display: flex;
+		flex-direction: column;
+
+		width: 17.5rem;
+		height: 100%;
+		margin-right: 2rem;
+
+		color: var(--color-title);
+	}
+
+	&__head {
+		display: flex;
+		align-items: center;
+
+		margin-bottom: 1.5rem;
+
+		font-size: 0.75rem;
+		font-weight: 700;
+		color: $medium-gray;
+		text-transform: uppercase;
+		letter-spacing: 2.4px;
+	}
+
+	&__color {
+		display: flex;
+
+		min-width: 15px;
+		height: 15px;
+		margin-right: 12px;
+
+		// temp
+		background: $dark-blue;
+		border-radius: 100%;
+	}
+
+	&__title {
+		cursor: help;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+
+	&__body {
+		height: 100vh;
+
+		&--empty {
+			border-radius: 6px;
+			outline: 1px dashed rgb(130 143 163 / 40%);
+			outline-width: 2px;
+		}
+	}
+}
