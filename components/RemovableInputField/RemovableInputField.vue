@@ -2,7 +2,11 @@
 	<div class="removable-input-field__container">
 		<InputField :model-value="modelValue" />
 
-		<button class="removable-input-field__icon" @click="onRemove">
+		<button
+			:disabled="isDisabled"
+			class="removable-input-field__icon"
+			@click="onRemove"
+		>
 			<img src="~/assets/icons/icon-cross.svg" alt="Cross Icon" />
 		</button>
 	</div>
@@ -14,9 +18,12 @@ import InputField from "~/components/InputField/InputField.vue";
 interface Props {
 	modelValue: string;
 	onRemove: () => void;
+	isDisabled?: boolean;
 }
 
-defineProps<Props>();
+withDefaults(defineProps<Props>(), {
+	isDisabled: false,
+});
 </script>
 
 <style scoped lang="scss">

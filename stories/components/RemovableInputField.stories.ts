@@ -10,10 +10,10 @@ const meta = {
 		setup() {
 			const value = ref<string>(args.modelValue ?? "");
 
-			return { onRemove: args.onRemove, value };
+			return { isDisabled: args.isDisabled, onRemove: args.onRemove, value };
 		},
 		template:
-			'<RemovableInputField :onRemove="onRemove"  :modelValue="value" />',
+			'<RemovableInputField :isDisabled="isDisabled" :onRemove="onRemove" :modelValue="value" />',
 	}),
 	args: {
 		modelValue: "",
@@ -26,4 +26,10 @@ type Story = StoryObj<typeof meta>;
 
 export const Base: Story = {
 	args: {},
+};
+
+export const Disabled: Story = {
+	args: {
+		isDisabled: true,
+	},
 };

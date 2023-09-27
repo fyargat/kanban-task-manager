@@ -12,5 +12,10 @@
 		margin-left: 0.5rem;
 
 		@include flex-center;
+
+		&:disabled {
+			pointer-events: none;
+			opacity: 0.2;
+		}
 	}
 }
