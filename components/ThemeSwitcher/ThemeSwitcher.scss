@@ -1,13 +1,13 @@
 @import "~/assets/scss/vars";
+@import "~/assets/scss/mixins";
 
 $icon-size: 19px;
 
 .switcher {
 	&__container {
-		display: flex;
+		@include flex-center;
+
 		gap: 25px;
-		align-items: center;
-		justify-content: center;
 
 		width: 100%;
 		max-width: 235px;

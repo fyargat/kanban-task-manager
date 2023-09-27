@@ -1,0 +1,48 @@
+@use "sass:map";
+
+@mixin truncate() {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+@mixin input-field {
+	width: 100%;
+	padding: 0.5rem 1rem;
+
+	font-size: 0.8125rem;
+	color: var(--color-title);
+
+	background-color: transparent;
+	border: 2px solid rgb(130 143 163 / 40%);
+	border-radius: 4px;
+
+	transition: border-color 0.2s ease;
+
+	&:focus-visible {
+		border-color: $dark-blue;
+	}
+}
+
+@mixin flex-center {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+@mixin breakpoint($point) {
+	@if map.has-key($map: $breakpoints, $key: $point) {
+		$value: map.get(
+			$map: $breakpoints,
+			$key: $point,
+		);
+
+		@media (min-width: $value) {
+			@content;
+		}
+	}
+
+ @else {
+		@warn "Invalid breakpoint: #{$breakpoint}";
+	}
+}

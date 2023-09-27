@@ -1,4 +1,5 @@
 @import "~/assets/scss/vars";
+@import "~/assets/scss/mixins";
 
 .board-column {
 	&__container {
@@ -40,10 +41,9 @@
 	}
 
 	&__title {
+		@include truncate;
+
 		cursor: help;
-		overflow: hidden;
-		text-overflow: ellipsis;
-		white-space: nowrap;
 	}
 
 	&__body {

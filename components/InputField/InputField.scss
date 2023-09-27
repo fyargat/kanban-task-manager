@@ -1,4 +1,7 @@
 @import "~/assets/scss/vars";
+@import "~/assets/scss/mixins";
+
+$test: "blue";
 
 .input-field {
 	&__container {
@@ -13,20 +16,6 @@
 	}
 
 	&__input {
-		width: 100%;
-		padding: 0.5rem 1rem;
-
-		font-size: 0.8125rem;
-		color: var(--color-title);
-
-		background-color: transparent;
-		border: 2px solid rgb(130 143 163 / 40%);
-		border-radius: 4px;
-
-		transition: border-color 0.2s ease;
-
-		&:focus-visible {
-			border-color: $dark-blue;
-		}
+		@include input-field;
 	}
 }

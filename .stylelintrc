@@ -24,6 +24,14 @@
 			{
 				"ignorePseudoClasses": ["deep"]
 			}
+		],
+		"order/order": [
+			"custom-properties",
+			"at-variables",
+			{ "type": "at-rule", "name": "import" },
+			{ "type": "at-rule", "name": "forward" },
+			{ "type": "at-rule", "name": "use" },
+			"dollar-variables"
 		]
 	}
 }

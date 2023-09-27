@@ -53,8 +53,12 @@ $dark: (
 	checked: rgb(255 255 255 / 50%),
 );
 
-// Device resolution
+// Breakpoints
 
+$breakpoints: (
+	mobile: 768px,
+	desktop: 1024px,
+);
 $mobile-resolution: 767px;
 $tablet-resolution: 1023px;
 $desktop-resolution: 1024px;
