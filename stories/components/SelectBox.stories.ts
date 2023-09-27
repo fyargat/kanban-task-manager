@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/vue3";
 import SelectBox from "~/components/SelectBox/SelectBox.vue";
 import { Column } from "~/types";
 
-const options: Column[] = [
+const columns: Column[] = [
 	{
 		id: "1",
 		name: "Column 1",
@@ -37,8 +37,8 @@ const meta = {
 			'<SelectBox  :selectedOption="selectedOption" @updateSelectedOption="updateSelectedOption" :options="options" />',
 	}),
 	args: {
-		options,
-		selectedOption: options[0],
+		columns,
+		currentColumn: columns[0],
 	},
 } satisfies Meta<typeof SelectBox>;
 

@@ -30,6 +30,16 @@
 	justify-content: center;
 }
 
+@mixin flex-column {
+	display: flex;
+	flex-direction: column;
+}
+
+@mixin flex-row {
+	display: flex;
+	flex-direction: row;
+}
+
 @mixin breakpoint($point) {
 	@if map.has-key($map: $breakpoints, $key: $point) {
 		$value: map.get(
@@ -37,12 +47,12 @@
 			$key: $point,
 		);
 
-		@media (min-width: $value) {
+		@media screen and (min-width: $value) {
 			@content;
 		}
 	}
 
  @else {
-		@warn "Invalid breakpoint: #{$breakpoint}";
+		@warn "Invalid breakpoint: #{$point}";
 	}
 }

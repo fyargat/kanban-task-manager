@@ -7,7 +7,7 @@
 			}"
 			@click="isOpen = !isOpen"
 		>
-			<p class="control__text">{{ selectedOption.name }}</p>
+			<p class="control__text">{{ currentColumn.name }}</p>
 
 			<div class="control__icon">
 				<svg width="10" height="7" xmlns="http://www.w3.org/2000/svg">
@@ -22,7 +22,7 @@
 		</button>
 
 		<ul v-if="isOpen" class="select-box__list list" @click.stop="">
-			<li v-for="option in options" :key="option.id" class="list__item">
+			<li v-for="option in columns" :key="option.id" class="list__item">
 				<button class="list__item-button" @click="selectOption(option)">
 					{{ option.name }}
 				</button>
@@ -35,8 +35,8 @@
 import { Column } from "~/types";
 
 interface Props {
-	options: Column[];
-	selectedOption: Column;
+	columns: Column[];
+	currentColumn: Column;
 }
 
 const emit = defineEmits(["updateSelectedOption"]);
