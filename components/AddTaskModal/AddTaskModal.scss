@@ -1,0 +1,55 @@
+@import "~/assets/scss/vars";
+@import "~/assets/scss/mixins";
+
+.add-task-modal {
+	&__container {
+		@include flex-column;
+
+		width: 100%;
+		text-align: left;
+	}
+
+	&__title {
+		margin-bottom: 1rem;
+		font-size: 1.125rem;
+		font-weight: 700;
+	}
+
+	&__box {
+		@include flex-column;
+
+		width: 100%;
+		margin-bottom: 1rem;
+	}
+
+	&__subtitle {
+		@include modal-subtitle;
+	}
+
+	&__description {
+		@include input-field;
+
+		resize: none;
+	}
+
+	&__add-subtask-button {
+		margin-top: 0.5rem;
+		padding: 0.6rem 1rem;
+
+		font-size: 0.8125rem;
+		color: $dark-blue;
+
+		background-color: var(--color-add-button);
+
+		&:hover {
+			opacity: 0.9;
+			background-color: var(--color-add-button);
+		}
+	}
+
+	&__create-button {
+		width: 100%;
+		padding: 0.6rem 1rem;
+		font-size: 0.8125rem;
+	}
+}

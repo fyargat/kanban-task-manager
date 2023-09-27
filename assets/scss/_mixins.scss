@@ -24,6 +24,13 @@
 	}
 }
 
+@mixin modal-subtitle {
+	margin-bottom: 0.5rem;
+	font-size: 0.75rem;
+	font-weight: 700;
+	color: var(--color-sub-title);
+}
+
 @mixin flex-center {
 	display: flex;
 	align-items: center;
