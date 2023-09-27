@@ -1,6 +1,7 @@
 import { v4 } from "uuid";
+import { Task } from "~/types";
 
-export const getTaskTemplate = () => ({
+export const getTaskTemplate = (): Task => ({
 	id: v4(),
 	name: "",
 	description: "",
