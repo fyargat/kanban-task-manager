@@ -5,6 +5,9 @@ import RemovableInputField from "~/components/RemovableInputField/RemovableInput
 const meta = {
 	title: "UI/RemovableInputField",
 	component: RemovableInputField,
+	decorators: [
+		() => ({ template: '<div style="maxWidth: 400px"><story/></div>' }),
+	],
 	render: (args: any) => ({
 		components: { RemovableInputField },
 		setup() {
