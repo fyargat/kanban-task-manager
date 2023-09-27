@@ -11,12 +11,15 @@ const meta = {
 	render: (args: any) => ({
 		components: { RemovableInputField },
 		setup() {
-			const value = ref<string>(args.modelValue ?? "");
+			const { modelValue, ...rest } = args;
+			const value = ref<string>(modelValue ?? "");
 
-			return { isDisabled: args.isDisabled, onRemove: args.onRemove, value };
+			return {
+				rest,
+				value,
+			};
 		},
-		template:
-			'<RemovableInputField :isDisabled="isDisabled" :onRemove="onRemove" :modelValue="value" />',
+		template: '<RemovableInputField  v-model="value" v-bind="rest" />',
 	}),
 	args: {
 		modelValue: "",
@@ -34,5 +37,11 @@ export const Base: Story = {
 export const Disabled: Story = {
 	args: {
 		isDisabled: true,
+	},
+};
+
+export const HideButton: Story = {
+	args: {
+		isHideButton: true,
 	},
 };

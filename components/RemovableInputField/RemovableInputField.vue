@@ -3,6 +3,7 @@
 		<InputField :model-value="modelValue" />
 
 		<button
+			v-if="!isHideButton"
 			type="button"
 			:disabled="isDisabled"
 			class="removable-input-field__icon"
@@ -20,10 +21,12 @@ interface Props {
 	modelValue: string;
 	onRemove: () => void;
 	isDisabled?: boolean;
+	isHideButton?: boolean;
 }
 
 withDefaults(defineProps<Props>(), {
 	isDisabled: false,
+	isHideButton: false,
 });
 </script>
 
