@@ -26,15 +26,18 @@ const meta = {
 	render: (args: any) => ({
 		components: { SelectBox },
 		setup() {
-			const selectedOption = ref<Column>(args.selectedOption as Column);
+			const currentColumn = ref<Column>(args.currentColumn as Column);
 
-			const updateSelectedOption = (option: Column) =>
-				(selectedOption.value = option);
+			const updateCurrentColumn = (option: Column) =>
+				(currentColumn.value = option);
 
-			return { options: args.options, selectedOption, updateSelectedOption };
+			return { columns: args.columns, currentColumn, updateCurrentColumn };
 		},
-		template:
-			'<SelectBox  :selectedOption="selectedOption" @updateSelectedOption="updateSelectedOption" :options="options" />',
+		template: `<SelectBox  
+					:columns="columns" 
+					:current-column="currentColumn" 
+					@update-current-column="updateCurrentColumn" 
+				/>`,
 	}),
 	args: {
 		columns,

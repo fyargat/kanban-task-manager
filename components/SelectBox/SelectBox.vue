@@ -1,6 +1,7 @@
 <template>
 	<div class="select-box__container">
 		<button
+			type="button"
 			class="select-box__control control"
 			:class="{
 				'control--open': isOpen,
@@ -39,14 +40,14 @@ interface Props {
 	currentColumn: Column;
 }
 
-const emit = defineEmits(["updateSelectedOption"]);
+const emit = defineEmits(["update-current-column"]);
 
 defineProps<Props>();
 
 const isOpen = ref<boolean>(false);
 
 const selectOption = (option: Column) => {
-	emit("updateSelectedOption", option);
+	emit("update-current-column", option);
 	isOpen.value = false;
 };
 </script>

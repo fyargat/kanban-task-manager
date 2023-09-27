@@ -1,7 +1,7 @@
 <template>
 	<div class="modal-dialog__overlay" @mousedown="onClose">
 		<div class="modal-dialog__content" @mousedown.stop="">
-			<button class="modal-dialog__close" @click="onClose">
+			<button type="button" class="modal-dialog__close" @click="onClose">
 				<svg width="15" height="15" xmlns="http://www.w3.org/2000/svg">
 					<g fill="#828FA3" fill-rule="evenodd">
 						<path d="m12.728 0 2.122 2.122L2.122 14.85 0 12.728z"></path>

@@ -18,14 +18,14 @@ interface Props {
 	modelValue: string;
 }
 
-const emit = defineEmits(["update:modeValue"]);
+const emit = defineEmits(["update:modelValue"]);
 
 defineProps<Props>();
 
 const updateInputValue = (event: Event) => {
 	const { value } = event.target as HTMLInputElement;
 
-	emit("update:modeValue", value);
+	emit("update:modelValue", value);
 };
 </script>
 

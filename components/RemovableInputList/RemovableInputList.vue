@@ -10,10 +10,7 @@
 				:key="item.id"
 				class="removable-input-list__item"
 			>
-				<RemovableInputField
-					:on-remove="() => {}"
-					:model-value="item.name as string"
-				/>
+				<RemovableInputField v-model="item.name" :on-remove="() => {}" />
 			</li>
 		</ul>
 

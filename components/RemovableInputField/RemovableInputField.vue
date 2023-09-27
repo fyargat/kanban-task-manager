@@ -3,6 +3,7 @@
 		<InputField :model-value="modelValue" />
 
 		<button
+			type="button"
 			:disabled="isDisabled"
 			class="removable-input-field__icon"
 			@click="onRemove"

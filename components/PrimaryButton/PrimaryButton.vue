@@ -1,5 +1,5 @@
 <template>
-	<button class="button__container"><slot></slot></button>
+	<button type="button" class="button__container"><slot></slot></button>
 </template>
 
 <script setup lang="ts"></script>
