@@ -1,0 +1,50 @@
+@import "~/assets/scss/vars";
+@import "~/assets/scss/mixins";
+
+.delete-modal {
+	&__container {
+		@include flex-column;
+
+		width: 100%;
+	}
+
+	&__title {
+		margin-bottom: 1rem;
+		font-size: 1.125rem;
+		color: $red;
+	}
+
+	&__text {
+		margin-bottom: 1.5rem;
+		font-size: 0.8125rem;
+		line-height: 23px;
+		color: $medium-gray;
+	}
+
+	&__buttons {
+		display: flex;
+		gap: 1rem;
+		justify-content: space-between;
+	}
+
+	&__button {
+		padding: 0.5rem 1rem;
+		font-size: 0.8125rem;
+		transition: opacity 0.3s ease;
+
+		&:hover {
+			opacity: 0.6;
+		}
+
+		&--delete,
+		&--delete:hover {
+			background-color: $red;
+		}
+
+		&--cancel,
+		&--cancel:hover {
+			color: $dark-blue;
+			background-color: $very-light-blue;
+		}
+	}
+}

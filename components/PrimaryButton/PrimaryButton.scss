@@ -3,13 +3,21 @@
 .button__container {
 	cursor: pointer;
 
-	padding: 8px;
+	display: flex;
+	justify-content: center;
 
+	width: 100%;
+	height: auto;
+	padding: 0.75rem 1rem;
+
+	font-size: 0.9375rem;
+	font-weight: 700;
 	color: $white;
 
 	background-color: $dark-blue;
 	border-radius: $button-border-radius;
 
+	transition: all 0.2s ease;
 	transition: background-color 0.3s ease;
 
 	&:hover {
