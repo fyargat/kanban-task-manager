@@ -56,7 +56,7 @@ import { storeToRefs } from "pinia";
 import SidebarCreateButton from "~/components/SidebarCreateButton/SidebarCreateButton.vue";
 import SidebarItem from "~/components/SidebarItem/SidebarItem.vue";
 import ThemeSwitcher from "~/components/ThemeSwitcher/ThemeSwitcher.vue";
-import { useSidebarStore } from "~/store/sidebar";
+import { useSidebarStore } from "~/store/useSidebarStore";
 import { Board } from "~/types";
 
 interface Props {

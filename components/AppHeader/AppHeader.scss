@@ -39,8 +39,6 @@
 
 		border-right: 1px solid transparent;
 
-		transition: border-color 0.3s ease;
-
 		@include breakpoint(tablet) {
 			min-width: 16.75rem;
 			border-color: var(--color-border-line);

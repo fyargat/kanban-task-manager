@@ -20,7 +20,7 @@
 <script setup lang="ts">
 import { storeToRefs } from "pinia";
 import BoardColumn from "~/components/BoardColumn/BoardColumn.vue";
-import { useSidebarStore } from "~/store/sidebar";
+import { useSidebarStore } from "~/store/useSidebarStore";
 import { Board } from "~/types";
 
 interface Props {

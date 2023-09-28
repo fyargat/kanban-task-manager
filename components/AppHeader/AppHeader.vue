@@ -59,14 +59,15 @@
 
 <script setup lang="ts">
 import { useMediaQuery } from "@vueuse/core";
+import { storeToRefs } from "pinia";
 import OptionDropdown from "~/components/OptionDropdown/OptionDropdown.vue";
 import PrimaryButton from "~/components/PrimaryButton/PrimaryButton.vue";
 import SidebarMobile from "~/components/SidebarMobile/SidebarMobile.vue";
 import { Theme } from "~/constants/theme";
-import { ThemeType } from "~/types/theme";
 
 import darkLogoPath from "~/assets/icons/logo-dark.svg";
 import lightLogoPath from "~/assets/icons/logo-light.svg";
+import { useThemeStore } from "~/store/useThemeStore";
 import { Board } from "~/types";
 
 interface Props {
@@ -79,9 +80,12 @@ defineProps<Props>();
 const isOpen = ref<boolean>(false);
 const isMobile = useMediaQuery("(max-width: 767px)");
 
-// temp
-const theme: ThemeType = Theme.Light;
-const logoPath = theme === Theme.Light ? darkLogoPath : lightLogoPath;
+const themeStore = useThemeStore();
+const { theme } = storeToRefs(themeStore);
+
+const logoPath = computed(() =>
+	theme.value === Theme.Light ? darkLogoPath : lightLogoPath,
+);
 </script>
 
 <style scoped lang="scss">

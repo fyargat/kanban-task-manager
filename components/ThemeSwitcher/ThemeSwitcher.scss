@@ -42,7 +42,7 @@ $icon-size: 19px;
 			position: absolute;
 			top: 50%;
 			left: 0;
-			transform: translate(5px, -50%);
+			transform: translate(21px, -50%);
 
 			width: 14px;
 			height: 14px;
@@ -55,7 +55,7 @@ $icon-size: 19px;
 
 		&--dark {
 			&::after {
-				transform: translate(21px, -50%);
+				transform: translate(5px, -50%);
 			}
 		}
 	}

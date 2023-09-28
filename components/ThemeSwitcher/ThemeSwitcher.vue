@@ -12,9 +12,9 @@
 		<button
 			class="switcher__button"
 			:class="{
-				'switcher__button--dark': isDark,
+				'switcher__button--dark': theme === Theme.Dark,
 			}"
-			@click="isDark = !isDark"
+			@click="toggleTheme"
 		></button>
 
 		<div class="switcher__icon">
@@ -29,10 +29,13 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { storeToRefs } from "pinia";
+import { Theme } from "~/constants/theme";
+import { useThemeStore } from "~/store/useThemeStore";
 
-// temp
-const isDark = ref<boolean>(false);
+const themeStore = useThemeStore();
+const { theme } = storeToRefs(themeStore);
+const { toggleTheme } = themeStore;
 </script>
 
 <style scoped lang="scss">
