@@ -1,0 +1,107 @@
+@import "~/assets/scss/vars";
+@import "~/assets/scss/mixins";
+
+.sidebar-desktop {
+	&__container {
+		cursor: default;
+
+		position: fixed;
+		z-index: 2;
+		left: 0;
+
+		overflow-x: hidden;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+
+		min-width: 18.75rem;
+		height: calc(100vh - 6rem);
+		padding-top: 1rem;
+		padding-bottom: 2rem;
+
+		font-weight: 700;
+		color: $medium-gray;
+
+		background: var(--color-main);
+		border-right: 1px solid var(--color-border-line);
+
+		transition: transform 0.2s ease;
+
+		&--hide {
+			transform: translate(-100%);
+		}
+	}
+
+	&__wrap {
+		padding-left: 2rem;
+	}
+
+	&__title {
+		@include sidebar-title;
+	}
+
+	&__boards {
+		margin-bottom: auto;
+	}
+
+	&__list,
+	&__create-button-container {
+		margin-bottom: 0.2rem;
+	}
+
+	&__item {
+		font-size: 1rem;
+		font-weight: 700;
+		color: $medium-gray;
+
+		&:not(:last-of-type) {
+			margin-bottom: 0.2rem;
+		}
+	}
+
+	&__footer {
+		margin-top: auto;
+	}
+
+	&__theme-switcher {
+		margin-bottom: 1rem;
+		margin-left: -0.5rem;
+	}
+
+	&__hide-button {
+		display: flex;
+		gap: 15px;
+		align-items: center;
+
+		font-size: 0.9375rem;
+		color: $medium-gray;
+
+		transition: opacity 0.1s ease-out;
+
+		&:hover {
+			opacity: 0.6;
+		}
+	}
+
+	&__show-button {
+		position: fixed;
+		bottom: 2rem;
+		left: 0;
+
+		@include flex-center;
+
+		width: 3.5rem;
+		height: 3rem;
+
+		color: $white;
+
+		background-color: $dark-blue;
+		border-radius: 0 25px 25px 0;
+
+		transition: background-color 0.2s ease;
+
+		&:hover {
+			background-color: $light-blue;
+		}
+	}
+}

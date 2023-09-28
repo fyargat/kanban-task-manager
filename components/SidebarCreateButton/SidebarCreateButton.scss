@@ -1,0 +1,38 @@
+@import "~/assets/scss/vars";
+@import "~/assets/scss/mixins";
+
+.sidebar-create-button {
+	&__container {
+		display: flex;
+		align-items: center;
+
+		width: 17.25rem;
+		height: fit-content;
+		min-height: 2.8rem;
+		padding-top: 0.5rem;
+		padding-bottom: 0.5rem;
+
+		font-size: inherit;
+		font-weight: 700;
+		color: $dark-blue;
+		text-align: left;
+		text-transform: capitalize;
+		word-break: break-word;
+
+		background: transparent;
+
+		transition: opacity 0.1s ease-out;
+
+		&:hover {
+			opacity: 0.6;
+		}
+	}
+
+	&__icon {
+		@include flex-center;
+
+		min-width: 1rem;
+		height: 16px;
+		margin-right: 1rem;
+	}
+}
