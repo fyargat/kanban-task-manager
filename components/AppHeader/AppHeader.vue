@@ -29,6 +29,7 @@
 							:on-close="() => (isOpen = false)"
 							:boards="boards"
 							:selected-board="selectedBoard"
+							:create-board="createBoard"
 						/>
 					</template>
 
@@ -37,7 +38,10 @@
 					</h1>
 				</div>
 				<div class="app-header__controls-right">
-					<PrimaryButton class="app-header__add-task-button">
+					<PrimaryButton
+						class="app-header__add-task-button"
+						@click="addNewTask"
+					>
 						<img
 							v-if="isMobile"
 							src="~/assets/icons/icon-plus.svg"
@@ -70,6 +74,9 @@ import lightLogoPath from "~/assets/icons/logo-light.svg";
 import { useThemeStore } from "~/store/useThemeStore";
 import { Board } from "~/types";
 
+import { Modal } from "~/constants/modal";
+import { useModalStore } from "~/store/useModalStore";
+
 interface Props {
 	boards: Board[];
 	selectedBoard: Board;
@@ -86,6 +93,18 @@ const { theme } = storeToRefs(themeStore);
 const logoPath = computed(() =>
 	theme.value === Theme.Light ? darkLogoPath : lightLogoPath,
 );
+
+const modalStore = useModalStore();
+const { setModal } = modalStore;
+
+const createBoard = () => {
+	isOpen.value = false;
+	setModal(Modal.BoardForm);
+};
+
+const addNewTask = () => {
+	setModal(Modal.TaskForm);
+};
 </script>
 
 <style scoped lang="scss">

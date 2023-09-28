@@ -1,6 +1,7 @@
+import { action } from "@storybook/addon-actions";
 import type { Meta, StoryObj } from "@storybook/vue3";
 import TaskFormModal from "~/components/TaskFormModal/TaskFormModal.vue";
-import { Column, Task } from "~/types";
+import { Task } from "~/types";
 
 const task: Task = {
 	id: "1",
@@ -13,20 +14,20 @@ const task: Task = {
 	status: "Doing",
 };
 
-const columns: Column[] = [
-	{
-		id: "1",
-		name: "Column 1",
-	},
-	{
-		id: "2",
-		name: "Column 2",
-	},
-	{
-		id: "3",
-		name: "Column 3",
-	},
-];
+// const columns: Column[] = [
+// 	{
+// 		id: "1",
+// 		name: "Column 1",
+// 	},
+// 	{
+// 		id: "2",
+// 		name: "Column 2",
+// 	},
+// 	{
+// 		id: "3",
+// 		name: "Column 3",
+// 	},
+// ];
 
 const meta = {
 	title: "UI/TaskFormModal",
@@ -39,8 +40,7 @@ const meta = {
 		template: '<TaskFormModal  v-bind="args" />',
 	}),
 	args: {
-		columns,
-		currentColumn: columns[0],
+		onClose: action("close"),
 	},
 } satisfies Meta<typeof TaskFormModal>;
 

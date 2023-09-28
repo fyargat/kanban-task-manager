@@ -1,5 +1,6 @@
 <template>
 	<div :class="`page__container ${theme}`">
+		<AppModals />
 		<AppHeader :boards="boards" :selected-board="boards[0]" />
 		<main class="page__main">
 			<SidebarDesktop
@@ -17,6 +18,7 @@ import { useMediaQuery } from "@vueuse/core";
 import { storeToRefs } from "pinia";
 import AppBoard from "~/components/AppBoard/AppBoard.vue";
 import AppHeader from "~/components/AppHeader/AppHeader.vue";
+import AppModals from "~/components/AppModals/AppModals.vue";
 import SidebarDesktop from "~/components/SidebarDesktop/SidebarDesktop.vue";
 import { useThemeStore } from "~/store/useThemeStore";
 import { Board } from "~/types";

@@ -16,26 +16,39 @@
 		</button>
 		<ul v-if="isVisible" class="option-dropdown__list">
 			<li class="option-dropdown__item">
-				<button @click="editFn">{{ editText ?? "Edit" }}</button>
+				<button @click="handleEdit">{{ editText ?? "Edit" }}</button>
 			</li>
 			<li class="option-dropdown__item option-dropdown__item--delete">
-				<button @click="deleteFn">{{ deleteText ?? "Delete" }}</button>
+				<button @click="handleDelete">{{ deleteText ?? "Delete" }}</button>
 			</li>
 		</ul>
 	</div>
 </template>
 
 <script setup lang="ts">
+import { Modal } from "~/constants/modal";
+import { useModalStore } from "~/store/useModalStore";
+
 interface Props {
 	editText?: string;
 	deleteText?: string;
-	editFn: () => void;
-	deleteFn: () => void;
 }
 
 defineProps<Props>();
 
 const isVisible = ref<boolean>(false);
+const modalStore = useModalStore();
+const { setModal } = modalStore;
+
+const handleDelete = () => {
+	isVisible.value = false;
+	setModal(Modal.Delete);
+};
+
+const handleEdit = () => {
+	isVisible.value = false;
+	setModal(Modal.BoardForm);
+};
 </script>
 
 <style scoped lang="scss">

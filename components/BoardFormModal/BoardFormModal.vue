@@ -1,5 +1,5 @@
 <template>
-	<ModalDialog :on-close="() => {}">
+	<ModalDialog :on-close="onClose">
 		<div class="board-form-modal__container">
 			<h3 class="board-form-modal__title">
 				{{ isEdit ? "Edit Board" : "Add New Board" }}
@@ -38,6 +38,7 @@ import { getBoardTemplate } from "~/utils/board";
 
 interface Props {
 	board?: Board;
+	onClose: () => void;
 }
 
 const props = defineProps<Props>();

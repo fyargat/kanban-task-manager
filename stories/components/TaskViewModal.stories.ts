@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/vue3";
-import TaskModal from "~/components/TaskModal/TaskModal.vue";
+import TaskViewModal from "~/components/TaskViewModal/TaskViewModal.vue";
 import { Column, Task } from "~/types";
 
 const tasks: Task[] = [
@@ -63,21 +63,21 @@ const columns: Column[] = [
 ];
 
 const meta = {
-	title: "UI/TaskModal",
-	component: TaskModal,
+	title: "UI/TaskViewModal",
+	component: TaskViewModal,
 	render: (args: any) => ({
-		components: { TaskModal },
+		components: { TaskViewModal },
 		setup() {
 			return { args };
 		},
-		template: '<TaskModal  v-bind="args" />',
+		template: '<TaskViewModal  v-bind="args" />',
 	}),
 	args: {
 		task: tasks[0],
 		columns,
 		currentColumn: columns[0],
 	},
-} satisfies Meta<typeof TaskModal>;
+} satisfies Meta<typeof TaskViewModal>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;

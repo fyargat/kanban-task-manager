@@ -1,4 +1,3 @@
-import { action } from "@storybook/addon-actions";
 import type { Meta, StoryObj } from "@storybook/vue3";
 import OptionDropdown from "~/components/OptionDropdown/OptionDropdown.vue";
 
@@ -14,8 +13,8 @@ const meta = {
 	}),
 
 	args: {
-		editFn: action("edit"),
-		deleteFn: action("delete"),
+		editText: "Edit Board",
+		deleteText: "Delete Board",
 	},
 
 	decorators: [
@@ -30,10 +29,3 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Base: Story = {};
-
-export const Board: Story = {
-	args: {
-		editText: "Edit Board",
-		deleteText: "Delete Board",
-	},
-};

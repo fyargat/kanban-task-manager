@@ -27,7 +27,7 @@
 				<div
 					class="sidebar-desktop__wrap sidebar-desktop__create-button-container"
 				>
-					<SidebarCreateButton />
+					<SidebarCreateButton @click="setModal(Modal.BoardForm)" />
 				</div>
 			</div>
 
@@ -56,8 +56,13 @@ import { storeToRefs } from "pinia";
 import SidebarCreateButton from "~/components/SidebarCreateButton/SidebarCreateButton.vue";
 import SidebarItem from "~/components/SidebarItem/SidebarItem.vue";
 import ThemeSwitcher from "~/components/ThemeSwitcher/ThemeSwitcher.vue";
+import { Modal } from "~/constants/modal";
+import { useModalStore } from "~/store/useModalStore";
 import { useSidebarStore } from "~/store/useSidebarStore";
 import { Board } from "~/types";
+
+const modalStore = useModalStore();
+const { setModal } = modalStore;
 
 interface Props {
 	boards: Board[];

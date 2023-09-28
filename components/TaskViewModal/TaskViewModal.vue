@@ -1,8 +1,10 @@
 <template>
-	<ModalDialog :on-close="() => {}">
-		<div class="task-modal__container">
-			<div class="task-modal__head">
-				<h4 :title="task.name" class="task-modal__title">{{ task.name }}</h4>
+	<ModalDialog :on-close="onClose">
+		<div class="task-view-modal__container">
+			<div class="task-view-modal__head">
+				<h4 :title="task.name" class="task-view-modal__title">
+					{{ task.name }}
+				</h4>
 				<OptionDropdown
 					:edit-fn="() => {}"
 					:delete-fn="() => {}"
@@ -10,12 +12,12 @@
 					delete-text="Delete task"
 				/>
 			</div>
-			<div class="task-modal__body">
-				<p class="task-modal__description">
+			<div class="task-view-modal__body">
+				<p class="task-view-modal__description">
 					{{ task.description ?? "No description" }}
 				</p>
-				<div class="task-modal__subtasks subtasks">
-					<h5 class="subtasks__title task-modal__subtitle">
+				<div class="task-view-modal__subtasks subtasks">
+					<h5 class="subtasks__title task-view-modal__subtitle">
 						Subtasks ({{ doneSubtaskCount }} of {{ task.subtasks.length }})
 					</h5>
 					<ul class="subtasks__list">
@@ -28,9 +30,11 @@
 						</li>
 					</ul>
 				</div>
-				<div class="task-modal__status">
-					<h5 class="task-modal__status-title task-modal__subtitle"></h5>
-					<SelectBox :columns="columns" :current-column="currentColumn" />
+				<div class="task-view-modal__status">
+					<h5
+						class="task-view-modal__status-title task-view-modal__subtitle"
+					></h5>
+					<SelectBox :columns="columns" :current-column="columns[0]" />
 				</div>
 			</div>
 		</div>
@@ -45,12 +49,37 @@ import SubtaskCheckbox from "~/components/SubtaskCheckbox/SubtaskCheckbox.vue";
 import { Column, Task } from "~/types";
 
 interface Props {
-	task: Task;
-	columns: Column[];
-	currentColumn: Column;
+	onClose: () => void;
 }
 
-const { task } = defineProps<Props>();
+defineProps<Props>();
+
+// temp
+const task: Task = {
+	id: "1",
+	name: "Task 1",
+	description: "Task Description",
+	subtasks: [
+		{ id: "1", name: "Subtask 1", checked: false },
+		{ id: "2", name: "Subtask 2", checked: true },
+	],
+	status: "Doing",
+};
+
+const columns: Column[] = [
+	{
+		id: "1",
+		name: "Column 1",
+	},
+	{
+		id: "2",
+		name: "Column 2",
+	},
+	{
+		id: "3",
+		name: "Column 3",
+	},
+];
 
 const doneSubtaskCount = computed(
 	() => task.subtasks.filter((v) => v.checked).length,
@@ -58,5 +87,5 @@ const doneSubtaskCount = computed(
 </script>
 
 <style scoped lang="scss">
-@use "./TaskModal.scss";
+@use "./TaskViewModal.scss";
 </style>

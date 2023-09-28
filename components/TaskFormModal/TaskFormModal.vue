@@ -1,5 +1,5 @@
 <template>
-	<ModalDialog :on-close="() => {}">
+	<ModalDialog :on-close="onClose">
 		<div class="task-form-modal__container">
 			<h3 class="task-form-modal__title">
 				{{ isEdit ? "Edit Task" : "Add New Task" }}
@@ -30,7 +30,7 @@
 
 				<div class="task-form-modal__box">
 					<p class="task-form-modal__subtitle">Status</p>
-					<SelectBox :columns="columns" :current-column="currentColumn" />
+					<SelectBox :columns="columns" :current-column="columns[0]" />
 				</div>
 
 				<div>
@@ -53,9 +53,8 @@ import { Column, Task } from "~/types";
 import { getTaskTemplate } from "~/utils/task";
 
 interface Props {
-	columns: Column[];
-	currentColumn: Column;
 	task?: Task;
+	onClose: () => void;
 }
 
 const props = defineProps<Props>();
@@ -65,6 +64,22 @@ const task = reactive<Task>(props.task ?? getTaskTemplate());
 const isEdit = computed(() => !!props.task);
 
 const handleSubmit = () => {};
+
+// temp
+const columns: Column[] = [
+	{
+		id: "1",
+		name: "Column 1",
+	},
+	{
+		id: "2",
+		name: "Column 2",
+	},
+	{
+		id: "3",
+		name: "Column 3",
+	},
+];
 </script>
 
 <style scoped lang="scss">

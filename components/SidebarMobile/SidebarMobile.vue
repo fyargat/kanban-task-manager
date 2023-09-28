@@ -18,7 +18,7 @@
 			</ul>
 
 			<div class="sidebar-mobile__wrap sidebar-mobile__create-button-container">
-				<SidebarCreateButton />
+				<SidebarCreateButton @click="createBoard" />
 			</div>
 
 			<div class="sidebar-mobile__wrap">
@@ -32,12 +32,14 @@
 import SidebarCreateButton from "~/components/SidebarCreateButton/SidebarCreateButton.vue";
 import SidebarItem from "~/components/SidebarItem/SidebarItem.vue";
 import ThemeSwitcher from "~/components/ThemeSwitcher/ThemeSwitcher.vue";
+
 import { Board } from "~/types";
 
 interface Props {
 	boards: Board[];
 	selectedBoard: Board;
 	onClose: () => void;
+	createBoard: () => void;
 }
 
 defineProps<Props>();
