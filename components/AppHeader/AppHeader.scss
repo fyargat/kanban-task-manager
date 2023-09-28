@@ -1,0 +1,122 @@
+@import "~/assets/scss/vars";
+@import "~/assets/scss/mixins";
+
+.app-header {
+	&__container {
+		display: flex;
+		align-items: center;
+
+		width: 100%;
+		height: 6rem;
+
+		background-color: var(--color-main);
+		border-bottom: 1px solid var(--color-border-line);
+	}
+
+	&__wrapper {
+		display: flex;
+		flex: auto;
+		align-items: center;
+
+		height: 100%;
+		padding-right: 1rem;
+		padding-left: 2rem;
+
+		@include breakpoint(tablet) {
+			padding: 0 2rem;
+		}
+	}
+
+	&__logo {
+		display: flex;
+		align-items: center;
+
+		width: fit-content;
+		min-width: 2.5rem;
+		height: 100%;
+		padding-right: 1rem;
+
+		border-right: 1px solid transparent;
+
+		transition: border-color 0.3s ease;
+
+		@include breakpoint(tablet) {
+			min-width: 16.75rem;
+			border-color: var(--color-border-line);
+		}
+	}
+
+	&__controls {
+		display: flex;
+		flex: auto;
+		gap: 1rem;
+		align-items: center;
+		justify-content: space-between;
+
+		height: 100%;
+
+		@include breakpoint(tablet) {
+			padding-left: 2rem;
+		}
+	}
+
+	&__controls-left,
+	&__controls-right {
+		display: flex;
+		align-items: center;
+	}
+
+	&__title {
+		display: flex;
+		justify-content: space-between;
+
+		min-width: fit-content;
+		max-width: 10rem;
+		padding-right: 1rem;
+
+		font-size: clamp(1.2rem, 3vw, 1.5rem);
+		font-weight: 700;
+		color: var(--color-title);
+		text-align: left;
+
+		@include truncate;
+
+		&--mobile {
+			position: relative;
+
+			&::before {
+				content: "";
+
+				position: absolute;
+				top: 50%;
+				right: 0;
+				transform: translateY(-50%);
+
+				width: 10px;
+				height: 10px;
+
+				background-image: url("~/assets/icons/icon-chevron-down.svg");
+				background-repeat: no-repeat;
+				background-position: center center;
+
+				transition: transform 0.2s ease;
+			}
+		}
+
+		&--open {
+			&::before {
+				transform: translateY(-50%) rotate(180deg);
+			}
+		}
+	}
+
+	&__add-task-button {
+		padding: 0.5rem 1rem;
+		font-size: 0.8125rem;
+
+		@include breakpoint(tablet) {
+			padding: 0.75rem 1rem;
+			font-size: 0.9375rem;
+		}
+	}
+}
