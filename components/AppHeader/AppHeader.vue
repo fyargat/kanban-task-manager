@@ -11,19 +11,29 @@
 			</div>
 			<div class="app-header__controls">
 				<div class="app-header__controls-left">
-					<button v-if="isMobile" @click="isOpen = !isOpen">
-						<h1
-							:title="boardName"
-							:class="{
-								'app-header__title--open': isOpen,
-							}"
-							class="app-header__title app-header__title--mobile"
-						>
-							{{ boardName }}
-						</h1>
-					</button>
-					<h1 v-else :title="boardName" class="app-header__title">
-						{{ boardName }}
+					<template v-if="isMobile">
+						<button @click="isOpen = !isOpen">
+							<h1
+								:title="selectedBoard.name"
+								:class="{
+									'app-header__title--open': isOpen,
+								}"
+								class="app-header__title app-header__title--mobile"
+							>
+								{{ selectedBoard.name }}
+							</h1>
+						</button>
+
+						<SidebarMobile
+							v-if="isOpen"
+							:on-close="() => (isOpen = false)"
+							:boards="boards"
+							:selected-board="selectedBoard"
+						/>
+					</template>
+
+					<h1 v-else :title="selectedBoard.name" class="app-header__title">
+						{{ selectedBoard.name }}
 					</h1>
 				</div>
 				<div class="app-header__controls-right">
@@ -51,14 +61,17 @@
 import { useMediaQuery } from "@vueuse/core";
 import OptionDropdown from "~/components/OptionDropdown/OptionDropdown.vue";
 import PrimaryButton from "~/components/PrimaryButton/PrimaryButton.vue";
+import SidebarMobile from "~/components/SidebarMobile/SidebarMobile.vue";
 import { Theme } from "~/constants/theme";
 import { ThemeType } from "~/types/theme";
 
 import darkLogoPath from "~/assets/icons/logo-dark.svg";
 import lightLogoPath from "~/assets/icons/logo-light.svg";
+import { Board } from "~/types";
 
 interface Props {
-	boardName: string;
+	boards: Board[];
+	selectedBoard: Board;
 }
 
 defineProps<Props>();

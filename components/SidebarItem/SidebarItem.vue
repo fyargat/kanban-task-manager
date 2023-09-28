@@ -14,14 +14,16 @@
 				></path>
 			</svg>
 		</div>
-		{{ text }}
+		{{ board.name }}
 	</button>
 </template>
 
 <script setup lang="ts">
+import { Board } from "~/types";
+
 interface Props {
+	board: Board;
 	isActive: boolean;
-	text: string;
 }
 
 defineProps<Props>();
