@@ -1,24 +1,30 @@
 import type { Meta, StoryObj } from "@storybook/vue3";
 import BoardColumn from "~/components/BoardColumn/BoardColumn.vue";
-import { Task } from "~/types";
 
-const tasks: Task[] = [
-	{
-		id: "1",
-		name: "Task 1",
-		subtasks: [
-			{ id: "1", name: "Subtask 1", checked: false },
-			{ id: "2", name: "Subtask 2", checked: true },
-		],
-		status: "Doing",
-	},
-	{
-		id: "2",
-		name: "Task 2",
-		subtasks: [{ id: "1", name: "Subtask 1", checked: false }],
-		status: "Doing",
-	},
-];
+const column = {
+	id: "1",
+	name: "Column 1",
+	tasks: [
+		{
+			id: "1",
+			name: "Task 1",
+			subtasks: [],
+			status: "Column 1",
+		},
+		{
+			id: "2",
+			name: "Task 2",
+			subtasks: [],
+			status: "Column 1",
+		},
+	],
+};
+
+const columnWithoutTasks = {
+	id: "1",
+	name: "Column 1",
+	tasks: [],
+};
 
 const meta = {
 	title: "UI/BoardColumn",
@@ -31,8 +37,7 @@ const meta = {
 		template: '<BoardColumn  v-bind="args" />',
 	}),
 	args: {
-		tasks,
-		name: "Preparing",
+		column,
 	},
 } satisfies Meta<typeof BoardColumn>;
 
@@ -43,7 +48,6 @@ export const Base: Story = {};
 
 export const Empty: Story = {
 	args: {
-		name: "Empty",
-		tasks: [],
+		column: columnWithoutTasks,
 	},
 };
