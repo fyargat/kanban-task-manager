@@ -13,6 +13,7 @@
 				<div class="app-header__controls-left">
 					<button v-if="isMobile" @click="isOpen = !isOpen">
 						<h1
+							:title="boardName"
 							:class="{
 								'app-header__title--open': isOpen,
 							}"
@@ -21,7 +22,9 @@
 							{{ boardName }}
 						</h1>
 					</button>
-					<h1 v-else class="app-header__title">{{ boardName }}</h1>
+					<h1 v-else :title="boardName" class="app-header__title">
+						{{ boardName }}
+					</h1>
 				</div>
 				<div class="app-header__controls-right">
 					<PrimaryButton class="app-header__add-task-button">

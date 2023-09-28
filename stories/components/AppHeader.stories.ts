@@ -25,3 +25,10 @@ type Story = StoryObj<typeof meta>;
 export const Base: Story = {
 	args: {},
 };
+
+export const LongBoardName: Story = {
+	args: {
+		boardName:
+			"Platform Launch Platform Launch Platform Launch Platform Launch Platform Launch",
+	},
+};

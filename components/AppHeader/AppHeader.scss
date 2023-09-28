@@ -41,7 +41,7 @@
 		transition: border-color 0.3s ease;
 
 		@include breakpoint(tablet) {
-			min-width: 16.75rem;
+			min-width: clamp(10rem, 30vw, 16.75rem);
 			border-color: var(--color-border-line);
 		}
 	}
@@ -67,11 +67,7 @@
 	}
 
 	&__title {
-		display: flex;
-		justify-content: space-between;
-
-		min-width: fit-content;
-		max-width: 10rem;
+		max-width: clamp(5rem, 30vw, 20rem);
 		padding-right: 1rem;
 
 		font-size: clamp(1.2rem, 3vw, 1.5rem);
@@ -108,11 +104,19 @@
 				transform: translateY(-50%) rotate(180deg);
 			}
 		}
+
+		@include breakpoint(tablet) {
+			max-width: clamp(10rem, 30vw, 20rem);
+		}
 	}
 
 	&__add-task-button {
 		padding: 0.5rem 1rem;
 		font-size: 0.8125rem;
+
+		img {
+			min-width: 12px;
+		}
 
 		@include breakpoint(tablet) {
 			padding: 0.75rem 1rem;
