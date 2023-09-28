@@ -14,7 +14,8 @@
 		flex-direction: column;
 		justify-content: space-between;
 
-		min-width: 18.75rem;
+		width: 100%;
+		max-width: 18.75rem;
 		height: calc(100vh - 6rem);
 		padding-top: 1rem;
 		padding-bottom: 2rem;
@@ -85,10 +86,9 @@
 
 	&__show-button {
 		position: fixed;
+		z-index: 1;
 		bottom: 2rem;
 		left: 0;
-
-		@include flex-center;
 
 		width: 3.5rem;
 		height: 3rem;
@@ -99,6 +99,8 @@
 		border-radius: 0 25px 25px 0;
 
 		transition: background-color 0.2s ease;
+
+		@include flex-center;
 
 		&:hover {
 			background-color: $light-blue;

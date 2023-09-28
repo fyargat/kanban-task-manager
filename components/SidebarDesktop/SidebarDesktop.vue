@@ -35,7 +35,7 @@
 				<ThemeSwitcher class="sidebar-desktop__theme-switcher" />
 
 				<div>
-					<button class="sidebar-desktop__hide-button" @click="isHidden = true">
+					<button class="sidebar-desktop__hide-button" @click="hide">
 						<div>
 							<img src="~/assets/icons/icon-hide-sidebar.svg" alt="" />
 						</div>
@@ -45,20 +45,18 @@
 			</footer>
 		</div>
 
-		<button
-			type="button"
-			class="sidebar-desktop__show-button"
-			@click="() => (isHidden = false)"
-		>
+		<button type="button" class="sidebar-desktop__show-button" @click="show">
 			<img src="~/assets/icons/icon-show-sidebar.svg" alt="" />
 		</button>
 	</div>
 </template>
 
 <script setup lang="ts">
+import { storeToRefs } from "pinia";
 import SidebarCreateButton from "~/components/SidebarCreateButton/SidebarCreateButton.vue";
 import SidebarItem from "~/components/SidebarItem/SidebarItem.vue";
 import ThemeSwitcher from "~/components/ThemeSwitcher/ThemeSwitcher.vue";
+import { useSidebarStore } from "~/store/sidebar";
 import { Board } from "~/types";
 
 interface Props {
@@ -68,7 +66,9 @@ interface Props {
 
 defineProps<Props>();
 
-const isHidden = ref<boolean>(false);
+const sidebarStore = useSidebarStore();
+const { isHidden } = storeToRefs(sidebarStore);
+const { show, hide } = sidebarStore;
 </script>
 
 <style scoped lang="scss">

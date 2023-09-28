@@ -17,6 +17,7 @@ export interface Task {
 	subtasks: Subtask[];
 	status: string;
 	columnId: ColumnId;
+	order: number;
 }
 
 export interface Column {

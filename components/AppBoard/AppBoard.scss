@@ -5,6 +5,8 @@
 	&__container {
 		cursor: move;
 
+		transform: translateX(18.75rem);
+
 		min-width: 100%;
 		height: 100%;
 		padding: 1.5rem 2rem;
@@ -12,6 +14,11 @@
 		color: $white;
 
 		transition: left 0.2s ease;
+		transition: transform 0.2s ease;
+
+		&--full {
+			transform: translateX(0);
+		}
 	}
 
 	&__list {
