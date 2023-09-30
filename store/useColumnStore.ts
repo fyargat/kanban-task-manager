@@ -32,7 +32,6 @@ export const useColumnStore = defineStore("columnStore", () => {
 	};
 
 	const createColumn = (newColumns: Column[]) => {
-		console.log("newColumns", newColumns);
 		columns.value.push(...newColumns);
 	};
 

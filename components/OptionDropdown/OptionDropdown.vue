@@ -26,28 +26,25 @@
 </template>
 
 <script setup lang="ts">
-import { Modal } from "~/constants/modal";
-import { useModalStore } from "~/store/useModalStore";
-
 interface Props {
 	editText?: string;
 	deleteText?: string;
+	onEdit: () => void;
+	onDelete: () => void;
 }
 
-defineProps<Props>();
+const { onDelete, onEdit } = defineProps<Props>();
 
 const isVisible = ref<boolean>(false);
-const modalStore = useModalStore();
-const { setModal } = modalStore;
-
-const handleDelete = () => {
-	isVisible.value = false;
-	setModal(Modal.Delete);
-};
 
 const handleEdit = () => {
 	isVisible.value = false;
-	setModal(Modal.BoardForm);
+	onEdit();
+};
+
+const handleDelete = () => {
+	isVisible.value = false;
+	onDelete();
 };
 </script>
 

@@ -1,9 +1,13 @@
 <template>
 	<div>
 		<BoardFormModal v-if="modal === Modal.BoardForm" :on-close="closeModal" />
-		<DeleteModal v-if="modal === Modal.Delete" :on-close="closeModal" />
+		<DeleteBoardModal
+			v-if="modal === Modal.BoardDelete"
+			:on-close="closeModal"
+		/>
 		<TaskFormModal v-if="modal === Modal.TaskForm" :on-close="closeModal" />
 		<TaskViewModal v-if="modal === Modal.TaskView" :on-close="closeModal" />
+		<DeleteTaskModal v-if="modal === Modal.TaskDelete" :on-close="closeModal" />
 	</div>
 </template>
 
@@ -11,7 +15,8 @@
 import { storeToRefs } from "pinia";
 
 import BoardFormModal from "~/components/BoardFormModal/BoardFormModal.vue";
-import DeleteModal from "~/components/DeleteModal/DeleteModal.vue";
+import DeleteBoardModal from "~/components/DeleteBoardModal/DeleteBoardModal.vue";
+import DeleteTaskModal from "~/components/DeleteTaskModal/DeleteTaskModal.vue";
 import TaskFormModal from "~/components/TaskFormModal/TaskFormModal.vue";
 import TaskViewModal from "~/components/TaskViewModal/TaskViewModal.vue";
 

@@ -17,8 +17,9 @@ export const useBoardStore = defineStore("boardStore", () => {
 	const boards = ref<Board[]>(mockBoards ?? []);
 	const selectedBoardId = ref<BoardId | null>(mockBoards[0].id ?? null);
 
-	const selectBoard = (boardId: BoardId) => {
-		console.log("boardId", boardId);
+	const selectedBoard = computed(() => getBoard(selectedBoardId.value));
+
+	const selectBoard = (boardId: BoardId | null) => {
 		selectedBoardId.value = boardId;
 	};
 
@@ -31,22 +32,22 @@ export const useBoardStore = defineStore("boardStore", () => {
 	};
 
 	const createBoard = (board: Board) => {
-		console.log("board", board);
 		boards.value.push(board);
 		selectedBoardId.value = board.id;
 	};
 
-	const editBoard = () => {
-		console.log("edit board");
-	};
+	const editBoard = () => {};
 
 	const deleteBoard = () => {
-		console.log("delete board");
+		boards.value = boards.value.filter((v) => v.id !== selectedBoardId.value);
+
+		selectBoard(boards.value[0].id ?? null);
 	};
 
 	return {
 		boards,
 		selectedBoardId,
+		selectedBoard,
 		createBoard,
 		editBoard,
 		deleteBoard,

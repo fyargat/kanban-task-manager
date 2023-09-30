@@ -9,14 +9,14 @@
 				<PrimaryButton
 					class="delete-modal__button delete-modal__button--delete"
 					type="button"
-					@click="() => {}"
+					@click="onConfirm"
 				>
 					Delete
 				</PrimaryButton>
 				<PrimaryButton
 					class="delete-modal__button delete-modal__button--cancel"
 					type="button"
-					@click="() => {}"
+					@click="onCancel"
 				>
 					Cancel
 				</PrimaryButton>
@@ -30,14 +30,14 @@ import ModalDialog from "~/components/ModalDialog/ModalDialog.vue";
 import PrimaryButton from "~/components/PrimaryButton/PrimaryButton.vue";
 
 interface Props {
+	title: string;
+	text: string;
 	onClose: () => void;
+	onConfirm: () => void;
+	onCancel: () => void;
 }
 
 defineProps<Props>();
-
-// temp
-const title = "Delete this task?";
-const text = "Are you sure you want to delete the 'Task 1' task?";
 </script>
 
 <style scoped lang="scss">

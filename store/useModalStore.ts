@@ -9,7 +9,6 @@ export const useModalStore = defineStore("modalStore", () => {
 	};
 
 	const closeModal = () => {
-		console.log("close");
 		modal.value = null;
 	};
 

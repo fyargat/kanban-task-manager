@@ -30,8 +30,6 @@ const columnStore = useColumnStore();
 const { getColumnsByBoardId } = columnStore;
 
 const columns = computed(() => getColumnsByBoardId(selectedBoardId.value));
-
-console.log("columns", columns);
 </script>
 
 <style scoped lang="scss">

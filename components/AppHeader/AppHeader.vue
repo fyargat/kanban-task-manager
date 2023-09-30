@@ -56,8 +56,8 @@
 					<OptionDropdown
 						edit-text="Edit Board"
 						delete-text="Delete Board"
-						:edit-fn="() => {}"
-						:delete-fn="() => {}"
+						:on-edit="editBoard"
+						:on-delete="deleteBoard"
 					/>
 				</div>
 			</div>
@@ -95,10 +95,7 @@ const modalStore = useModalStore();
 const { setModal } = modalStore;
 
 const boardStore = useBoardStore();
-const { boards, selectedBoardId } = storeToRefs(boardStore);
-const { getBoard } = boardStore;
-
-const selectedBoard = computed(() => getBoard(selectedBoardId.value));
+const { boards, selectedBoardId, selectedBoard } = storeToRefs(boardStore);
 
 const createBoard = () => {
 	isOpen.value = false;
@@ -107,6 +104,14 @@ const createBoard = () => {
 
 const addNewTask = () => {
 	setModal(Modal.TaskForm);
+};
+
+const editBoard = () => {
+	setModal(Modal.BoardForm);
+};
+
+const deleteBoard = () => {
+	setModal(Modal.BoardDelete);
 };
 </script>
 

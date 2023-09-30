@@ -92,8 +92,6 @@ const updateColumn = (itemId: string, name: string) => {
 
 		return column;
 	});
-	console.log("itemId", itemId);
-	console.log("inputValue", name);
 };
 
 const removeColumn = (id: ColumnId) => {

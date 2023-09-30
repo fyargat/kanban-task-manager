@@ -1,7 +1,12 @@
 <template>
 	<div class="board-column__container">
 		<div class="board-column__head">
-			<div class="board-column__color"></div>
+			<div
+				class="board-column__color"
+				:style="{
+					backgroundColor: column.color,
+				}"
+			></div>
 			<h3 class="board-column__title">
 				{{ column.name }} ({{ tasks.length }})
 			</h3>
