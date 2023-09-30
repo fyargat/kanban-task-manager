@@ -7,7 +7,7 @@
 	>
 		<ul class="app-board__list">
 			<li
-				v-for="column in board.columns"
+				v-for="column in selectedBoard.columns"
 				:key="column.id"
 				class="app-board__item"
 			>
@@ -20,17 +20,14 @@
 <script setup lang="ts">
 import { storeToRefs } from "pinia";
 import BoardColumn from "~/components/BoardColumn/BoardColumn.vue";
+import { useBoardStore } from "~/store/useBoardStore";
 import { useSidebarStore } from "~/store/useSidebarStore";
-import { Board } from "~/types";
-
-interface Props {
-	board: Board;
-}
-
-defineProps<Props>();
 
 const sidebarStore = useSidebarStore();
 const { isHidden } = storeToRefs(sidebarStore);
+
+const boardStore = useBoardStore();
+const { selectedBoard } = storeToRefs(boardStore);
 </script>
 
 <style scoped lang="scss">

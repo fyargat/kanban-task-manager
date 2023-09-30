@@ -23,7 +23,7 @@ const meta = {
 	}),
 	args: {
 		modelValue: "",
-		onRemove: action("remove"),
+		remove: action("remove"),
 	},
 } satisfies Meta<typeof RemovableInputField>;
 

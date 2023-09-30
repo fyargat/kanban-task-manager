@@ -71,18 +71,11 @@ import { Theme } from "~/constants/theme";
 
 import darkLogoPath from "~/assets/icons/logo-dark.svg";
 import lightLogoPath from "~/assets/icons/logo-light.svg";
+import { useBoardStore } from "~/store/useBoardStore";
 import { useThemeStore } from "~/store/useThemeStore";
-import { Board } from "~/types";
 
 import { Modal } from "~/constants/modal";
 import { useModalStore } from "~/store/useModalStore";
-
-interface Props {
-	boards: Board[];
-	selectedBoard: Board;
-}
-
-defineProps<Props>();
 
 const isOpen = ref<boolean>(false);
 const isMobile = useMediaQuery("(max-width: 767px)");
@@ -96,6 +89,9 @@ const logoPath = computed(() =>
 
 const modalStore = useModalStore();
 const { setModal } = modalStore;
+
+const boardStore = useBoardStore();
+const { boards, selectedBoard } = storeToRefs(boardStore);
 
 const createBoard = () => {
 	isOpen.value = false;

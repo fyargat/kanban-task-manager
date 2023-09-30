@@ -57,23 +57,20 @@ import SidebarCreateButton from "~/components/SidebarCreateButton/SidebarCreateB
 import SidebarItem from "~/components/SidebarItem/SidebarItem.vue";
 import ThemeSwitcher from "~/components/ThemeSwitcher/ThemeSwitcher.vue";
 import { Modal } from "~/constants/modal";
+import { useBoardStore } from "~/store/useBoardStore";
 import { useModalStore } from "~/store/useModalStore";
 import { useSidebarStore } from "~/store/useSidebarStore";
-import { Board } from "~/types";
 
 const modalStore = useModalStore();
+
 const { setModal } = modalStore;
-
-interface Props {
-	boards: Board[];
-	selectedBoard: Board;
-}
-
-defineProps<Props>();
 
 const sidebarStore = useSidebarStore();
 const { isHidden } = storeToRefs(sidebarStore);
 const { show, hide } = sidebarStore;
+
+const boardStore = useBoardStore();
+const { boards, selectedBoard } = storeToRefs(boardStore);
 </script>
 
 <style scoped lang="scss">

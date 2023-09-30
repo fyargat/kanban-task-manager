@@ -4,10 +4,4 @@ import { Board } from "~/types";
 export const getBoardTemplate = (): Board => ({
 	id: v4(),
 	name: "",
-	columns: [
-		{
-			id: v4(),
-			name: "",
-		},
-	],
 });

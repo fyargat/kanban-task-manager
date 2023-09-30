@@ -1,7 +1,7 @@
-type SubtaskId = string;
-type TaskId = string;
-type ColumnId = string;
-type BoardId = string;
+export type SubtaskId = string;
+export type TaskId = string;
+export type ColumnId = string;
+export type BoardId = string;
 
 export interface Subtask {
 	id: SubtaskId;
@@ -14,7 +14,6 @@ export interface Task {
 	id: TaskId;
 	name: string;
 	description?: string;
-	subtasks: Subtask[];
 	status: string;
 	columnId: ColumnId;
 	order: number;
@@ -23,7 +22,6 @@ export interface Task {
 export interface Column {
 	id: ColumnId;
 	name: string;
-	tasks: Task[];
 	color: string;
 	boardId: BoardId;
 }
@@ -31,5 +29,4 @@ export interface Column {
 export interface Board {
 	id: BoardId;
 	name: string;
-	columns: Column[];
 }

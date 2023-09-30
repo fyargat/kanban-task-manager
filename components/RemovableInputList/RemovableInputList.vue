@@ -10,11 +10,19 @@
 				:key="item.id"
 				class="removable-input-list__item"
 			>
-				<RemovableInputField v-model="item.name" :on-remove="() => {}" />
+				<RemovableInputField
+					v-model="item.name"
+					:remove="() => remove(item.id)"
+					@update-input="updateInput(item.id, $event)"
+				/>
 			</li>
 		</ul>
 
-		<PrimaryButton v-if="!isHideButton" class="removable-input-list__button">
+		<PrimaryButton
+			v-if="!isHideButton"
+			class="removable-input-list__button"
+			@click="add"
+		>
 			{{ buttonText }}
 		</PrimaryButton>
 	</div>
@@ -30,11 +38,19 @@ interface Props {
 	buttonText: string;
 	list: Subtask[] | Column[];
 	isHideButton?: boolean;
+	add: () => void;
+	remove: (id: string) => void;
 }
 
 withDefaults(defineProps<Props>(), {
 	isHideButton: false,
 });
+
+const emit = defineEmits(["update-column"]);
+
+const updateInput = (itemId: string, inputValue: string) => {
+	emit("update-column", itemId, inputValue);
+};
 </script>
 
 <style scoped lang="scss">

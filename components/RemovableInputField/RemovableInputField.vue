@@ -1,13 +1,13 @@
 <template>
 	<div class="removable-input-field__container">
-		<InputField :model-value="modelValue" />
+		<InputField :model-value="modelValue" @input="updateInput" />
 
 		<button
 			v-if="!isHideButton"
 			type="button"
 			:disabled="isDisabled"
 			class="removable-input-field__icon"
-			@click="onRemove"
+			@click="remove"
 		>
 			<img src="~/assets/icons/icon-cross.svg" alt="Cross Icon" />
 		</button>
@@ -19,7 +19,7 @@ import InputField from "~/components/InputField/InputField.vue";
 
 interface Props {
 	modelValue: string;
-	onRemove: () => void;
+	remove: () => void;
 	isDisabled?: boolean;
 	isHideButton?: boolean;
 }
@@ -28,6 +28,14 @@ withDefaults(defineProps<Props>(), {
 	isDisabled: false,
 	isHideButton: false,
 });
+
+const emit = defineEmits(["update-input"]);
+
+const updateInput = (event: Event) => {
+	const { value } = event.target as HTMLInputElement;
+
+	emit("update-input", value);
+};
 </script>
 
 <style scoped lang="scss">
