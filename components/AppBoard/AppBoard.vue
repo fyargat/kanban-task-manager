@@ -5,12 +5,8 @@
 		}"
 		class="app-board__container"
 	>
-		<ul class="app-board__list">
-			<li
-				v-for="column in selectedBoard.columns"
-				:key="column.id"
-				class="app-board__item"
-			>
+		<ul v-if="columns.length" class="app-board__list">
+			<li v-for="column in columns" :key="column.id" class="app-board__item">
 				<BoardColumn :column="column" />
 			</li>
 		</ul>
@@ -21,13 +17,21 @@
 import { storeToRefs } from "pinia";
 import BoardColumn from "~/components/BoardColumn/BoardColumn.vue";
 import { useBoardStore } from "~/store/useBoardStore";
+import { useColumnStore } from "~/store/useColumnStore";
 import { useSidebarStore } from "~/store/useSidebarStore";
 
 const sidebarStore = useSidebarStore();
 const { isHidden } = storeToRefs(sidebarStore);
 
 const boardStore = useBoardStore();
-const { selectedBoard } = storeToRefs(boardStore);
+const { selectedBoardId } = storeToRefs(boardStore);
+
+const columnStore = useColumnStore();
+const { getColumnsByBoardId } = columnStore;
+
+const columns = computed(() => getColumnsByBoardId(selectedBoardId.value));
+
+console.log("columns", columns);
 </script>
 
 <style scoped lang="scss">

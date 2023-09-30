@@ -12,7 +12,7 @@
 				>
 					<SidebarItem
 						:board="board"
-						:is-active="selectedBoard.id === board.id"
+						:is-active="selectedBoardId === board.id"
 					/>
 				</li>
 			</ul>
@@ -33,11 +33,11 @@ import SidebarCreateButton from "~/components/SidebarCreateButton/SidebarCreateB
 import SidebarItem from "~/components/SidebarItem/SidebarItem.vue";
 import ThemeSwitcher from "~/components/ThemeSwitcher/ThemeSwitcher.vue";
 
-import { Board } from "~/types";
+import { Board, BoardId } from "~/types";
 
 interface Props {
 	boards: Board[];
-	selectedBoard: Board;
+	selectedBoardId: BoardId | null;
 	onClose: () => void;
 	createBoard: () => void;
 }

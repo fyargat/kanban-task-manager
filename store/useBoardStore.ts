@@ -2,113 +2,38 @@ import { defineStore } from "pinia";
 import { ref } from "../.nuxt/imports";
 import { Board, BoardId } from "../types";
 
-// temp
-const tempBoards: Board[] = [
+const mockBoards: Board[] = [
 	{
-		id: "1",
+		id: "0ac8b1ee-315c-4d1c-b223-f799dcdd3bb6",
 		name: "Board 1",
-		columns: [
-			{
-				id: "1",
-				name: "Column 1",
-				tasks: [
-					{
-						id: "1",
-						name: "Task 1",
-						subtasks: [],
-						status: "Column 1",
-					},
-					{
-						id: "2",
-						name: "Task 2",
-						subtasks: [],
-						status: "Column 2",
-					},
-				],
-			},
-
-			{
-				id: "2",
-				name: "Column 2",
-				tasks: [],
-			},
-
-			{
-				id: "3",
-				name: "Column 3",
-				tasks: [
-					{
-						id: "1",
-						name: "Task 1",
-						subtasks: [],
-						status: "Column 1",
-					},
-				],
-			},
-
-			{
-				id: "4",
-				name: "Column 4",
-				tasks: [
-					{
-						id: "1",
-						name: "Task 1",
-						subtasks: [],
-						status: "Column 1",
-					},
-				],
-			},
-
-			{
-				id: "5",
-				name: "Column 5",
-				tasks: [
-					{
-						id: "1",
-						name: "Task 1",
-						subtasks: [],
-						status: "Column 1",
-					},
-				],
-			},
-
-			{
-				id: "6",
-				name: "Column 6",
-				tasks: [
-					{
-						id: "1",
-						name: "Task 1",
-						subtasks: [],
-						status: "Column 1",
-					},
-				],
-			},
-		],
 	},
 	{
-		id: "2",
+		id: "0ac8b1ee-315c-4d1c-b223-f799dcdd3bb7",
 		name: "Board 2",
-		columns: [],
-	},
-	{
-		id: "3",
-		name: "Board 3",
-		columns: [],
 	},
 ];
 
 export const useBoardStore = defineStore("boardStore", () => {
-	const boards = ref<Board[]>(tempBoards);
-	const selectedBoardId = ref<Board>(tempBoards[0]);
+	const boards = ref<Board[]>(mockBoards ?? []);
+	const selectedBoardId = ref<BoardId | null>(mockBoards[0].id ?? null);
 
 	const selectBoard = (boardId: BoardId) => {
+		console.log("boardId", boardId);
 		selectedBoardId.value = boardId;
+	};
+
+	const getBoard = (boardId: BoardId | null) => {
+		if (!boardId) return null;
+
+		const board = boards.value.find((v) => v.id === boardId) ?? null;
+
+		return board;
 	};
 
 	const createBoard = (board: Board) => {
 		console.log("board", board);
 		boards.value.push(board);
+		selectedBoardId.value = board.id;
 	};
 
 	const editBoard = () => {
@@ -126,5 +51,6 @@ export const useBoardStore = defineStore("boardStore", () => {
 		editBoard,
 		deleteBoard,
 		selectBoard,
+		getBoard,
 	};
 });

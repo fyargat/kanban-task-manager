@@ -14,13 +14,13 @@
 					<template v-if="isMobile">
 						<button @click="isOpen = !isOpen">
 							<h1
-								:title="selectedBoard.name"
+								:title="selectedBoard?.name ?? 'No Board Found'"
 								:class="{
 									'app-header__title--open': isOpen,
 								}"
 								class="app-header__title app-header__title--mobile"
 							>
-								{{ selectedBoard.name }}
+								{{ selectedBoard?.name ?? "No Board Found" }}
 							</h1>
 						</button>
 
@@ -28,13 +28,17 @@
 							v-if="isOpen"
 							:on-close="() => (isOpen = false)"
 							:boards="boards"
-							:selected-board="selectedBoard"
+							:selected-board-id="selectedBoardId"
 							:create-board="createBoard"
 						/>
 					</template>
 
-					<h1 v-else :title="selectedBoard.name" class="app-header__title">
-						{{ selectedBoard.name }}
+					<h1
+						v-else
+						:title="selectedBoard?.name ?? 'No Board Found'"
+						class="app-header__title"
+					>
+						{{ selectedBoard?.name ?? "No Board Found" }}
 					</h1>
 				</div>
 				<div class="app-header__controls-right">
@@ -91,7 +95,10 @@ const modalStore = useModalStore();
 const { setModal } = modalStore;
 
 const boardStore = useBoardStore();
-const { boards, selectedBoard } = storeToRefs(boardStore);
+const { boards, selectedBoardId } = storeToRefs(boardStore);
+const { getBoard } = boardStore;
+
+const selectedBoard = computed(() => getBoard(selectedBoardId.value));
 
 const createBoard = () => {
 	isOpen.value = false;

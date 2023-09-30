@@ -19,7 +19,8 @@
 					>
 						<SidebarItem
 							:board="board"
-							:is-active="selectedBoard.id === board.id"
+							:is-active="selectedBoardId === board.id"
+							@click="() => selectBoard(board.id)"
 						/>
 					</li>
 				</ul>
@@ -70,7 +71,8 @@ const { isHidden } = storeToRefs(sidebarStore);
 const { show, hide } = sidebarStore;
 
 const boardStore = useBoardStore();
-const { boards, selectedBoard } = storeToRefs(boardStore);
+const { boards, selectedBoardId } = storeToRefs(boardStore);
+const { selectBoard } = boardStore;
 </script>
 
 <style scoped lang="scss">
