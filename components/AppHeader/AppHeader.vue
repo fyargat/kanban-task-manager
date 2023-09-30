@@ -99,7 +99,7 @@ const { boards, selectedBoardId, selectedBoard } = storeToRefs(boardStore);
 
 const createBoard = () => {
 	isOpen.value = false;
-	setModal(Modal.BoardForm);
+	setModal(Modal.BoardAdd);
 };
 
 const addNewTask = () => {
@@ -107,7 +107,7 @@ const addNewTask = () => {
 };
 
 const editBoard = () => {
-	setModal(Modal.BoardForm);
+	setModal(Modal.BoardEdit);
 };
 
 const deleteBoard = () => {

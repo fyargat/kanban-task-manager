@@ -46,10 +46,10 @@ withDefaults(defineProps<Props>(), {
 	isHideButton: false,
 });
 
-const emit = defineEmits(["update-column"]);
+const emit = defineEmits(["update-item"]);
 
 const updateInput = (itemId: string, inputValue: string) => {
-	emit("update-column", itemId, inputValue);
+	emit("update-item", itemId, inputValue);
 };
 </script>
 

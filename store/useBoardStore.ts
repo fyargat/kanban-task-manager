@@ -23,7 +23,7 @@ export const useBoardStore = defineStore("boardStore", () => {
 		selectedBoardId.value = boardId;
 	};
 
-	const getBoard = (boardId: BoardId | null) => {
+	const getBoard = (boardId: BoardId | null): Board | null => {
 		if (!boardId) return null;
 
 		const board = boards.value.find((v) => v.id === boardId) ?? null;
@@ -36,7 +36,18 @@ export const useBoardStore = defineStore("boardStore", () => {
 		selectedBoardId.value = board.id;
 	};
 
-	const editBoard = () => {};
+	const editBoard = (boardId: BoardId, updatedBoard: Board) => {
+		boards.value = boards.value.map((board) => {
+			if (board.id === boardId) {
+				return {
+					...board,
+					...updatedBoard,
+				};
+			}
+
+			return board;
+		});
+	};
 
 	const deleteBoard = () => {
 		boards.value = boards.value.filter((v) => v.id !== selectedBoardId.value);

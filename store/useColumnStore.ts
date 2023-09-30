@@ -31,23 +31,27 @@ export const useColumnStore = defineStore("columnStore", () => {
 		return columns.value.filter((v) => v.boardId === boardId);
 	};
 
-	const createColumn = (newColumns: Column[]) => {
+	const addColumns = (newColumns: Column[]) => {
 		columns.value.push(...newColumns);
 	};
 
-	const editColumn = () => {
-		console.log("edit column");
+	const editColumns = (boardId: BoardId, newColumns: Column[]) => {
+		deleteColumns(boardId);
+
+		addColumns(newColumns);
 	};
 
-	const deleteColumn = () => {
-		console.log("delete column");
+	const deleteColumns = (boardId: BoardId) => {
+		columns.value = columns.value.filter(
+			(column) => column.boardId !== boardId,
+		);
 	};
 
 	return {
 		columns,
-		createColumn,
-		editColumn,
-		deleteColumn,
+		addColumns,
+		editColumns,
+		deleteColumns,
 		getColumnsByBoardId,
 	};
 });

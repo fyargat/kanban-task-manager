@@ -1,5 +1,6 @@
 export enum Modal {
-	BoardForm = "board_form",
+	BoardAdd = "board_add",
+	BoardEdit = "board_edit",
 	BoardDelete = "board_delete",
 	TaskForm = "task_form",
 	TaskView = "task_view",

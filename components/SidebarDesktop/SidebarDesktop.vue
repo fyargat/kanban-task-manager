@@ -28,7 +28,7 @@
 				<div
 					class="sidebar-desktop__wrap sidebar-desktop__create-button-container"
 				>
-					<SidebarCreateButton @click="setModal(Modal.BoardForm)" />
+					<SidebarCreateButton @click="setModal(Modal.BoardAdd)" />
 				</div>
 			</div>
 
