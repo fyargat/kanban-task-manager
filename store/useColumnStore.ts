@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import { BoardId, Column } from "../types";
+import { BoardId, Column, ColumnId } from "../types";
 
 const mockColumns: Column[] = [
 	{
@@ -31,6 +31,14 @@ export const useColumnStore = defineStore("columnStore", () => {
 		return columns.value.filter((v) => v.boardId === boardId);
 	};
 
+	const getColumn = (columnId?: ColumnId | null) => {
+		if (!columnId) return null;
+
+		const board = columns.value.find((v) => v.id === columnId) ?? null;
+
+		return board;
+	};
+
 	const addColumns = (newColumns: Column[]) => {
 		columns.value.push(...newColumns);
 	};
@@ -49,6 +57,7 @@ export const useColumnStore = defineStore("columnStore", () => {
 
 	return {
 		columns,
+		getColumn,
 		addColumns,
 		editColumns,
 		deleteColumns,

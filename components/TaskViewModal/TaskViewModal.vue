@@ -2,27 +2,27 @@
 	<ModalDialog :on-close="onClose">
 		<div class="task-view-modal__container">
 			<div class="task-view-modal__head">
-				<h4 :title="task.name" class="task-view-modal__title">
-					{{ task.name }}
+				<h4 :title="selectedTask?.name" class="task-view-modal__title">
+					{{ selectedTask?.name }}
 				</h4>
 				<OptionDropdown
-					:edit-fn="() => {}"
-					:delete-fn="() => {}"
+					:on-edit="editTask"
+					:on-delete="deleteTask"
 					edit-text="Edit task"
 					delete-text="Delete task"
 				/>
 			</div>
 			<div class="task-view-modal__body">
 				<p class="task-view-modal__description">
-					{{ task.description ?? "No description" }}
+					{{ selectedTask?.description ?? "No description" }}
 				</p>
 				<div class="task-view-modal__subtasks subtasks">
 					<h5 class="subtasks__title task-view-modal__subtitle">
-						Subtasks ({{ doneSubtaskCount }} of {{ task.subtasks.length }})
+						Subtasks ({{ doneSubtaskCount }} of {{ subtasks.length }})
 					</h5>
 					<ul class="subtasks__list">
 						<li
-							v-for="subtask in task.subtasks"
+							v-for="subtask in subtasks"
 							:key="subtask.id"
 							class="subtasks__item"
 						>
@@ -34,7 +34,7 @@
 					<h5
 						class="task-view-modal__status-title task-view-modal__subtitle"
 					></h5>
-					<SelectBox :columns="columns" :current-column="columns[0]" />
+					<SelectBox :columns="columns" :current-column="taskColumn!" />
 				</div>
 			</div>
 		</div>
@@ -46,7 +46,12 @@ import ModalDialog from "~/components/ModalDialog/ModalDialog.vue";
 import OptionDropdown from "~/components/OptionDropdown/OptionDropdown.vue";
 import SelectBox from "~/components/SelectBox/SelectBox.vue";
 import SubtaskCheckbox from "~/components/SubtaskCheckbox/SubtaskCheckbox.vue";
-import { Column, Task } from "~/types";
+import { Modal } from "~/constants/modal";
+import { useBoardStore } from "~/store/useBoardStore";
+import { useColumnStore } from "~/store/useColumnStore";
+import { useModalStore } from "~/store/useModalStore";
+import { useSubtaskStore } from "~/store/useSubtaskStore";
+import { useTaskStore } from "~/store/useTaskStore";
 
 interface Props {
 	onClose: () => void;
@@ -54,36 +59,37 @@ interface Props {
 
 defineProps<Props>();
 
-// temp
-const task: Task = {
-	id: "1",
-	name: "Task 1",
-	description: "Task Description",
-	subtasks: [
-		{ id: "1", name: "Subtask 1", checked: false },
-		{ id: "2", name: "Subtask 2", checked: true },
-	],
-	status: "Doing",
-};
+const modalStore = useModalStore();
+const { setModal } = modalStore;
 
-const columns: Column[] = [
-	{
-		id: "1",
-		name: "Column 1",
-	},
-	{
-		id: "2",
-		name: "Column 2",
-	},
-	{
-		id: "3",
-		name: "Column 3",
-	},
-];
+const boardStore = useBoardStore();
+const { selectedBoardId } = boardStore;
+
+const columnStore = useColumnStore();
+const { getColumnsByBoardId, getColumn } = columnStore;
+
+const columns = computed(() => getColumnsByBoardId(selectedBoardId));
+
+const taskStore = useTaskStore();
+const { selectedTask, selectedTaskId } = taskStore;
+const taskColumn = getColumn(selectedTask?.columnId);
+
+const subtaskStore = useSubtaskStore();
+const { getSubtasksByTaskId } = subtaskStore;
+
+const subtasks = getSubtasksByTaskId(selectedTaskId!);
 
 const doneSubtaskCount = computed(
-	() => task.subtasks.filter((v) => v.checked).length,
+	() => subtasks.filter((v) => v.checked).length,
 );
+
+const editTask = () => {
+	setModal(Modal.TaskEdit);
+};
+
+const deleteTask = () => {
+	setModal(Modal.TaskDelete);
+};
 </script>
 
 <style scoped lang="scss">

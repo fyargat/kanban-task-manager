@@ -1,8 +1,48 @@
 import { defineStore } from "pinia";
-import { ColumnId, Task } from "../types";
+import { ColumnId, Task, TaskId } from "../types";
+
+// temp
+const mockTasks: Task[] = [
+	{
+		id: "0ac8b1ee-315c-4d1c-b223-f799dcdd3task1",
+		name: "Task 1",
+		description: "Task 1 Description",
+		order: 0,
+		columnId: "0ac8b1ee-315c-4d1c-b223-f799dcdd3ba1",
+	},
+	{
+		id: "0ac8b1ee-315c-4d1c-b223-f799dcdd3task2",
+		name: "Task 2",
+		description: "Task 2 Description",
+		order: 1,
+		columnId: "0ac8b1ee-315c-4d1c-b223-f799dcdd3ba1",
+	},
+	{
+		id: "0ac8b1ee-315c-4d1c-b223-f799dcdd3task3",
+		name: "Task 3",
+		description: "",
+		order: 1,
+		columnId: "0ac8b1ee-315c-4d1c-b223-f799dcdd3ba2",
+	},
+];
 
 export const useTaskStore = defineStore("taskStore", () => {
-	const tasks = ref<Task[]>([]);
+	const tasks = ref<Task[]>(mockTasks ?? []);
+	const selectedTaskId = ref<TaskId | null>(mockTasks[0].id ?? null);
+
+	const selectedTask = computed(() => getTask(selectedTaskId.value));
+
+	const selectTask = (taskId: TaskId | null) => {
+		selectedTaskId.value = taskId;
+	};
+
+	const getTask = (taskId: TaskId | null): Task | null => {
+		if (!taskId) return null;
+
+		const task = tasks.value.find((v) => v.id === taskId) ?? null;
+
+		return task;
+	};
 
 	const getTasksByColumnId = (columnId: ColumnId) => {
 		return tasks.value.filter((v) => v.columnId === columnId);
@@ -22,9 +62,12 @@ export const useTaskStore = defineStore("taskStore", () => {
 
 	return {
 		tasks,
+		selectedTask,
+		selectedTaskId,
 		createTask,
 		editTask,
 		deleteTask,
 		getTasksByColumnId,
+		selectTask,
 	};
 });

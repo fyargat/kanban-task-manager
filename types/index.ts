@@ -14,7 +14,6 @@ export interface Task {
 	id: TaskId;
 	name: string;
 	description?: string;
-	status: string;
 	columnId: ColumnId;
 	order: number;
 }

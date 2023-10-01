@@ -103,7 +103,7 @@ const createBoard = () => {
 };
 
 const addNewTask = () => {
-	setModal(Modal.TaskForm);
+	setModal(Modal.TaskAdd);
 };
 
 const editBoard = () => {

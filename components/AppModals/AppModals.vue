@@ -6,7 +6,8 @@
 			v-if="modal === Modal.BoardDelete"
 			:on-close="closeModal"
 		/>
-		<TaskFormModal v-if="modal === Modal.TaskForm" :on-close="closeModal" />
+		<AddTaskModal v-if="modal === Modal.TaskAdd" :on-close="closeModal" />
+		<EditTaskModal v-if="modal === Modal.TaskEdit" :on-close="closeModal" />
 		<TaskViewModal v-if="modal === Modal.TaskView" :on-close="closeModal" />
 		<DeleteTaskModal v-if="modal === Modal.TaskDelete" :on-close="closeModal" />
 	</div>
@@ -16,10 +17,11 @@
 import { storeToRefs } from "pinia";
 
 import AddBoardModal from "~/components/AddBoardModal/AddBoardModal.vue";
+import AddTaskModal from "~/components/AddTaskModal/AddTaskModal.vue";
 import DeleteBoardModal from "~/components/DeleteBoardModal/DeleteBoardModal.vue";
 import DeleteTaskModal from "~/components/DeleteTaskModal/DeleteTaskModal.vue";
 import EditBoardModal from "~/components/EditBoardModal/EditBoardModal.vue";
-import TaskFormModal from "~/components/TaskFormModal/TaskFormModal.vue";
+import EditTaskModal from "~/components/EditTaskModal/EditTaskModal.vue";
 import TaskViewModal from "~/components/TaskViewModal/TaskViewModal.vue";
 
 import { Modal } from "~/constants/modal";
