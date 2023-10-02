@@ -1,5 +1,6 @@
 <template>
 	<perfect-scrollbar
+		v-dragscroll
 		:class="{
 			'app-board__container--full': isHidden,
 			'app-board__container--no-boards': !boards.length,

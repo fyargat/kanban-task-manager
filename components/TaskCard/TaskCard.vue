@@ -1,5 +1,5 @@
 <template>
-	<div class="task-card__container" @click="viewTask">
+	<div data-no-dragscroll class="task-card__container" @click="viewTask">
 		<h4 class="task-card__title">{{ task.name }}</h4>
 		<p class="task-card__subtask-count">
 			{{ doneSubtaskCount }} of {{ subtasks.length }} subtasks
