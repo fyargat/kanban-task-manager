@@ -19,7 +19,7 @@
 						<p class="task-form-modal__subtitle">Description</p>
 						<textarea
 							class="task-form-modal__description"
-							:model-value="task.description"
+							:value="task.description"
 							@input="updateDescription"
 						/>
 					</label>

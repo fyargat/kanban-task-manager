@@ -41,6 +41,18 @@ export const useSubtaskStore = defineStore("subtaskStore", () => {
 		});
 	};
 
+	const editSubtasksByTaskId = (taskId: TaskId, newSubtasks: Subtask[]) => {
+		deleteSubtasks(taskId);
+
+		addSubtasks(newSubtasks);
+	};
+
+	const deleteSubtasks = (taskId: TaskId) => {
+		subtasks.value = subtasks.value.filter(
+			(subtask) => subtask.taskId !== taskId,
+		);
+	};
+
 	const deleteSubtask = () => {
 		console.log("delete");
 	};
@@ -49,7 +61,9 @@ export const useSubtaskStore = defineStore("subtaskStore", () => {
 		subtasks,
 		addSubtasks,
 		editSubtask,
+		editSubtasksByTaskId,
 		deleteSubtask,
+		deleteSubtasks,
 		getSubtasksByTaskId,
 	};
 });
