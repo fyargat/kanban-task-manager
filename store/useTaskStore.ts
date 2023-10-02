@@ -76,7 +76,9 @@ export const useTaskStore = defineStore("taskStore", () => {
 	};
 
 	const deleteTask = () => {
-		console.log("delete");
+		tasks.value = tasks.value.filter((v) => v.id !== selectedTaskId.value);
+
+		selectTask(null);
 	};
 
 	return {

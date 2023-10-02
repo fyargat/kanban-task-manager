@@ -3,7 +3,7 @@
 		title="Delete this board?"
 		:text="`Are you sure you want to delete the '${selectedBoard?.name}' board? This action will remove all columns and tasks and cannot be reversed.`"
 		:on-close="onClose"
-		:on-confirm="handleConfirm"
+		:on-confirm="handleConfirmDeletion"
 		:on-cancel="onClose"
 	/>
 </template>
@@ -28,7 +28,7 @@ const boardStore = useBoardStore();
 const { selectedBoard } = storeToRefs(boardStore);
 const { deleteBoard } = boardStore;
 
-const handleConfirm = () => {
+const handleConfirmDeletion = () => {
 	deleteBoard();
 	closeModal();
 };
