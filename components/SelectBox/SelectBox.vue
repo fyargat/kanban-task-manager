@@ -24,7 +24,7 @@
 
 		<ul v-if="isOpen" class="select-box__list list" @click.stop="">
 			<li v-for="option in columns" :key="option.id" class="list__item">
-				<button class="list__item-button" @click="selectOption(option)">
+				<button class="list__item-button" @click="selectOption(option.id)">
 					{{ option.name }}
 				</button>
 			</li>
@@ -33,7 +33,7 @@
 </template>
 
 <script setup lang="ts">
-import { Column } from "~/types";
+import { Column, ColumnId } from "~/types";
 
 interface Props {
 	columns: Column[];
@@ -46,8 +46,8 @@ defineProps<Props>();
 
 const isOpen = ref<boolean>(false);
 
-const selectOption = (option: Column) => {
-	emit("update-current-column", option);
+const selectOption = (optionId: ColumnId) => {
+	emit("update-current-column", optionId);
 	isOpen.value = false;
 };
 </script>

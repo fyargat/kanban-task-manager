@@ -1,13 +1,13 @@
 <template>
-	<ModalDialog :on-close="onClose">
+	<ModalDialog :on-close="handleModalClose">
 		<div class="task-view-modal__container">
 			<div class="task-view-modal__head">
 				<h4 :title="selectedTask?.name" class="task-view-modal__title">
 					{{ selectedTask?.name }}
 				</h4>
 				<OptionDropdown
-					:on-edit="editTask"
-					:on-delete="deleteTask"
+					:on-edit="handleTaskEdit"
+					:on-delete="handleTaskDelete"
 					edit-text="Edit task"
 					delete-text="Delete task"
 				/>
@@ -26,7 +26,10 @@
 							:key="subtask.id"
 							class="subtasks__item"
 						>
-							<SubtaskCheckbox :subtask="subtask" />
+							<SubtaskCheckbox
+								:subtask="subtask"
+								@toggle-checked-subtask="toggleCheckedSubtask"
+							/>
 						</li>
 					</ul>
 				</div>
@@ -34,7 +37,11 @@
 					<h5
 						class="task-view-modal__status-title task-view-modal__subtitle"
 					></h5>
-					<SelectBox :columns="columns" :current-column="taskColumn!" />
+					<SelectBox
+						:columns="columns"
+						:current-column="selectedTaskColumn!"
+						@update-current-column="updateTaskColumn"
+					/>
 				</div>
 			</div>
 		</div>
@@ -42,6 +49,7 @@
 </template>
 
 <script setup lang="ts">
+import { storeToRefs } from "pinia";
 import ModalDialog from "~/components/ModalDialog/ModalDialog.vue";
 import OptionDropdown from "~/components/OptionDropdown/OptionDropdown.vue";
 import SelectBox from "~/components/SelectBox/SelectBox.vue";
@@ -52,43 +60,64 @@ import { useColumnStore } from "~/store/useColumnStore";
 import { useModalStore } from "~/store/useModalStore";
 import { useSubtaskStore } from "~/store/useSubtaskStore";
 import { useTaskStore } from "~/store/useTaskStore";
+import { ColumnId, Subtask, SubtaskId, Task } from "~/types";
 
 interface Props {
 	onClose: () => void;
 }
 
-defineProps<Props>();
+const props = defineProps<Props>();
 
 const modalStore = useModalStore();
 const { setModal } = modalStore;
 
 const boardStore = useBoardStore();
-const { selectedBoardId } = boardStore;
+const { selectedBoardId } = storeToRefs(boardStore);
 
 const columnStore = useColumnStore();
-const { getColumnsByBoardId, getColumn } = columnStore;
+const { getColumnsByBoardId } = columnStore;
 
-const columns = computed(() => getColumnsByBoardId(selectedBoardId));
+const columns = computed(() => getColumnsByBoardId(selectedBoardId.value));
 
 const taskStore = useTaskStore();
-const { selectedTask, selectedTaskId } = taskStore;
-const taskColumn = getColumn(selectedTask?.columnId);
+const { selectedTaskId, selectedTask, selectedTaskColumn } =
+	storeToRefs(taskStore);
+const { editTask, selectTask } = taskStore;
 
 const subtaskStore = useSubtaskStore();
-const { getSubtasksByTaskId } = subtaskStore;
+const { getSubtasksByTaskId, editSubtask } = subtaskStore;
 
-const subtasks = getSubtasksByTaskId(selectedTaskId!);
+const subtasks = computed(() => getSubtasksByTaskId(selectedTaskId.value!));
 
 const doneSubtaskCount = computed(
-	() => subtasks.filter((v) => v.checked).length,
+	() => subtasks.value.filter((v) => v.checked).length,
 );
 
-const editTask = () => {
+const handleTaskEdit = () => {
 	setModal(Modal.TaskEdit);
 };
 
-const deleteTask = () => {
+const handleTaskDelete = () => {
 	setModal(Modal.TaskDelete);
+};
+
+const handleModalClose = () => {
+	selectTask(null);
+	props.onClose();
+};
+
+const updateTaskColumn = (columnId: ColumnId) => {
+	editTask(selectedTaskId.value!, {
+		...selectedTask.value,
+		columnId,
+	} as Task);
+};
+
+const toggleCheckedSubtask = (
+	subtaskId: SubtaskId,
+	updatedSubtask: Subtask,
+) => {
+	editSubtask(subtaskId, updatedSubtask);
 };
 </script>
 

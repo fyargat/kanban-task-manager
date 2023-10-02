@@ -26,10 +26,10 @@ const { selectTask } = taskStore;
 const subtaskStore = useSubtaskStore();
 const { getSubtasksByTaskId } = subtaskStore;
 
-const subtasks = getSubtasksByTaskId(task.id);
+const subtasks = computed(() => getSubtasksByTaskId(task.id));
 
 const doneSubtaskCount = computed(
-	() => subtasks.filter((v) => v.checked).length,
+	() => subtasks.value.filter((v) => v.checked).length,
 );
 
 const modalStore = useModalStore();

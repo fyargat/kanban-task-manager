@@ -23,14 +23,17 @@ interface Props {
 	subtask: Subtask;
 }
 
-const emit = defineEmits(["toggleCheckedSubtask"]);
+const emit = defineEmits(["toggle-checked-subtask"]);
 
-defineProps<Props>();
+const { subtask } = defineProps<Props>();
 
 const onChange = (event: Event) => {
 	const { checked } = event.target as HTMLInputElement;
 
-	emit("toggleCheckedSubtask", checked);
+	emit("toggle-checked-subtask", subtask.id, {
+		...subtask,
+		checked,
+	});
 };
 </script>
 

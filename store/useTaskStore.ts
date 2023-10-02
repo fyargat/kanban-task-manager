@@ -1,5 +1,6 @@
 import { defineStore } from "pinia";
 import { ColumnId, Task, TaskId } from "../types";
+import { useColumnStore } from "./useColumnStore";
 
 // temp
 const mockTasks: Task[] = [
@@ -28,9 +29,18 @@ const mockTasks: Task[] = [
 
 export const useTaskStore = defineStore("taskStore", () => {
 	const tasks = ref<Task[]>(mockTasks ?? []);
-	const selectedTaskId = ref<TaskId | null>(mockTasks[0].id ?? null);
+	const selectedTaskId = ref<TaskId | null>(null);
 
-	const selectedTask = computed(() => getTask(selectedTaskId.value));
+	const columnStore = useColumnStore();
+	const { getColumn } = columnStore;
+
+	const selectedTask = computed(() => {
+		return getTask(selectedTaskId.value);
+	});
+
+	const selectedTaskColumn = computed(() => {
+		return getColumn(selectedTask?.value?.columnId);
+	});
 
 	const selectTask = (taskId: TaskId | null) => {
 		selectedTaskId.value = taskId;
@@ -52,8 +62,17 @@ export const useTaskStore = defineStore("taskStore", () => {
 		tasks.value.push(task);
 	};
 
-	const editTask = () => {
-		console.log("edit");
+	const editTask = (taskId: TaskId, updatedTask: Task) => {
+		tasks.value = tasks.value.map((task) => {
+			if (task.id === taskId) {
+				return {
+					...task,
+					...updatedTask,
+				};
+			}
+
+			return task;
+		});
 	};
 
 	const deleteTask = () => {
@@ -62,8 +81,10 @@ export const useTaskStore = defineStore("taskStore", () => {
 
 	return {
 		tasks,
-		selectedTask,
 		selectedTaskId,
+		selectedTask,
+		selectedTaskColumn,
+		getTask,
 		createTask,
 		editTask,
 		deleteTask,

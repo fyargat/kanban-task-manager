@@ -9,7 +9,5 @@ interface Props {
 	onClose: () => void;
 }
 
-console.log("sdflkskjl");
-
 defineProps<Props>();
 </script>

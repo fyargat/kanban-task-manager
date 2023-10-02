@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import { Subtask, TaskId } from "../types";
+import { Subtask, SubtaskId, TaskId } from "../types";
 
 // temp
 const mockSubtasks: Subtask[] = [
@@ -21,8 +21,6 @@ export const useSubtaskStore = defineStore("subtaskStore", () => {
 	const subtasks = ref<Subtask[]>(mockSubtasks ?? []);
 
 	const getSubtasksByTaskId = (taskId: TaskId) => {
-		console.log("taskId", taskId);
-
 		return subtasks.value.filter((v) => v.taskId === taskId);
 	};
 
@@ -30,8 +28,17 @@ export const useSubtaskStore = defineStore("subtaskStore", () => {
 		subtasks.value.push(subtask);
 	};
 
-	const editSubtask = () => {
-		console.log("edit");
+	const editSubtask = (subtaskId: SubtaskId, updatedSubtask: Subtask) => {
+		subtasks.value = subtasks.value.map((subtask) => {
+			if (subtask.id === subtaskId) {
+				return {
+					...subtask,
+					...updatedSubtask,
+				};
+			}
+
+			return subtask;
+		});
 	};
 
 	const deleteSubtask = () => {
