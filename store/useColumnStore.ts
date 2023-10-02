@@ -17,6 +17,30 @@ const mockColumns: Column[] = [
 	},
 	{
 		id: "0ac8b1ee-315c-4d1c-b223-f799dcdd3ba3",
+		name: "Column 3",
+		color: Color.Purple,
+		boardId: "0ac8b1ee-315c-4d1c-b223-f799dcdd3bb6",
+	},
+	{
+		id: "0ac8b1ee-315c-4d1c-b223-f799dcdd3ba4",
+		name: "Column 4",
+		color: Color.Purple,
+		boardId: "0ac8b1ee-315c-4d1c-b223-f799dcdd3bb6",
+	},
+	{
+		id: "0ac8b1ee-315c-4d1c-b223-f799dcdd3ba5",
+		name: "Column 5",
+		color: Color.Purple,
+		boardId: "0ac8b1ee-315c-4d1c-b223-f799dcdd3bb6",
+	},
+	{
+		id: "0ac8b1ee-315c-4d1c-b223-f799dcdd3ba6",
+		name: "Column 6",
+		color: Color.Purple,
+		boardId: "0ac8b1ee-315c-4d1c-b223-f799dcdd3bb6",
+	},
+	{
+		id: "0ac8b1ee-315c-4d1c-b223-f799dcdd3ba3",
 		name: "Column 1",
 		color: Color.Aqua,
 		boardId: "0ac8b1ee-315c-4d1c-b223-f799dcdd3bb7",

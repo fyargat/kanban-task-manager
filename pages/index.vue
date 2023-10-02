@@ -35,7 +35,7 @@ const { theme } = storeToRefs(themeStore);
 	&__main {
 		position: relative;
 
-		overflow: auto;
+		overflow: hidden;
 		display: flex;
 
 		width: 100%;

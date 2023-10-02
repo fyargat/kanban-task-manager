@@ -5,27 +5,39 @@
 	&__container {
 		cursor: move;
 
-		transform: translateX(18.75rem);
+		position: absolute;
+		top: 0;
+		left: 18.75rem;
 
-		min-width: 100%;
+		overflow: auto;
+		display: flex;
+
+		width: calc(100vw - 18.75rem);
 		height: 100%;
 		padding: 1.5rem 2rem;
 
 		color: $white;
 
-		transition: left 0.2s ease;
 		transition: transform 0.2s ease;
+		transition: left 0.2s ease;
 
 		&--full {
-			transform: translateX(0);
+			left: 0;
+			width: 100vw;
 		}
 	}
 
 	&__list {
 		display: flex;
+		flex: 1;
+		height: 100%;
 	}
 
 	&__item {
-		margin-right: 2rem;
+		height: 100%;
+
+		&:not(:last-of-type) {
+			margin-right: 2rem;
+		}
 	}
 }

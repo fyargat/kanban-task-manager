@@ -5,12 +5,10 @@
 	&__container {
 		user-select: none;
 
-		display: flex;
-		flex-direction: column;
+		@include flex-column;
 
 		width: 17.5rem;
 		height: 100%;
-
 		color: var(--color-title);
 	}
 
@@ -34,8 +32,6 @@
 		height: 15px;
 		margin-right: 12px;
 
-		// temp
-		background: $dark-blue;
 		border-radius: 100%;
 	}
 
@@ -46,7 +42,7 @@
 	}
 
 	&__body {
-		height: 100vh;
+		flex: 1;
 
 		&--empty {
 			border-radius: 6px;
