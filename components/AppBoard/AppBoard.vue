@@ -1,5 +1,5 @@
 <template>
-	<div
+	<perfect-scrollbar
 		:class="{
 			'app-board__container--full': isHidden,
 			'app-board__container--no-boards': !boards.length,
@@ -38,7 +38,7 @@
 				+ Create New Board
 			</PrimaryButton>
 		</div>
-	</div>
+	</perfect-scrollbar>
 </template>
 
 <script setup lang="ts">

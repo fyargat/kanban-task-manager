@@ -9,7 +9,7 @@
 		z-index: 2;
 		left: 0;
 
-		overflow-x: hidden;
+		overflow: hidden;
 		display: flex;
 		flex-direction: column;
 		justify-content: space-between;
@@ -48,6 +48,10 @@
 	&__list,
 	&__create-button-container {
 		margin-bottom: 0.2rem;
+	}
+
+	&__list {
+		height: calc(100vh - 20rem);
 	}
 
 	&__item {

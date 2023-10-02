@@ -43,12 +43,18 @@ const { getColumnsByBoardId } = columnStore;
 const columns = computed(() => getColumnsByBoardId(selectedBoardId.value));
 
 const taskStore = useTaskStore();
-const { createTask } = taskStore;
+const { createTask, getTasksByColumnId } = taskStore;
+
+const columnTasksCount = computed(
+	() => getTasksByColumnId(columns.value[0].id!).length,
+);
 
 const subtaskStore = useSubtaskStore();
 const { addSubtasks } = subtaskStore;
 
-const task = reactive<Task>(getTaskTemplate(columns.value[0].id));
+const task = reactive<Task>(
+	getTaskTemplate(columns.value[0].id, columnTasksCount.value),
+);
 const subtasks = ref<Subtask[]>([getInitSubtask(task.id)]);
 
 const validate = () => {
@@ -66,7 +72,12 @@ const handleSubmit = () => {
 const updateName = (name: string) => (task.name = name);
 const updateDescription = (description: string) =>
 	(task.description = description);
-const updateColumn = (columnId: ColumnId) => (task.columnId = columnId);
+const updateColumn = (columnId: ColumnId) => {
+	const columnTasksCount = getTasksByColumnId(columns.value[0].id!).length;
+
+	task.columnId = columnId;
+	task.order = columnTasksCount;
+};
 
 const addSubtask = () => {
 	if (subtasks.value.length >= MAX_TASKS) return;

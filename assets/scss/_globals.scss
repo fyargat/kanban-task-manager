@@ -28,3 +28,17 @@ textarea,
 select {
 	font: inherit;
 }
+
+.ps {
+	&__rail-y,
+	&__rail-x {
+		cursor: default;
+		background-color: transparent !important;
+	}
+
+	&__thumb-y,
+	&__thumb-x {
+		cursor: default;
+		background-color: $dark-blue !important;
+	}
+}

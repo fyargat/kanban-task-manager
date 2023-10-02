@@ -11,19 +11,21 @@
 			</header>
 
 			<div class="sidebar-desktop__boards">
-				<ul class="sidebar-desktop__list">
-					<li
-						v-for="board in boards"
-						:key="board.id"
-						class="sidebar-desktop__item"
-					>
-						<SidebarItem
-							:board="board"
-							:is-active="selectedBoardId === board.id"
-							@click="() => selectBoard(board.id)"
-						/>
-					</li>
-				</ul>
+				<perfect-scrollbar>
+					<ul class="sidebar-desktop__list">
+						<li
+							v-for="board in boards"
+							:key="board.id"
+							class="sidebar-desktop__item"
+						>
+							<SidebarItem
+								:board="board"
+								:is-active="selectedBoardId === board.id"
+								@click="() => selectBoard(board.id)"
+							/>
+						</li>
+					</ul>
+				</perfect-scrollbar>
 
 				<div
 					class="sidebar-desktop__wrap sidebar-desktop__create-button-container"
