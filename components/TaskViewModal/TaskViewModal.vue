@@ -14,7 +14,7 @@
 			</div>
 			<div class="task-view-modal__body">
 				<p class="task-view-modal__description">
-					{{ selectedTask?.description ?? "No description" }}
+					{{ selectedTask?.description || "No description" }}
 				</p>
 				<div class="task-view-modal__subtasks subtasks">
 					<h5 class="subtasks__title task-view-modal__subtitle">
@@ -39,7 +39,7 @@
 					></h5>
 					<SelectBox
 						:columns="columns"
-						:current-column="selectedTaskColumn!"
+						:current-column-id="selectedTask?.columnId!"
 						@update-current-column="updateTaskColumn"
 					/>
 				</div>
@@ -80,8 +80,7 @@ const { getColumnsByBoardId } = columnStore;
 const columns = computed(() => getColumnsByBoardId(selectedBoardId.value));
 
 const taskStore = useTaskStore();
-const { selectedTaskId, selectedTask, selectedTaskColumn } =
-	storeToRefs(taskStore);
+const { selectedTaskId, selectedTask } = storeToRefs(taskStore);
 const { editTask, selectTask } = taskStore;
 
 const subtaskStore = useSubtaskStore();

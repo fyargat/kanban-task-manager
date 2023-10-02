@@ -1,6 +1,5 @@
 import { defineStore } from "pinia";
 import { ColumnId, Task, TaskId } from "../types";
-import { useColumnStore } from "./useColumnStore";
 
 // temp
 const mockTasks: Task[] = [
@@ -31,15 +30,8 @@ export const useTaskStore = defineStore("taskStore", () => {
 	const tasks = ref<Task[]>(mockTasks ?? []);
 	const selectedTaskId = ref<TaskId | null>(null);
 
-	const columnStore = useColumnStore();
-	const { getColumn } = columnStore;
-
 	const selectedTask = computed(() => {
 		return getTask(selectedTaskId.value);
-	});
-
-	const selectedTaskColumn = computed(() => {
-		return getColumn(selectedTask?.value?.columnId);
 	});
 
 	const selectTask = (taskId: TaskId | null) => {
@@ -85,7 +77,6 @@ export const useTaskStore = defineStore("taskStore", () => {
 		tasks,
 		selectedTaskId,
 		selectedTask,
-		selectedTaskColumn,
 		getTask,
 		createTask,
 		editTask,

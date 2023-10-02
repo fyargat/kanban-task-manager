@@ -8,7 +8,7 @@
 			}"
 			@click="isOpen = !isOpen"
 		>
-			<p class="control__text">{{ currentColumn.name }}</p>
+			<p class="control__text">{{ currentColumn?.name! }}</p>
 
 			<div class="control__icon">
 				<svg width="10" height="7" xmlns="http://www.w3.org/2000/svg">
@@ -37,14 +37,19 @@ import { Column, ColumnId } from "~/types";
 
 interface Props {
 	columns: Column[];
-	currentColumn: Column;
+	// currentColumn: Column;
+	currentColumnId: ColumnId;
 }
 
 const emit = defineEmits(["update-current-column"]);
 
-defineProps<Props>();
+const props = defineProps<Props>();
 
 const isOpen = ref<boolean>(false);
+
+const currentColumn = computed(() => {
+	return props.columns.find((column) => column.id === props.currentColumnId);
+});
 
 const selectOption = (optionId: ColumnId) => {
 	emit("update-current-column", optionId);

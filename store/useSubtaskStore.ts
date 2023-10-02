@@ -24,8 +24,8 @@ export const useSubtaskStore = defineStore("subtaskStore", () => {
 		return subtasks.value.filter((v) => v.taskId === taskId);
 	};
 
-	const createSubtask = (subtask: Subtask) => {
-		subtasks.value.push(subtask);
+	const addSubtasks = (newSubtasks: Subtask[]) => {
+		subtasks.value.push(...newSubtasks);
 	};
 
 	const editSubtask = (subtaskId: SubtaskId, updatedSubtask: Subtask) => {
@@ -47,7 +47,7 @@ export const useSubtaskStore = defineStore("subtaskStore", () => {
 
 	return {
 		subtasks,
-		createSubtask,
+		addSubtasks,
 		editSubtask,
 		deleteSubtask,
 		getSubtasksByTaskId,

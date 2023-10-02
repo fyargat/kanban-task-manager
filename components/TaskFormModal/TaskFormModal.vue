@@ -2,20 +2,25 @@
 	<ModalDialog :on-close="onClose">
 		<div class="task-form-modal__container">
 			<h3 class="task-form-modal__title">
-				{{ isEdit ? "Edit Task" : "Add New Task" }}
+				{{ title }}
 			</h3>
 
-			<form @submit.prevent="handleSubmit">
+			<form @submit.prevent="onSubmit">
 				<div class="task-form-modal__box">
-					<InputField v-model="task.name" label="Title" />
+					<InputField
+						label="Title"
+						:model-value="task.name"
+						@input="updateName"
+					/>
 				</div>
 
 				<div class="task-form-modal__box">
 					<label>
 						<p class="task-form-modal__subtitle">Description</p>
 						<textarea
-							v-model="task.description"
 							class="task-form-modal__description"
+							:model-value="task.description"
+							@input="updateDescription"
 						/>
 					</label>
 				</div>
@@ -24,18 +29,26 @@
 					<RemovableInputList
 						title="Subtasks"
 						button-text="+Add New Subtask"
-						:list="task.subtasks"
+						:list="subtasks"
+						:add="addSubtask"
+						:remove="removeSubtask"
+						:is-hide-button="subtasks.length >= MAX_TASKS"
+						@update-item="updateSubtask"
 					/>
 				</div>
 
 				<div class="task-form-modal__box">
 					<p class="task-form-modal__subtitle">Status</p>
-					<SelectBox :columns="columns" :current-column="columns[0]" />
+					<SelectBox
+						:columns="columns"
+						:current-column-id="task.columnId"
+						@update-current-column="updateColumn"
+					/>
 				</div>
 
 				<div>
 					<PrimaryButton class="task-form-modal__create-button" type="submit">
-						{{ isEdit ? "Save Changes" : "Create Task" }}
+						{{ buttonText }}
 					</PrimaryButton>
 				</div>
 			</form>
@@ -49,37 +62,38 @@ import ModalDialog from "~/components/ModalDialog/ModalDialog.vue";
 import PrimaryButton from "~/components/PrimaryButton/PrimaryButton.vue";
 import RemovableInputList from "~/components/RemovableInputList/RemovableInputList.vue";
 import SelectBox from "~/components/SelectBox/SelectBox.vue";
-import { Column, Task } from "~/types";
-import { getTaskTemplate } from "~/utils/task";
+import { MAX_TASKS } from "~/constants/task";
+import { Column, ColumnId, Subtask, SubtaskId, Task } from "~/types";
 
 interface Props {
-	task?: Task;
+	title: string;
+	buttonText: string;
+	task: Task;
+	subtasks: Subtask[];
+	columns: Column[];
 	onClose: () => void;
+	onSubmit: () => void;
+	addSubtask: () => void;
+	updateSubtask: (itemId: SubtaskId, name: string) => void;
+	removeSubtask: (id: SubtaskId) => void;
+	updateColumn: (columId: ColumnId) => void;
 }
 
-const props = defineProps<Props>();
+defineProps<Props>();
 
-const task = reactive<Task>(props.task ?? getTaskTemplate());
+const emit = defineEmits(["update-name", "update-description"]);
 
-const isEdit = computed(() => !!props.task);
+const updateName = (event: Event) => {
+	const { value } = event.target as HTMLInputElement;
 
-const handleSubmit = () => {};
+	emit("update-name", value);
+};
 
-// temp
-const columns: Column[] = [
-	{
-		id: "1",
-		name: "Column 1",
-	},
-	{
-		id: "2",
-		name: "Column 2",
-	},
-	{
-		id: "3",
-		name: "Column 3",
-	},
-];
+const updateDescription = (event: Event) => {
+	const { value } = event.target as HTMLInputElement;
+
+	emit("update-description", value);
+};
 </script>
 
 <style scoped lang="scss">
