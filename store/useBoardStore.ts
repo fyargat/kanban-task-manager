@@ -52,7 +52,7 @@ export const useBoardStore = defineStore("boardStore", () => {
 	const deleteBoard = () => {
 		boards.value = boards.value.filter((v) => v.id !== selectedBoardId.value);
 
-		selectBoard(boards.value[0].id ?? null);
+		selectBoard(boards.value.length ? boards.value[0].id : null);
 	};
 
 	return {

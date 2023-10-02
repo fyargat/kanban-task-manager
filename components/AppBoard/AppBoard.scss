@@ -25,6 +25,10 @@
 			left: 0;
 			width: 100vw;
 		}
+
+		&--no-boards {
+			cursor: default;
+		}
 	}
 
 	&__columns {
@@ -71,6 +75,29 @@
 			&:hover {
 				color: $dark-blue;
 			}
+		}
+	}
+
+	&__no-boards {
+		cursor: default;
+
+		left: 9.375rem;
+
+		align-items: center;
+
+		margin: auto;
+
+		color: var(--color-title);
+
+		@include flex-column;
+
+		&-text {
+			margin-bottom: 1rem;
+			text-align: center;
+		}
+
+		&-button {
+			max-width: fit-content;
 		}
 	}
 }
