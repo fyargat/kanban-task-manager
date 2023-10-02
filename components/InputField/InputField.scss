@@ -12,5 +12,9 @@
 
 	&__input {
 		@include input-field;
+
+		&:disabled {
+			opacity: 0.3;
+		}
 	}
 }

@@ -1,4 +1,5 @@
 export enum Modal {
+	ColumnAdd = "column_add",
 	BoardAdd = "board_add",
 	BoardEdit = "board_edit",
 	BoardDelete = "board_delete",

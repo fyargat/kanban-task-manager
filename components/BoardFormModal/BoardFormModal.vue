@@ -10,6 +10,7 @@
 					<InputField
 						label="Title"
 						:model-value="board.name"
+						:disabled="isBoardNameDisabled"
 						@input="updateName"
 					/>
 				</div>
@@ -54,6 +55,7 @@ interface Props {
 	addColumn: () => void;
 	updateColumn: (itemId: string, name: string) => void;
 	removeColumn: (id: ColumnId) => void;
+	isBoardNameDisabled?: boolean;
 }
 
 const { board } = defineProps<Props>();

@@ -1,5 +1,6 @@
 <template>
 	<div>
+		<AddColumnModal v-if="modal === Modal.ColumnAdd" :on-close="closeModal" />
 		<AddBoardModal v-if="modal === Modal.BoardAdd" :on-close="closeModal" />
 		<EditBoardModal v-if="modal === Modal.BoardEdit" :on-close="closeModal" />
 		<DeleteBoardModal
@@ -17,6 +18,7 @@
 import { storeToRefs } from "pinia";
 
 import AddBoardModal from "~/components/AddBoardModal/AddBoardModal.vue";
+import AddColumnModal from "~/components/AddColumnModal/AddColumnModal.vue";
 import AddTaskModal from "~/components/AddTaskModal/AddTaskModal.vue";
 import DeleteBoardModal from "~/components/DeleteBoardModal/DeleteBoardModal.vue";
 import DeleteTaskModal from "~/components/DeleteTaskModal/DeleteTaskModal.vue";

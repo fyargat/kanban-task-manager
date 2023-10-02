@@ -3,6 +3,7 @@
 		<label>
 			<p v-if="label" class="input-field__label">{{ label }}</p>
 			<input
+				:disabled="disabled"
 				class="input-field__input"
 				type="text"
 				:value="modelValue"
@@ -14,13 +15,17 @@
 
 <script setup lang="ts">
 interface Props {
-	label?: string;
 	modelValue: string;
+	disabled?: boolean;
+	label?: string;
 }
 
 const emit = defineEmits(["update:modelValue"]);
 
-defineProps<Props>();
+withDefaults(defineProps<Props>(), {
+	disabled: false,
+	label: "",
+});
 
 const updateInputValue = (event: Event) => {
 	const { value } = event.target as HTMLInputElement;
