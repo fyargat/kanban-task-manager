@@ -1,5 +1,6 @@
 import { defineStore } from "pinia";
 import { ColumnId, Task, TaskId } from "../types";
+import { DraggableEventType } from "../types/order";
 
 // temp
 const mockTasks: Task[] = [
@@ -20,8 +21,29 @@ const mockTasks: Task[] = [
 	{
 		id: "0ac8b1ee-315c-4d1c-b223-f799dcdd3task3",
 		name: "Task 3",
+		description: "Task 3 Description",
+		order: 2,
+		columnId: "0ac8b1ee-315c-4d1c-b223-f799dcdd3ba1",
+	},
+	{
+		id: "0ac8b1ee-315c-4d1c-b223-f799dcdd3task4",
+		name: "Task 4",
+		description: "Task 4 Description",
+		order: 3,
+		columnId: "0ac8b1ee-315c-4d1c-b223-f799dcdd3ba1",
+	},
+	{
+		id: "0ac8b1ee-315c-4d1c-b223-f799dcdd3task5",
+		name: "Task 5",
+		description: "Task 5 Description",
+		order: 4,
+		columnId: "0ac8b1ee-315c-4d1c-b223-f799dcdd3ba1",
+	},
+	{
+		id: "0ac8b1ee-315c-4d1c-b223-f799dcdd3task4121",
+		name: "Other Task",
 		description: "",
-		order: 1,
+		order: 0,
 		columnId: "0ac8b1ee-315c-4d1c-b223-f799dcdd3ba2",
 	},
 ];
@@ -47,11 +69,31 @@ export const useTaskStore = defineStore("taskStore", () => {
 	};
 
 	const getTasksByColumnId = (columnId: ColumnId) => {
-		return tasks.value.filter((v) => v.columnId === columnId);
+		return tasks.value
+			.filter((v) => v.columnId === columnId)
+			.sort((a, b) => a.order - b.order);
 	};
 
 	const createTask = (task: Task) => {
 		tasks.value.push(task);
+	};
+
+	const reorderColumnTasks = (
+		event: DraggableEventType,
+		columnId: ColumnId,
+		oldOrder: number | null,
+		newOrder: number | null,
+	) => {
+		const tasks = getTasksByColumnId(columnId);
+
+		const tasksWithNewOrder = getReorderFnByDraggableEvent(event)(tasks, {
+			oldOrder,
+			newOrder,
+		});
+
+		tasksWithNewOrder.forEach((task) => {
+			editTask(task.id, task);
+		});
 	};
 
 	const editTask = (taskId: TaskId, updatedTask: Task) => {
@@ -77,11 +119,13 @@ export const useTaskStore = defineStore("taskStore", () => {
 		tasks,
 		selectedTaskId,
 		selectedTask,
+
+		selectTask,
 		getTask,
 		createTask,
+		reorderColumnTasks,
 		editTask,
 		deleteTask,
 		getTasksByColumnId,
-		selectTask,
 	};
 });

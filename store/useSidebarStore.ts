@@ -19,7 +19,8 @@ export const useSidebarStore = defineStore("sidebarStore", () => {
 	});
 
 	onMounted(() => {
-		isHidden.value = isMobile.value;
+		// temp
+		isHidden.value = !isMobile.value;
 	});
 
 	return {
