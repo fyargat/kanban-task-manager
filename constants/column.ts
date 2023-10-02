@@ -7,5 +7,14 @@ export enum Color {
 	Brown = "#c36e6e",
 }
 
+export const COLUMN_COLORS = [
+	Color.Aqua,
+	Color.Purple,
+	Color.Green,
+	Color.Orange,
+	Color.Blue,
+	Color.Brown,
+];
+
 export const MIN_COLUMNS = 1;
 export const MAX_COLUMNS = 6;

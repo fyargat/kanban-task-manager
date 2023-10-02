@@ -15,7 +15,12 @@
 
 <script setup lang="ts">
 import BoardFormModal from "~/components/BoardFormModal/BoardFormModal.vue";
-import { Color, MAX_COLUMNS, MIN_COLUMNS } from "~/constants/column";
+import {
+	COLUMN_COLORS,
+	Color,
+	MAX_COLUMNS,
+	MIN_COLUMNS,
+} from "~/constants/column";
 import { useBoardStore } from "~/store/useBoardStore";
 import { useColumnStore } from "~/store/useColumnStore";
 import { Board, Column, ColumnId } from "~/types";
@@ -52,9 +57,13 @@ const handleSubmit = () => {
 const updateName = (name: string) => (board.name = name);
 
 const addColumn = () => {
-	if (columns.value.length >= MAX_COLUMNS) return;
+	const columnsLength = columns.value.length;
 
-	const columnData = getInitColumn(board.id, Color.Aqua);
+	if (columnsLength >= MAX_COLUMNS) return;
+
+	const color = COLUMN_COLORS[columnsLength];
+
+	const columnData = getInitColumn(board.id, color);
 	columns.value.push(columnData);
 };
 
