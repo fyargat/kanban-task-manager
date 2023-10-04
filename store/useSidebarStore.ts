@@ -4,7 +4,7 @@ import { defineStore } from "pinia";
 export const useSidebarStore = defineStore("sidebarStore", () => {
 	const isMobile = useMediaQuery("(max-width: 767px)");
 
-	const isHidden = ref<boolean>(true);
+	const isHidden = ref<boolean>(false);
 
 	const show = () => {
 		isHidden.value = false;
@@ -16,11 +16,6 @@ export const useSidebarStore = defineStore("sidebarStore", () => {
 
 	watch(isMobile, (newValue) => {
 		isHidden.value = newValue;
-	});
-
-	onMounted(() => {
-		// temp
-		isHidden.value = !isMobile.value;
 	});
 
 	return {

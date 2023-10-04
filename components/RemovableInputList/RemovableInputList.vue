@@ -6,13 +6,16 @@
 
 		<ul class="removable-input-list__list">
 			<li
-				v-for="item in list"
+				v-for="(item, index) in list"
 				:key="item.id"
 				class="removable-input-list__item"
 			>
 				<RemovableInputField
 					v-model="item.name"
 					:remove="() => remove(item.id)"
+					:validation-status="
+						index === 0 ? columnsValidationStatus : ValidationStatus.Idle
+					"
 					@update-input="updateInput(item.id, $event)"
 				/>
 			</li>
@@ -31,12 +34,14 @@
 <script setup lang="ts">
 import PrimaryButton from "~/components/PrimaryButton/PrimaryButton.vue";
 import RemovableInputField from "~/components/RemovableInputField/RemovableInputField.vue";
+import { ValidationStatus } from "~/constants/validation";
 import { Column, Subtask } from "~/types";
 
 interface Props {
 	title: string;
 	buttonText: string;
 	list: Subtask[] | Column[];
+	columnsValidationStatus: ValidationStatus;
 	isHideButton?: boolean;
 	add: () => void;
 	remove: (id: string) => void;

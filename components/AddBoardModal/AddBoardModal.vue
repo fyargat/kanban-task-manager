@@ -2,6 +2,8 @@
 	<BoardFormModal
 		title="Add New Board"
 		button-text="Create New Board"
+		:board-name-validation-status="boardNameValidationStatus"
+		:columns-validation-status="columnsValidationStatus"
 		:board="board"
 		:columns="columns"
 		:on-submit="handleSubmit"
@@ -21,6 +23,7 @@ import {
 	MAX_COLUMNS,
 	MIN_COLUMNS,
 } from "~/constants/column";
+import { ValidationStatus } from "~/constants/validation";
 import { useBoardStore } from "~/store/useBoardStore";
 import { useColumnStore } from "~/store/useColumnStore";
 import { Board, Column, ColumnId } from "~/types";
@@ -41,20 +44,45 @@ const { addColumns } = columnStore;
 
 const board = reactive<Board>(getBoardTemplate());
 const columns = ref<Column[]>([getInitColumn(board.id, Color.Aqua)]);
+const boardNameValidationStatus = ref<ValidationStatus>(ValidationStatus.Idle);
+const columnsValidationStatus = ref<ValidationStatus>(ValidationStatus.Idle);
 
-const validate = () => {
-	console.log("validate");
+const isValid = () => {
+	if (isEmpty(board.name)) {
+		boardNameValidationStatus.value = ValidationStatus.Invalid;
+	}
+
+	if (isEveryEmpty(columns.value)) {
+		columnsValidationStatus.value = ValidationStatus.Invalid;
+	}
+
+	if (
+		boardNameValidationStatus.value === ValidationStatus.Invalid ||
+		columnsValidationStatus.value === ValidationStatus.Invalid
+	) {
+		return false;
+	}
+
+	return true;
 };
 
 const handleSubmit = () => {
-	validate();
+	if (!isValid()) return;
+
+	const columnsWithName = columns.value.filter((v) => !isEmpty(v.name));
 
 	createBoard(board);
-	addColumns(columns.value);
+	addColumns(columnsWithName);
 	props.onClose();
 };
 
-const updateName = (name: string) => (board.name = name);
+const updateName = (name: string) => {
+	if (boardNameValidationStatus.value === ValidationStatus.Invalid) {
+		boardNameValidationStatus.value = ValidationStatus.Idle;
+	}
+
+	board.name = name;
+};
 
 const addColumn = () => {
 	const columnsLength = columns.value.length;
@@ -68,6 +96,10 @@ const addColumn = () => {
 };
 
 const updateColumn = (itemId: string, name: string) => {
+	if (columnsValidationStatus.value === ValidationStatus.Invalid) {
+		columnsValidationStatus.value = ValidationStatus.Idle;
+	}
+
 	columns.value = columns.value.map((column) => {
 		if (column.id === itemId) {
 			return {
