@@ -21,7 +21,6 @@
 						title="Columns"
 						button-text="+Add New Column"
 						:list="columns"
-						:validation-status="columnsValidationStatus"
 						:add="addColumn"
 						:remove="removeColumn"
 						:is-hide-button="columns.length >= MAX_COLUMNS"
@@ -46,15 +45,15 @@ import PrimaryButton from "~/components/PrimaryButton/PrimaryButton.vue";
 import RemovableInputList from "~/components/RemovableInputList/RemovableInputList.vue";
 import { MAX_COLUMNS } from "~/constants/column";
 import { ValidationStatus } from "~/constants/validation";
-import { Board, Column, ColumnId } from "~/types";
+import { Board, ColumnId } from "~/types";
+import { ColumnWithValidationStatus } from "~/types/validation";
 
 interface Props {
 	title: string;
 	buttonText: string;
 	board: Board;
-	columns: Column[];
+	columns: ColumnWithValidationStatus[];
 	boardNameValidationStatus?: ValidationStatus;
-	columnsValidationStatus: ValidationStatus;
 	onClose: () => void;
 	onSubmit: () => void;
 	addColumn: () => void;

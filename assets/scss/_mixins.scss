@@ -58,10 +58,6 @@
 			@content;
 		}
 	}
-
- @else {
-		@warn "Invalid breakpoint: #{$point}";
-	}
 }
 
 @mixin modal-overlay($z-index: 9) {

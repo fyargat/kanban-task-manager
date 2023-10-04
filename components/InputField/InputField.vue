@@ -12,10 +12,10 @@
 					@input="updateInputValue"
 				/>
 				<span
-					v-if="validationStatus === ValidationStatus.Invalid"
+					v-if="INVALID_STATUSES.includes(validationStatus)"
 					class="input-field__error-text"
 				>
-					Required
+					{{ errorText ?? "Required" }}
 				</span>
 			</div>
 		</label>
@@ -23,7 +23,7 @@
 </template>
 
 <script setup lang="ts">
-import { ValidationStatus } from "~/constants/validation";
+import { INVALID_STATUSES, ValidationStatus } from "~/constants/validation";
 
 interface Props {
 	modelValue: string;
@@ -34,10 +34,18 @@ interface Props {
 
 const emit = defineEmits(["update:modelValue"]);
 
-withDefaults(defineProps<Props>(), {
+const props = withDefaults(defineProps<Props>(), {
 	disabled: false,
 	label: "",
 	validationStatus: ValidationStatus.Idle,
+});
+
+const errorText = computed(() => {
+	if (props.validationStatus === ValidationStatus.Used) {
+		return "Used";
+	}
+
+	return "Required";
 });
 
 const updateInputValue = (event: Event) => {

@@ -6,16 +6,14 @@
 
 		<ul class="removable-input-list__list">
 			<li
-				v-for="(item, index) in list"
+				v-for="item in list"
 				:key="item.id"
 				class="removable-input-list__item"
 			>
 				<RemovableInputField
 					v-model="item.name"
 					:remove="() => remove(item.id)"
-					:validation-status="
-						index === 0 ? validationStatus : ValidationStatus.Idle
-					"
+					:validation-status="item.validationStatus!"
 					@update-input="updateInput(item.id, $event)"
 				/>
 			</li>
@@ -34,22 +32,28 @@
 <script setup lang="ts">
 import PrimaryButton from "~/components/PrimaryButton/PrimaryButton.vue";
 import RemovableInputField from "~/components/RemovableInputField/RemovableInputField.vue";
-import { ValidationStatus } from "~/constants/validation";
-import { Column, Subtask } from "~/types";
+import {
+	ColumnWithValidationStatus,
+	SubtaskWithValidationStatus,
+} from "~/types/validation";
 
-interface Props {
+interface Props<T> {
 	title: string;
 	buttonText: string;
-	list: Subtask[] | Column[];
-	validationStatus: ValidationStatus;
+	list: T[];
 	isHideButton?: boolean;
 	add: () => void;
 	remove: (id: string) => void;
 }
 
-withDefaults(defineProps<Props>(), {
-	isHideButton: false,
-});
+withDefaults(
+	defineProps<
+		Props<ColumnWithValidationStatus | SubtaskWithValidationStatus>
+	>(),
+	{
+		isHideButton: false,
+	},
+);
 
 const emit = defineEmits(["update-item"]);
 
