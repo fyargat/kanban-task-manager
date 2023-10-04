@@ -53,7 +53,7 @@ interface Props {
 	buttonText: string;
 	board: Board;
 	columns: Column[];
-	boardNameValidationStatus: ValidationStatus;
+	boardNameValidationStatus?: ValidationStatus;
 	columnsValidationStatus: ValidationStatus;
 	onClose: () => void;
 	onSubmit: () => void;

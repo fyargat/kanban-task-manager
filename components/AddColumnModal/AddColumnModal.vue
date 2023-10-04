@@ -3,6 +3,7 @@
 		title="Add New Column"
 		button-text="Save Changes"
 		:is-board-name-disabled="true"
+		:columns-validation-status="columnsValidationStatus"
 		:board="board"
 		:columns="columns"
 		:on-submit="handleSubmit"
@@ -17,6 +18,7 @@
 import { storeToRefs } from "pinia";
 import BoardFormModal from "~/components/BoardFormModal/BoardFormModal.vue";
 import { COLUMN_COLORS, MAX_COLUMNS, MIN_COLUMNS } from "~/constants/column";
+import { ValidationStatus } from "~/constants/validation";
 import { useBoardStore } from "~/store/useBoardStore";
 import { useColumnStore } from "~/store/useColumnStore";
 import { Board, Column, ColumnId } from "~/types";
@@ -30,23 +32,32 @@ const props = defineProps<Props>();
 
 const boardStore = useBoardStore();
 const { selectedBoard, selectedBoardId } = storeToRefs(boardStore);
-const { editBoard } = boardStore;
 
 const columnStore = useColumnStore();
 const { getColumnsByBoardId, editColumns } = columnStore;
 
 const board = reactive<Board>({ ...selectedBoard.value! });
 const columns = ref<Column[]>(getColumnsByBoardId(selectedBoardId.value));
+const columnsValidationStatus = ref<ValidationStatus>(ValidationStatus.Idle);
 
-const validate = () => {
-	console.log("validate");
+const isValid = () => {
+	if (isEveryEmpty(columns.value)) {
+		columnsValidationStatus.value = ValidationStatus.Invalid;
+	}
+
+	if (columnsValidationStatus.value === ValidationStatus.Invalid) {
+		return false;
+	}
+
+	return true;
 };
 
 const handleSubmit = () => {
-	validate();
+	if (!isValid()) return;
 
-	editBoard(selectedBoardId.value!, board);
-	editColumns(selectedBoardId.value!, columns.value);
+	const columnsWithName = columns.value.filter((v) => !isEmpty(v.name));
+
+	editColumns(selectedBoardId.value!, columnsWithName);
 	props.onClose();
 };
 
@@ -62,6 +73,10 @@ const addColumn = () => {
 };
 
 const updateColumn = (itemId: string, name: string) => {
+	if (columnsValidationStatus.value === ValidationStatus.Invalid) {
+		columnsValidationStatus.value = ValidationStatus.Idle;
+	}
+
 	columns.value = columns.value.map((column) => {
 		if (column.id === itemId) {
 			return {
