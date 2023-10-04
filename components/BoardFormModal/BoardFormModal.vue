@@ -10,6 +10,7 @@
 					<InputField
 						label="Title"
 						:model-value="board.name"
+						:validation-status="boardNameValidationStatus"
 						:disabled="isBoardNameDisabled"
 						@input="updateName"
 					/>
@@ -43,13 +44,16 @@ import ModalDialog from "~/components/ModalDialog/ModalDialog.vue";
 import PrimaryButton from "~/components/PrimaryButton/PrimaryButton.vue";
 import RemovableInputList from "~/components/RemovableInputList/RemovableInputList.vue";
 import { MAX_COLUMNS } from "~/constants/column";
-import { Board, Column, ColumnId } from "~/types";
+import { ValidationStatus } from "~/constants/validation";
+import { Board, ColumnId } from "~/types";
+import { ColumnWithValidationStatus } from "~/types/validation";
 
 interface Props {
 	title: string;
 	buttonText: string;
 	board: Board;
-	columns: Column[];
+	columns: ColumnWithValidationStatus[];
+	boardNameValidationStatus?: ValidationStatus;
 	onClose: () => void;
 	onSubmit: () => void;
 	addColumn: () => void;

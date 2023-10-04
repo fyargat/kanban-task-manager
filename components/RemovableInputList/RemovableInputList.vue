@@ -13,6 +13,7 @@
 				<RemovableInputField
 					v-model="item.name"
 					:remove="() => remove(item.id)"
+					:validation-status="item.validationStatus!"
 					@update-input="updateInput(item.id, $event)"
 				/>
 			</li>
@@ -31,20 +32,28 @@
 <script setup lang="ts">
 import PrimaryButton from "~/components/PrimaryButton/PrimaryButton.vue";
 import RemovableInputField from "~/components/RemovableInputField/RemovableInputField.vue";
-import { Column, Subtask } from "~/types";
+import {
+	ColumnWithValidationStatus,
+	SubtaskWithValidationStatus,
+} from "~/types/validation";
 
-interface Props {
+interface Props<T> {
 	title: string;
 	buttonText: string;
-	list: Subtask[] | Column[];
+	list: T[];
 	isHideButton?: boolean;
 	add: () => void;
 	remove: (id: string) => void;
 }
 
-withDefaults(defineProps<Props>(), {
-	isHideButton: false,
-});
+withDefaults(
+	defineProps<
+		Props<ColumnWithValidationStatus | SubtaskWithValidationStatus>
+	>(),
+	{
+		isHideButton: false,
+	},
+);
 
 const emit = defineEmits(["update-item"]);
 

@@ -1,6 +1,10 @@
 <template>
 	<div class="removable-input-field__container">
-		<InputField :model-value="modelValue" @input="updateInput" />
+		<InputField
+			:model-value="modelValue"
+			:validation-status="validationStatus"
+			@input="updateInput"
+		/>
 
 		<button
 			v-if="!isHideButton"
@@ -16,10 +20,12 @@
 
 <script setup lang="ts">
 import InputField from "~/components/InputField/InputField.vue";
+import { ValidationStatus } from "~/constants/validation";
 
 interface Props {
 	modelValue: string;
 	remove: () => void;
+	validationStatus: ValidationStatus;
 	isDisabled?: boolean;
 	isHideButton?: boolean;
 }

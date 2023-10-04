@@ -9,6 +9,7 @@
 				<div class="task-form-modal__box">
 					<InputField
 						label="Title"
+						:validation-status="taskNameValidationStatus"
 						:model-value="task.name"
 						@input="updateName"
 					/>
@@ -63,14 +64,17 @@ import PrimaryButton from "~/components/PrimaryButton/PrimaryButton.vue";
 import RemovableInputList from "~/components/RemovableInputList/RemovableInputList.vue";
 import SelectBox from "~/components/SelectBox/SelectBox.vue";
 import { MAX_TASKS } from "~/constants/task";
-import { Column, ColumnId, Subtask, SubtaskId, Task } from "~/types";
+import { ValidationStatus } from "~/constants/validation";
+import { Column, ColumnId, SubtaskId, Task } from "~/types";
+import { SubtaskWithValidationStatus } from "~/types/validation";
 
 interface Props {
 	title: string;
 	buttonText: string;
 	task: Task;
-	subtasks: Subtask[];
+	subtasks: SubtaskWithValidationStatus[];
 	columns: Column[];
+	taskNameValidationStatus: ValidationStatus;
 	onClose: () => void;
 	onSubmit: () => void;
 	addSubtask: () => void;
