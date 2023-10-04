@@ -14,7 +14,7 @@
 					v-model="item.name"
 					:remove="() => remove(item.id)"
 					:validation-status="
-						index === 0 ? columnsValidationStatus : ValidationStatus.Idle
+						index === 0 ? validationStatus : ValidationStatus.Idle
 					"
 					@update-input="updateInput(item.id, $event)"
 				/>
@@ -41,7 +41,7 @@ interface Props {
 	title: string;
 	buttonText: string;
 	list: Subtask[] | Column[];
-	columnsValidationStatus: ValidationStatus;
+	validationStatus: ValidationStatus;
 	isHideButton?: boolean;
 	add: () => void;
 	remove: (id: string) => void;

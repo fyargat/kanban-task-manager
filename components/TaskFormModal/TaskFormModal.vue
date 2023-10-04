@@ -9,6 +9,7 @@
 				<div class="task-form-modal__box">
 					<InputField
 						label="Title"
+						:validation-status="taskNameValidationStatus"
 						:model-value="task.name"
 						@input="updateName"
 					/>
@@ -30,6 +31,7 @@
 						title="Subtasks"
 						button-text="+Add New Subtask"
 						:list="subtasks"
+						:validation-status="subtasksValidationStatus"
 						:add="addSubtask"
 						:remove="removeSubtask"
 						:is-hide-button="subtasks.length >= MAX_TASKS"
@@ -63,6 +65,7 @@ import PrimaryButton from "~/components/PrimaryButton/PrimaryButton.vue";
 import RemovableInputList from "~/components/RemovableInputList/RemovableInputList.vue";
 import SelectBox from "~/components/SelectBox/SelectBox.vue";
 import { MAX_TASKS } from "~/constants/task";
+import { ValidationStatus } from "~/constants/validation";
 import { Column, ColumnId, Subtask, SubtaskId, Task } from "~/types";
 
 interface Props {
@@ -71,6 +74,8 @@ interface Props {
 	task: Task;
 	subtasks: Subtask[];
 	columns: Column[];
+	taskNameValidationStatus: ValidationStatus;
+	subtasksValidationStatus: ValidationStatus;
 	onClose: () => void;
 	onSubmit: () => void;
 	addSubtask: () => void;

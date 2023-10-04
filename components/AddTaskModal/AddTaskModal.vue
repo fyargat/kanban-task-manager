@@ -5,6 +5,8 @@
 		:task="task"
 		:subtasks="subtasks"
 		:columns="columns"
+		:task-name-validation-status="taskNameValidationStatus"
+		:subtasks-validation-status="subtasksValidationStatus"
 		:on-close="onClose"
 		:on-submit="handleSubmit"
 		:add-subtask="addSubtask"
@@ -20,6 +22,7 @@
 import { storeToRefs } from "pinia";
 import TaskFormModal from "~/components/TaskFormModal/TaskFormModal.vue";
 import { MAX_TASKS, MIN_TASKS } from "~/constants/task";
+import { ValidationStatus } from "~/constants/validation";
 import { useBoardStore } from "~/store/useBoardStore";
 import { useColumnStore } from "~/store/useColumnStore";
 import { useSubtaskStore } from "~/store/useSubtaskStore";
@@ -57,19 +60,45 @@ const task = reactive<Task>(
 );
 const subtasks = ref<Subtask[]>([getInitSubtask(task.id)]);
 
-const validate = () => {
-	console.log("validate");
+const taskNameValidationStatus = ref<ValidationStatus>(ValidationStatus.Idle);
+const subtasksValidationStatus = ref<ValidationStatus>(ValidationStatus.Idle);
+
+const isValid = () => {
+	if (isEmpty(task.name)) {
+		taskNameValidationStatus.value = ValidationStatus.Invalid;
+	}
+
+	if (isEveryEmpty(subtasks.value)) {
+		subtasksValidationStatus.value = ValidationStatus.Invalid;
+	}
+
+	if (
+		taskNameValidationStatus.value === ValidationStatus.Invalid ||
+		subtasksValidationStatus.value === ValidationStatus.Invalid
+	) {
+		return false;
+	}
+
+	return true;
 };
 
 const handleSubmit = () => {
-	validate();
+	if (!isValid()) return;
+
+	const subtasksWithName = subtasks.value.filter((v) => !isEmpty(v.name));
 
 	createTask(task);
-	addSubtasks(subtasks.value);
+	addSubtasks(subtasksWithName);
 	props.onClose();
 };
 
-const updateName = (name: string) => (task.name = name);
+const updateName = (name: string) => {
+	if (taskNameValidationStatus.value === ValidationStatus.Invalid) {
+		taskNameValidationStatus.value = ValidationStatus.Idle;
+	}
+
+	task.name = name;
+};
 const updateDescription = (description: string) =>
 	(task.description = description);
 const updateColumn = (columnId: ColumnId) => {
@@ -87,6 +116,10 @@ const addSubtask = () => {
 };
 
 const updateSubtask = (itemId: SubtaskId, name: string) => {
+	if (subtasksValidationStatus.value === ValidationStatus.Invalid) {
+		subtasksValidationStatus.value = ValidationStatus.Idle;
+	}
+
 	subtasks.value = subtasks.value.map((subtask) => {
 		if (subtask.id === itemId) {
 			return {

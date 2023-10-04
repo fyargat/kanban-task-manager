@@ -21,7 +21,7 @@
 						title="Columns"
 						button-text="+Add New Column"
 						:list="columns"
-						:columns-validation-status="columnsValidationStatus"
+						:validation-status="columnsValidationStatus"
 						:add="addColumn"
 						:remove="removeColumn"
 						:is-hide-button="columns.length >= MAX_COLUMNS"
