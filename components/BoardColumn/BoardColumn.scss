@@ -41,7 +41,7 @@
 		cursor: help;
 	}
 
-	&__body {
+	&__list {
 		flex: 1;
 
 		&--empty {
@@ -49,5 +49,9 @@
 			outline: 1px dashed rgb(130 143 163 / 40%);
 			outline-width: 2px;
 		}
+	}
+
+	&__item {
+		margin-bottom: 1.5rem;
 	}
 }

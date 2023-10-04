@@ -14,16 +14,18 @@
 		<draggable
 			:list="tasks"
 			item-key="task"
-			tag="div"
-			class="board-column__body"
+			tag="ul"
+			class="board-column__list"
 			:class="{
-				'board-column__body--empty': !tasks.length,
+				'board-column__list--empty': !tasks.length,
 			}"
 			group="column"
 			@change="handleDraggableChange"
 		>
 			<template #item="{ element }">
-				<TaskCard :key="element.id" :task="element" />
+				<li class="board-column__item" data-no-dragscroll @mousedown.stop="">
+					<TaskCard :key="element.id" :task="element" />
+				</li>
 			</template>
 		</draggable>
 	</div>
