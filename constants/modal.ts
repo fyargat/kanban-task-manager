@@ -14,3 +14,8 @@ export enum BoardModalEvent {
 	BoardEdit = "board_edit",
 	ColumnAdd = "column_add",
 }
+
+export enum TaskModalEvent {
+	TaskAdd = "task_add",
+	TaskEdit = "task_edit",
+}

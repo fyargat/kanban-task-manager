@@ -31,7 +31,6 @@
 						title="Subtasks"
 						button-text="+Add New Subtask"
 						:list="subtasks"
-						:validation-status="subtasksValidationStatus"
 						:add="addSubtask"
 						:remove="removeSubtask"
 						:is-hide-button="subtasks.length >= MAX_TASKS"
@@ -66,16 +65,16 @@ import RemovableInputList from "~/components/RemovableInputList/RemovableInputLi
 import SelectBox from "~/components/SelectBox/SelectBox.vue";
 import { MAX_TASKS } from "~/constants/task";
 import { ValidationStatus } from "~/constants/validation";
-import { Column, ColumnId, Subtask, SubtaskId, Task } from "~/types";
+import { Column, ColumnId, SubtaskId, Task } from "~/types";
+import { SubtaskWithValidationStatus } from "~/types/validation";
 
 interface Props {
 	title: string;
 	buttonText: string;
 	task: Task;
-	subtasks: Subtask[];
+	subtasks: SubtaskWithValidationStatus[];
 	columns: Column[];
 	taskNameValidationStatus: ValidationStatus;
-	subtasksValidationStatus: ValidationStatus;
 	onClose: () => void;
 	onSubmit: () => void;
 	addSubtask: () => void;
