@@ -1,8 +1,17 @@
 import { defineStore } from "pinia";
+import { StorageKey } from "~/constants/storage";
+import { StoreName } from "~/store/constants";
 import { ModalType } from "~/types/modal";
+import { storage } from "~/utils/storage";
 
-export const useModalStore = defineStore("modalStore", () => {
-	const modal = ref<ModalType | null>(null);
+const getModal = () => {
+	const modal = storage.get<ModalType | null>(StorageKey.Modal) ?? null;
+
+	return modal;
+};
+
+export const useModalStore = defineStore(StoreName.Modal, () => {
+	const modal = ref<ModalType | null>(getModal());
 
 	const setModal = (modalValue: ModalType) => {
 		modal.value = modalValue;
@@ -11,6 +20,10 @@ export const useModalStore = defineStore("modalStore", () => {
 	const closeModal = () => {
 		modal.value = null;
 	};
+
+	watch(modal, (newValue) => {
+		storage.set(StorageKey.Modal, newValue);
+	});
 
 	return {
 		closeModal,

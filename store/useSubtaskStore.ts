@@ -1,24 +1,16 @@
 import { defineStore } from "pinia";
-import { Subtask, SubtaskId, TaskId } from "../types";
+import { StorageKey } from "~/constants/storage";
+import { StoreName } from "~/store/constants";
+import { Subtask, SubtaskId, TaskId } from "~/types";
 
-// temp
-const mockSubtasks: Subtask[] = [
-	{
-		id: "0ac8b1ee-315c-4d1c-b223-f799dcddsbt1",
-		taskId: "0ac8b1ee-315c-4d1c-b223-f799dcdd3task1",
-		name: "Task 1",
-		checked: true,
-	},
-	{
-		id: "0ac8b1ee-315c-4d1c-b223-f799dcddsbt2",
-		taskId: "0ac8b1ee-315c-4d1c-b223-f799dcdd3task1",
-		name: "Task 2",
-		checked: false,
-	},
-];
+const getSubtasksFromStorage = () => {
+	const subtasks = storage.get<Subtask[]>(StorageKey.Subtasks) ?? [];
 
-export const useSubtaskStore = defineStore("subtaskStore", () => {
-	const subtasks = ref<Subtask[]>(mockSubtasks ?? []);
+	return subtasks;
+};
+
+export const useSubtaskStore = defineStore(StoreName.Subtask, () => {
+	const subtasks = ref<Subtask[]>(getSubtasksFromStorage());
 
 	const getSubtasksByTaskId = (taskId: TaskId) => {
 		return subtasks.value.filter((v) => v.taskId === taskId);
@@ -53,16 +45,19 @@ export const useSubtaskStore = defineStore("subtaskStore", () => {
 		);
 	};
 
-	const deleteSubtask = () => {
-		console.log("delete");
-	};
+	watch(
+		subtasks,
+		(newValue) => {
+			storage.set(StorageKey.Subtasks, newValue);
+		},
+		{ deep: true },
+	);
 
 	return {
 		subtasks,
 		addSubtasks,
 		editSubtask,
 		editSubtasksByTaskId,
-		deleteSubtask,
 		deleteSubtasks,
 		getSubtasksByTaskId,
 	};

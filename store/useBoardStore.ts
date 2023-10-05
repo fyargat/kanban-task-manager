@@ -1,21 +1,25 @@
 import { defineStore } from "pinia";
-import { ref } from "../.nuxt/imports";
-import { Board, BoardId } from "../types";
+import { StorageKey } from "~/constants/storage";
+import { StoreName } from "~/store/constants";
+import { Board, BoardId } from "~/types";
+import { storage } from "~/utils/storage";
 
-const mockBoards: Board[] = [
-	{
-		id: "0ac8b1ee-315c-4d1c-b223-f799dcdd3bb6",
-		name: "Board 1",
-	},
-	{
-		id: "0ac8b1ee-315c-4d1c-b223-f799dcdd3bb7",
-		name: "Board 2",
-	},
-];
+const getBoardsFromStorage = () => {
+	const boards = storage.get<Board[]>(StorageKey.Boards) ?? [];
 
-export const useBoardStore = defineStore("boardStore", () => {
-	const boards = ref<Board[]>(mockBoards ?? []);
-	const selectedBoardId = ref<BoardId | null>(mockBoards[0].id ?? null);
+	return boards;
+};
+
+const getSelectedBoardIdFromStorage = () => {
+	const selectedBoardId =
+		storage.get<BoardId | null>(StorageKey.SelectedBoardId) ?? null;
+
+	return selectedBoardId;
+};
+
+export const useBoardStore = defineStore(StoreName.Board, () => {
+	const boards = ref<Board[]>(getBoardsFromStorage());
+	const selectedBoardId = ref<BoardId | null>(getSelectedBoardIdFromStorage());
 
 	const selectedBoard = computed(() => getBoard(selectedBoardId.value));
 
@@ -50,10 +54,22 @@ export const useBoardStore = defineStore("boardStore", () => {
 	};
 
 	const deleteBoard = () => {
-		boards.value = boards.value.filter((v) => v.id !== selectedBoardId.value);
+		boards.value = boards.value.filter((v) => v.id !== selectedBoardId.value!);
 
 		selectBoard(boards.value.length ? boards.value[0].id : null);
 	};
+
+	watch(
+		boards,
+		(newValue) => {
+			storage.set(StorageKey.Boards, newValue);
+		},
+		{ deep: true },
+	);
+
+	watch(selectedBoardId, (newValue) => {
+		storage.set(StorageKey.SelectedBoardId, newValue);
+	});
 
 	return {
 		boards,

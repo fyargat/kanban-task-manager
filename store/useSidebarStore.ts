@@ -1,21 +1,40 @@
 import { useMediaQuery } from "@vueuse/core";
 import { defineStore } from "pinia";
+import { StorageKey } from "~/constants/storage";
+import { StoreName } from "~/store/constants";
 
-export const useSidebarStore = defineStore("sidebarStore", () => {
+import { storage } from "~/utils/storage";
+
+const getSidebar = () => {
+	const sidebar = storage.get<boolean>(StorageKey.isSidebarHidden) ?? false;
+
+	return sidebar;
+};
+
+export const useSidebarStore = defineStore(StoreName.Sidebar, () => {
 	const isMobile = useMediaQuery("(max-width: 767px)");
 
-	const isHidden = ref<boolean>(false);
+	const isHidden = ref<boolean>(getSidebar());
 
 	const show = () => {
 		isHidden.value = false;
+		storage.set(StoreName.Sidebar, false);
 	};
 
 	const hide = () => {
 		isHidden.value = true;
+		storage.set(StoreName.Sidebar, true);
 	};
 
 	watch(isMobile, (newValue) => {
-		isHidden.value = newValue;
+		if (newValue) {
+			isHidden.value = newValue;
+			storage.set(StoreName.Sidebar, newValue);
+		}
+	});
+
+	watch(isHidden, (newValue) => {
+		storage.set(StorageKey.isSidebarHidden, newValue);
 	});
 
 	return {

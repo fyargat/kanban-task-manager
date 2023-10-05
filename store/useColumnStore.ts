@@ -1,54 +1,16 @@
 import { defineStore } from "pinia";
-import { Color } from "~/constants/column";
+import { StorageKey } from "~/constants/storage";
+import { StoreName } from "~/store/constants";
 import { BoardId, Column, ColumnId } from "~/types";
 
-const mockColumns: Column[] = [
-	{
-		id: "0ac8b1ee-315c-4d1c-b223-f799dcdd3ba1",
-		name: "Column 1",
-		color: Color.Aqua,
-		boardId: "0ac8b1ee-315c-4d1c-b223-f799dcdd3bb6",
-	},
-	{
-		id: "0ac8b1ee-315c-4d1c-b223-f799dcdd3ba2",
-		name: "Column 2",
-		color: Color.Purple,
-		boardId: "0ac8b1ee-315c-4d1c-b223-f799dcdd3bb6",
-	},
-	{
-		id: "0ac8b1ee-315c-4d1c-b223-f799dcdd3ba3",
-		name: "Column 3",
-		color: Color.Purple,
-		boardId: "0ac8b1ee-315c-4d1c-b223-f799dcdd3bb6",
-	},
-	{
-		id: "0ac8b1ee-315c-4d1c-b223-f799dcdd3ba4",
-		name: "Column 4",
-		color: Color.Purple,
-		boardId: "0ac8b1ee-315c-4d1c-b223-f799dcdd3bb6",
-	},
-	{
-		id: "0ac8b1ee-315c-4d1c-b223-f799dcdd3ba5",
-		name: "Column 5",
-		color: Color.Purple,
-		boardId: "0ac8b1ee-315c-4d1c-b223-f799dcdd3bb6",
-	},
-	{
-		id: "0ac8b1ee-315c-4d1c-b223-f799dcdd3ba6",
-		name: "Column 6",
-		color: Color.Purple,
-		boardId: "0ac8b1ee-315c-4d1c-b223-f799dcdd3bb6",
-	},
-	{
-		id: "0ac8b1ee-315c-4d1c-b223-f799dcdd3ba3",
-		name: "Column 1",
-		color: Color.Aqua,
-		boardId: "0ac8b1ee-315c-4d1c-b223-f799dcdd3bb7",
-	},
-];
+const getColumnsFromStorage = () => {
+	const columns = storage.get<Column[]>(StorageKey.Columns) ?? [];
 
-export const useColumnStore = defineStore("columnStore", () => {
-	const columns = ref<Column[]>(mockColumns ?? []);
+	return columns;
+};
+
+export const useColumnStore = defineStore(StoreName.Column, () => {
+	const columns = ref<Column[]>(getColumnsFromStorage());
 
 	const getColumnsByBoardId = (boardId: BoardId | null) => {
 		if (!boardId) return [];
@@ -79,6 +41,14 @@ export const useColumnStore = defineStore("columnStore", () => {
 			(column) => column.boardId !== boardId,
 		);
 	};
+
+	watch(
+		columns,
+		(newValue) => {
+			storage.set(StorageKey.Columns, newValue);
+		},
+		{ deep: true },
+	);
 
 	return {
 		columns,
