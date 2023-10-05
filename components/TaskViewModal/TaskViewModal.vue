@@ -81,7 +81,7 @@ const columns = computed(() => getColumnsByBoardId(selectedBoardId.value));
 
 const taskStore = useTaskStore();
 const { selectedTaskId, selectedTask } = storeToRefs(taskStore);
-const { editTask, selectTask } = taskStore;
+const { editTask, selectTask, getTasksByColumnId } = taskStore;
 
 const subtaskStore = useSubtaskStore();
 const { getSubtasksByTaskId, editSubtask } = subtaskStore;
@@ -106,9 +106,12 @@ const handleModalClose = () => {
 };
 
 const updateTaskColumn = (columnId: ColumnId) => {
+	const columnTasksCount = getTasksByColumnId(columnId).length;
+
 	editTask(selectedTaskId.value!, {
 		...selectedTask.value,
 		columnId,
+		order: columnTasksCount,
 	} as Task);
 };
 
