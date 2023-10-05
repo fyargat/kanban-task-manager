@@ -14,7 +14,11 @@
 				</g>
 			</svg>
 		</button>
-		<ul v-if="isVisible" class="option-dropdown__list">
+		<ul
+			v-if="isVisible"
+			v-click-outside="handleClickOutside"
+			class="option-dropdown__list"
+		>
 			<li class="option-dropdown__item">
 				<button @click="handleEdit">{{ editText ?? "Edit" }}</button>
 			</li>
@@ -36,6 +40,12 @@ interface Props {
 const { onDelete, onEdit } = defineProps<Props>();
 
 const isVisible = ref<boolean>(false);
+
+const handleClickOutside = () => {
+	if (!isVisible) return;
+
+	isVisible.value = false;
+};
 
 const handleEdit = () => {
 	isVisible.value = false;
