@@ -22,7 +22,12 @@
 			</div>
 		</button>
 
-		<ul v-if="isOpen" class="select-box__list list" @click.stop="">
+		<ul
+			v-if="isOpen"
+			v-click-outside="handleClickOutside"
+			class="select-box__list list"
+			@click.stop=""
+		>
 			<li v-for="option in columns" :key="option.id" class="list__item">
 				<button class="list__item-button" @click="selectOption(option.id)">
 					{{ option.name }}
@@ -37,7 +42,6 @@ import { Column, ColumnId } from "~/types";
 
 interface Props {
 	columns: Column[];
-	// currentColumn: Column;
 	currentColumnId: ColumnId;
 }
 
@@ -53,6 +57,12 @@ const currentColumn = computed(() => {
 
 const selectOption = (optionId: ColumnId) => {
 	emit("update-current-column", optionId);
+	isOpen.value = false;
+};
+
+const handleClickOutside = () => {
+	if (!isOpen) return;
+
 	isOpen.value = false;
 };
 </script>
