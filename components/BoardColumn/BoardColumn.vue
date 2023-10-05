@@ -19,6 +19,7 @@
 			:class="{
 				'board-column__list--empty': !tasks.length,
 			}"
+			:animation="200"
 			group="column"
 			@change="handleDraggableChange"
 		>
