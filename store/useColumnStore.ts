@@ -1,10 +1,11 @@
 import { defineStore } from "pinia";
 import { StorageKey } from "~/constants/storage";
+import columnsData from "~/data/columns.json";
 import { StoreName } from "~/store/constants";
 import { BoardId, Column, ColumnId } from "~/types";
 
 const getColumnsFromStorage = () => {
-	const columns = storage.get<Column[]>(StorageKey.Columns) ?? [];
+	const columns = storage.get<Column[]>(StorageKey.Columns) ?? columnsData;
 
 	return columns;
 };

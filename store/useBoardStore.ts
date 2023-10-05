@@ -1,25 +1,28 @@
 import { defineStore } from "pinia";
 import { StorageKey } from "~/constants/storage";
+import boardsData from "~/data/boards.json";
 import { StoreName } from "~/store/constants";
 import { Board, BoardId } from "~/types";
 import { storage } from "~/utils/storage";
 
 const getBoardsFromStorage = () => {
-	const boards = storage.get<Board[]>(StorageKey.Boards) ?? [];
+	const boards = storage.get<Board[]>(StorageKey.Boards) ?? boardsData;
 
 	return boards;
 };
 
-const getSelectedBoardIdFromStorage = () => {
+const getSelectedBoardIdFromStorage = (defaultId: BoardId) => {
 	const selectedBoardId =
-		storage.get<BoardId | null>(StorageKey.SelectedBoardId) ?? null;
+		storage.get<BoardId | null>(StorageKey.SelectedBoardId) ?? defaultId;
 
 	return selectedBoardId;
 };
 
 export const useBoardStore = defineStore(StoreName.Board, () => {
 	const boards = ref<Board[]>(getBoardsFromStorage());
-	const selectedBoardId = ref<BoardId | null>(getSelectedBoardIdFromStorage());
+	const selectedBoardId = ref<BoardId | null>(
+		getSelectedBoardIdFromStorage(boards.value[0].id),
+	);
 
 	const selectedBoard = computed(() => getBoard(selectedBoardId.value));
 
@@ -62,6 +65,14 @@ export const useBoardStore = defineStore(StoreName.Board, () => {
 	watch(
 		boards,
 		(newValue) => {
+			if (!newValue.length) {
+				storage.clear(StorageKey.Boards);
+				storage.clear(StorageKey.Columns);
+				storage.clear(StorageKey.Tasks);
+				storage.clear(StorageKey.Subtasks);
+				return;
+			}
+
 			storage.set(StorageKey.Boards, newValue);
 		},
 		{ deep: true },

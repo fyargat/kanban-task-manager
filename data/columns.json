@@ -1,0 +1,50 @@
+[
+	{
+		"id": "401b335c-9fea-484a-91c2-056514327c45",
+		"name": "Todo",
+		"color": "#49C4E5",
+		"boardId": "79658e2c-01ed-42de-8071-29d6bc6fbeb9"
+	},
+	{
+		"id": "30372e1e-d902-4196-ac54-4500bb440727",
+		"name": "Doing",
+		"color": "#8471F2",
+		"boardId": "79658e2c-01ed-42de-8071-29d6bc6fbeb9"
+	},
+	{
+		"id": "a594a757-d1eb-421c-8cde-b48758520192",
+		"name": "Done",
+		"color": "#67E2AE",
+		"boardId": "79658e2c-01ed-42de-8071-29d6bc6fbeb9"
+	},
+	{
+		"id": "9dbe4584-2a97-4385-a646-64e773451d31",
+		"name": "Todo",
+		"color": "#49C4E5",
+		"boardId": "0a55345b-c116-47ca-8b2e-60002719efc6"
+	},
+	{
+		"id": "baab4ff1-241e-4e55-934f-a500df460640",
+		"name": "Doing",
+		"color": "#8471F2",
+		"boardId": "0a55345b-c116-47ca-8b2e-60002719efc6"
+	},
+	{
+		"id": "17ca5b2b-99f7-4c82-a8ae-b26b8e7e9544",
+		"name": "Now",
+		"color": "#49C4E5",
+		"boardId": "44ea98d9-de7d-4203-b965-4b8961fe953e"
+	},
+	{
+		"id": "b41538fe-20f7-400a-8c33-a96fa9b4d7a0",
+		"name": "Next",
+		"color": "#8471F2",
+		"boardId": "44ea98d9-de7d-4203-b965-4b8961fe953e"
+	},
+	{
+		"id": "7b25ed35-6199-40a9-8a81-d4354f537d6d",
+		"name": "Later",
+		"color": "#67E2AE",
+		"boardId": "44ea98d9-de7d-4203-b965-4b8961fe953e"
+	}
+]

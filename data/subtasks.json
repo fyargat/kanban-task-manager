@@ -1,0 +1,326 @@
+[
+	{
+		"id": "c912b1b8-7174-4ff6-9aa0-b892436f9291",
+		"name": "Sign up page",
+		"checked": true,
+		"taskId": "2049c3c5-526e-44b9-96c5-5fee51fcbbf1"
+	},
+	{
+		"id": "557c8af9-aaf9-4510-9303-89efbde57bb3",
+		"name": "Sign in page",
+		"checked": false,
+		"taskId": "2049c3c5-526e-44b9-96c5-5fee51fcbbf1"
+	},
+	{
+		"id": "24a7adb9-9866-4a26-b2c8-5f64bfda1822",
+		"name": "Welcome page",
+		"checked": false,
+		"taskId": "2049c3c5-526e-44b9-96c5-5fee51fcbbf1"
+	},
+	{
+		"id": "dfb4dd53-17b9-4ae9-9a40-c99b4caf7d44",
+		"name": "Search page",
+		"checked": false,
+		"taskId": "14a4d84b-fe72-4ae7-91d6-fec0f98f11c1"
+	},
+	{
+		"id": "363e3a8c-5cc0-40ef-8546-f01d304a5b3a",
+		"name": "Account page",
+		"checked": false,
+		"taskId": "cc5e1b74-db0e-43e3-be53-4ca9d3da09b3"
+	},
+	{
+		"id": "9d89d0d6-418e-4d58-85f3-d1d115d31662",
+		"name": "Billing page",
+		"checked": false,
+		"taskId": "cc5e1b74-db0e-43e3-be53-4ca9d3da09b3"
+	},
+	{
+		"id": "9f8b4e85-f161-41f7-b654-a93529079e15",
+		"name": "Internal testing",
+		"checked": false,
+		"taskId": "f5558f92-e2c4-47dd-b6f0-9e63215f8839"
+	},
+	{
+		"id": "02afcc0d-78ca-4695-a157-ccbb5623154e",
+		"name": "External testing",
+		"checked": false,
+		"taskId": "f5558f92-e2c4-47dd-b6f0-9e63215f8839"
+	},
+	{
+		"id": "82dfaa9a-eef6-461e-a058-a2c9310ec098",
+		"name": "Settings - Account page",
+		"checked": true,
+		"taskId": "0ab7203f-e7c5-404b-bb1f-ad8f26b2e581"
+	},
+	{
+		"id": "971e3e90-3250-4653-80ce-5bdedb8e45b6",
+		"name": "Settings - Billing page",
+		"checked": true,
+		"taskId": "0ab7203f-e7c5-404b-bb1f-ad8f26b2e581"
+	},
+	{
+		"id": "3047fa80-a6f5-4cf8-9379-f0ee7da86036",
+		"name": "Search page",
+		"checked": false,
+		"taskId": "0ab7203f-e7c5-404b-bb1f-ad8f26b2e581"
+	},
+	{
+		"id": "94a94963-913b-4809-8506-bf6edf052728",
+		"name": "Upgrade plan",
+		"checked": true,
+		"taskId": "af00258e-ae33-4480-9a6e-21cb1dc613d1"
+	},
+	{
+		"id": "edd94337-0265-4d3a-bb8a-d88a9befbde2",
+		"name": "Cancel plan",
+		"checked": true,
+		"taskId": "af00258e-ae33-4480-9a6e-21cb1dc613d1"
+	},
+	{
+		"id": "2f7d9b4e-4378-4dea-b08d-93cc3c3d23db",
+		"name": "Update payment method",
+		"checked": false,
+		"taskId": "af00258e-ae33-4480-9a6e-21cb1dc613d1"
+	},
+	{
+		"id": "b38b614a-1cc4-4041-8784-1f21f1579e90",
+		"name": "Sign up page",
+		"checked": true,
+		"taskId": "a0686077-e668-486b-8a49-0b6e043d0f41"
+	},
+	{
+		"id": "be9b2173-6ec1-4afc-ad09-5b3e6a8eb762",
+		"name": "Sign in page",
+		"checked": true,
+		"taskId": "a0686077-e668-486b-8a49-0b6e043d0f41"
+	},
+	{
+		"id": "b820328a-f2d1-4ca7-a157-2fcabbe61aca",
+		"name": "Welcome page",
+		"checked": false,
+		"taskId": "a0686077-e668-486b-8a49-0b6e043d0f41"
+	},
+	{
+		"id": "bd062b7d-b618-4121-a4ae-741586cccdad",
+		"name": "Add search endpoint",
+		"checked": true,
+		"taskId": "c77d733e-d42d-4fd4-a6bf-d628fa6900c5"
+	},
+	{
+		"id": "f76e3956-fe8b-4c8a-9bb2-87a36b1375e6",
+		"name": "Define search filters",
+		"checked": false,
+		"taskId": "c77d733e-d42d-4fd4-a6bf-d628fa6900c5"
+	},
+	{
+		"id": "967f6189-1d62-4c85-b3f6-bcb534a396fc",
+		"name": "Define user model",
+		"checked": true,
+		"taskId": "74c50a58-55c5-403e-a55e-0e80dbef8084"
+	},
+	{
+		"id": "93dd849a-9ca0-4e3b-a6af-9c2b5928cbfe",
+		"name": "Add auth endpoints",
+		"checked": false,
+		"taskId": "74c50a58-55c5-403e-a55e-0e80dbef8084"
+	},
+	{
+		"id": "b6dae71f-32be-4fa1-a959-9b9ad3253935",
+		"name": "Research competitor pricing and business models",
+		"checked": true,
+		"taskId": "73be6704-e227-4657-b403-5785fb734806"
+	},
+	{
+		"id": "940e88f9-2b4d-498d-b16f-88eeeec29528",
+		"name": "Outline a business model that works for our solution",
+		"checked": true,
+		"taskId": "73be6704-e227-4657-b403-5785fb734806"
+	},
+	{
+		"id": "9634ecd1-a8be-4997-89b5-dd1f61ca2334",
+		"name": "Talk to potential customers about our proposed solution and ask for fair price expectancy",
+		"checked": false,
+		"taskId": "73be6704-e227-4657-b403-5785fb734806"
+	},
+	{
+		"id": "1de26af7-1fb1-4ac2-aeaf-ed884c195ab4",
+		"name": "Complete 5 wireframe prototype tests",
+		"checked": true,
+		"taskId": "189a278d-3140-4482-b794-dc93cb8f700f"
+	},
+	{
+		"id": "e55e2f5a-c334-4d3b-ad61-2126925f7d71",
+		"name": "Create clickable wireframe prototype in Balsamiq",
+		"checked": true,
+		"taskId": "825f18c8-8234-47c5-9fd3-6b092d22680f"
+	},
+	{
+		"id": "ef79c126-4ab2-462e-bd3e-1b926f474faa",
+		"name": "Meet to review notes from previous tests and plan changes",
+		"checked": true,
+		"taskId": "ad5760f3-78b9-44b1-adc3-30cffddc6592"
+	},
+	{
+		"id": "c9479a0a-1b4e-418b-b916-e6d9ed1627da",
+		"name": "Make changes to paper prototypes",
+		"checked": true,
+		"taskId": "ad5760f3-78b9-44b1-adc3-30cffddc6592"
+	},
+	{
+		"id": "75a17b78-555b-46ec-b5d0-674ed858249b",
+		"name": "Conduct 5 usability tests",
+		"checked": true,
+		"taskId": "ad5760f3-78b9-44b1-adc3-30cffddc6592"
+	},
+	{
+		"id": "a77d71e8-0f74-4bdd-b89c-bd950804ff98",
+		"name": "Create paper prototypes for version one",
+		"checked": true,
+		"taskId": "612fd05c-8034-4039-a892-6661f32ac62c"
+	},
+	{
+		"id": "9c73fb4b-a56d-43c3-bb6f-47cdcecfe025",
+		"name": "Complete 10 usability tests",
+		"checked": true,
+		"taskId": "612fd05c-8034-4039-a892-6661f32ac62c"
+	},
+	{
+		"id": "7da869de-9989-4355-875c-5d803e313291",
+		"name": "Interview 10 prospective customers",
+		"checked": true,
+		"taskId": "cf3647b7-4c2e-43e7-98ad-ebadbe99710c"
+	},
+	{
+		"id": "da8295b5-5442-4b6f-9d02-4bd7cf28b43e",
+		"name": "Find direct and indirect competitors",
+		"checked": true,
+		"taskId": "1ae9507e-1baa-48a4-a6a2-d57e3e18c660"
+	},
+	{
+		"id": "e5e2aa58-0e0b-4a43-b3bc-bcb2b9a5ce52",
+		"name": "SWOT analysis for each competitor",
+		"checked": true,
+		"taskId": "1ae9507e-1baa-48a4-a6a2-d57e3e18c660"
+	},
+	{
+		"id": "0a5fa8d0-6c6a-4e21-ac25-9adfa8f74125",
+		"name": "Write up research analysis",
+		"checked": true,
+		"taskId": "b6ea9902-9bd4-43bf-86ff-d655ddfb2efa"
+	},
+	{
+		"id": "191a7b51-0daa-4556-afd2-6c78be2c7e4e",
+		"name": "Calculate TAM",
+		"checked": true,
+		"taskId": "b6ea9902-9bd4-43bf-86ff-d655ddfb2efa"
+	},
+	{
+		"id": "432f6c78-029e-430c-bc0d-eca77b563bfe",
+		"name": "Find hunter",
+		"checked": false,
+		"taskId": "3fe8034e-b5dd-41a3-9570-5ae6b766ff8c"
+	},
+	{
+		"id": "253e4b05-82a0-41a3-8ae8-209c2c6903be",
+		"name": "Gather assets",
+		"checked": false,
+		"taskId": "3fe8034e-b5dd-41a3-9570-5ae6b766ff8c"
+	},
+	{
+		"id": "50cbc852-6d34-43f2-8420-0876eaf1e8f3",
+		"name": "Draft product page",
+		"checked": false,
+		"taskId": "3fe8034e-b5dd-41a3-9570-5ae6b766ff8c"
+	},
+	{
+		"id": "ee5bfed8-8d4f-4f4b-80a6-32532456cc44",
+		"name": "Notify customers",
+		"checked": false,
+		"taskId": "3fe8034e-b5dd-41a3-9570-5ae6b766ff8c"
+	},
+	{
+		"id": "5b1d84d2-03cb-4049-ab26-e2a80ab5bf9e",
+		"name": "Notify network",
+		"checked": false,
+		"taskId": "3fe8034e-b5dd-41a3-9570-5ae6b766ff8c"
+	},
+	{
+		"id": "0ecef319-e473-4582-836a-3fc63d3df859",
+		"name": "Launch!",
+		"checked": false,
+		"taskId": "3fe8034e-b5dd-41a3-9570-5ae6b766ff8c"
+	},
+	{
+		"id": "d321560d-d300-4d20-b19b-f9d2536086fa",
+		"name": "Draft out HN post",
+		"checked": false,
+		"taskId": "3b483750-c164-4440-98e9-663061ecf5a2"
+	},
+	{
+		"id": "6ec410ac-705f-4969-9b4b-0e0e25e9fd2f",
+		"name": "Get feedback and refine",
+		"checked": false,
+		"taskId": "3b483750-c164-4440-98e9-663061ecf5a2"
+	},
+	{
+		"id": "b00866f5-9640-4fbd-ae82-cc4826266950",
+		"name": "Publish post",
+		"checked": false,
+		"taskId": "3b483750-c164-4440-98e9-663061ecf5a2"
+	},
+	{
+		"id": "ac0d19d8-c6be-4a03-b0b9-671a95f50ecf",
+		"name": "Write article",
+		"checked": false,
+		"taskId": "7661312d-318f-4ee3-9751-27dbd33796ee"
+	},
+	{
+		"id": "41e3ae43-ea8c-4e2d-9c1b-d0c4d430042b",
+		"name": "Publish on LinkedIn",
+		"checked": false,
+		"taskId": "7661312d-318f-4ee3-9751-27dbd33796ee"
+	},
+	{
+		"id": "175ac53f-71c3-4c7e-8715-e8465094099c",
+		"name": "Publish on Inndie Hackers",
+		"checked": false,
+		"taskId": "7661312d-318f-4ee3-9751-27dbd33796ee"
+	},
+	{
+		"id": "6bd16f56-1d0a-41c1-ae59-be6962d997b2",
+		"name": "Publish on Medium",
+		"checked": false,
+		"taskId": "7661312d-318f-4ee3-9751-27dbd33796ee"
+	},
+	{
+		"id": "36935769-c15b-4fb1-bdf2-0344897e2847",
+		"name": "Launch privately to our waitlist",
+		"checked": false,
+		"taskId": "cb5d4343-7b3e-4e1c-9d32-aa69bc74207a"
+	},
+	{
+		"id": "85ce78cf-637f-467c-adfa-29a9a90b7603",
+		"name": "Launch publicly on PH, HN, etc.",
+		"checked": false,
+		"taskId": "cb5d4343-7b3e-4e1c-9d32-aa69bc74207a"
+	},
+	{
+		"id": "6b8be569-5192-48d4-8c74-1865cfbbbdfe",
+		"name": "Interview 10 customers",
+		"checked": false,
+		"taskId": "766651d0-5dba-4eaf-a830-aba25d2bff34"
+	},
+	{
+		"id": "3efe0a46-ed34-40bc-b3a4-fde9117fc2d9",
+		"name": "Review common customer pain points and suggestions",
+		"checked": false,
+		"taskId": "766651d0-5dba-4eaf-a830-aba25d2bff34"
+	},
+	{
+		"id": "222d4c19-6e02-44dd-9dc8-e58cda008854",
+		"name": "Outline next steps for our roadmap",
+		"checked": false,
+		"taskId": "766651d0-5dba-4eaf-a830-aba25d2bff34"
+	}
+]

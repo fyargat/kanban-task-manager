@@ -1,11 +1,12 @@
 import { defineStore } from "pinia";
 import { StorageKey } from "~/constants/storage";
+import tasksData from "~/data/tasks.json";
 import { StoreName } from "~/store/constants";
 import { ColumnId, Task, TaskId } from "~/types";
 import { DraggableEventType } from "~/types/order";
 
 const getTasksFromStorage = () => {
-	const tasks = storage.get<Task[]>(StorageKey.Tasks) ?? [];
+	const tasks = storage.get<Task[]>(StorageKey.Tasks) ?? tasksData;
 
 	return tasks;
 };

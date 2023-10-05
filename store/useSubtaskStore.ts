@@ -1,10 +1,11 @@
 import { defineStore } from "pinia";
 import { StorageKey } from "~/constants/storage";
+import subtasksData from "~/data/subtasks.json";
 import { StoreName } from "~/store/constants";
 import { Subtask, SubtaskId, TaskId } from "~/types";
 
 const getSubtasksFromStorage = () => {
-	const subtasks = storage.get<Subtask[]>(StorageKey.Subtasks) ?? [];
+	const subtasks = storage.get<Subtask[]>(StorageKey.Subtasks) ?? subtasksData;
 
 	return subtasks;
 };
