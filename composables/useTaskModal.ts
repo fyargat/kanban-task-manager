@@ -117,7 +117,7 @@ export const useTaskModal = ({ event, onClose }: Props) => {
 		(taskData.description = description);
 
 	const updateColumn = (columnId: ColumnId) => {
-		const columnTasksCount = getTasksByColumnId(columns.value[0].id!).length;
+		const columnTasksCount = getTasksByColumnId(columnId).length;
 
 		taskData.columnId = columnId;
 		taskData.order = columnTasksCount;

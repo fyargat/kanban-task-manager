@@ -32,28 +32,28 @@
 		"name": "Design settings and search pages",
 		"description": "",
 		"columnId": "30372e1e-d902-4196-ac54-4500bb440727",
-		"order": 4
+		"order": 0
 	},
 	{
 		"id": "af00258e-ae33-4480-9a6e-21cb1dc613d1",
 		"name": "Add account management endpoints",
 		"description": "",
 		"columnId": "30372e1e-d902-4196-ac54-4500bb440727",
-		"order": 4
+		"order": 1
 	},
 	{
 		"id": "a0686077-e668-486b-8a49-0b6e043d0f41",
 		"name": "Design onboarding flow",
 		"description": "",
 		"columnId": "30372e1e-d902-4196-ac54-4500bb440727",
-		"order": 4
+		"order": 2
 	},
 	{
 		"id": "c77d733e-d42d-4fd4-a6bf-d628fa6900c5",
 		"name": "Add search enpoints",
 		"description": "",
 		"columnId": "30372e1e-d902-4196-ac54-4500bb440727",
-		"order": 4
+		"order": 3
 	},
 	{
 		"id": "74c50a58-55c5-403e-a55e-0e80dbef8084",
@@ -67,35 +67,35 @@
 		"name": "Research pricing points of various competitors and trial different business models",
 		"description": "We know what we're planning to build for version one. Now we need to finalise the first pricing model we'll use. Keep iterating the subtasks until we have a coherent proposition.",
 		"columnId": "30372e1e-d902-4196-ac54-4500bb440727",
-		"order": 4
+		"order": 5
 	},
 	{
 		"id": "189a278d-3140-4482-b794-dc93cb8f700f",
 		"name": "Conduct 5 wireframe tests",
 		"description": "Ensure the layout continues to make sense and we have strong buy-in from potential users.",
 		"columnId": "a594a757-d1eb-421c-8cde-b48758520192",
-		"order": 4
+		"order": 0
 	},
 	{
 		"id": "825f18c8-8234-47c5-9fd3-6b092d22680f",
 		"name": "Create wireframe prototype",
 		"description": "Create a greyscale clickable wireframe prototype to test our asssumptions so far.",
 		"columnId": "a594a757-d1eb-421c-8cde-b48758520192",
-		"order": 4
+		"order": 1
 	},
 	{
 		"id": "ad5760f3-78b9-44b1-adc3-30cffddc6592",
 		"name": "Review results of usability tests and iterate",
 		"description": "Keep iterating through the subtasks until we're clear on the core concepts for the app.",
 		"columnId": "a594a757-d1eb-421c-8cde-b48758520192",
-		"order": 4
+		"order": 2
 	},
 	{
 		"id": "612fd05c-8034-4039-a892-6661f32ac62c",
 		"name": "Create paper prototypes and conduct 10 usability tests with potential customers",
 		"description": "",
 		"columnId": "a594a757-d1eb-421c-8cde-b48758520192",
-		"order": 4
+		"order": 3
 	},
 	{
 		"id": "cf3647b7-4c2e-43e7-98ad-ebadbe99710c",
@@ -109,14 +109,14 @@
 		"name": "Competitor analysis",
 		"description": "",
 		"columnId": "a594a757-d1eb-421c-8cde-b48758520192",
-		"order": 4
+		"order": 5
 	},
 	{
 		"id": "b6ea9902-9bd4-43bf-86ff-d655ddfb2efa",
 		"name": "Research the market",
 		"description": "We need to get a solid overview of the market to ensure we have up-to-date estimates of market size and demand.",
 		"columnId": "a594a757-d1eb-421c-8cde-b48758520192",
-		"order": 4
+		"order": 6
 	},
 	{
 		"id": "3fe8034e-b5dd-41a3-9570-5ae6b766ff8c",
