@@ -2,6 +2,7 @@ import { defineStore } from "pinia";
 import { StorageKey } from "~/constants/storage";
 import boardsData from "~/data/boards.json";
 import { StoreName } from "~/store/constants";
+import { useColumnStore } from "~/store/useColumnStore";
 import { Board, BoardId } from "~/types";
 import { storage } from "~/utils/storage";
 
@@ -23,6 +24,9 @@ export const useBoardStore = defineStore(StoreName.Board, () => {
 	const selectedBoardId = ref<BoardId | null>(
 		getSelectedBoardIdFromStorage(boards.value[0].id),
 	);
+
+	const columnStore = useColumnStore();
+	const { deleteColumnsByBoardId } = columnStore;
 
 	const selectedBoard = computed(() => getBoard(selectedBoardId.value));
 
@@ -57,7 +61,9 @@ export const useBoardStore = defineStore(StoreName.Board, () => {
 	};
 
 	const deleteBoard = () => {
-		boards.value = boards.value.filter((v) => v.id !== selectedBoardId.value!);
+		const boardId = selectedBoardId.value;
+		deleteColumnsByBoardId(boardId!);
+		boards.value = boards.value.filter((v) => v.id !== boardId);
 
 		selectBoard(boards.value.length ? boards.value[0].id : null);
 	};

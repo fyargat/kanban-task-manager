@@ -2,6 +2,7 @@ import { defineStore } from "pinia";
 import { StorageKey } from "~/constants/storage";
 import tasksData from "~/data/tasks.json";
 import { StoreName } from "~/store/constants";
+import { useSubtaskStore } from "~/store/useSubtaskStore";
 import { ColumnId, Task, TaskId } from "~/types";
 import { DraggableEventType } from "~/types/order";
 
@@ -21,6 +22,9 @@ const getSelectedTaskIdFromStorage = () => {
 export const useTaskStore = defineStore(StoreName.Task, () => {
 	const tasks = ref<Task[]>(getTasksFromStorage());
 	const selectedTaskId = ref<TaskId | null>(getSelectedTaskIdFromStorage());
+
+	const subtaskStore = useSubtaskStore();
+	const { deleteSubtasksByTaskId } = subtaskStore;
 
 	const selectedTask = computed(() => {
 		return getTask(selectedTaskId.value);
@@ -85,6 +89,20 @@ export const useTaskStore = defineStore(StoreName.Task, () => {
 		selectTask(null);
 	};
 
+	const deleteTasksByColumnId = (columnId: ColumnId) => {
+		const result = [] as Task[];
+
+		for (const task of tasks.value) {
+			if (task.columnId !== columnId) {
+				result.push(task);
+			} else {
+				deleteSubtasksByTaskId(task.id);
+			}
+		}
+
+		tasks.value = result;
+	};
+
 	watch(
 		tasks,
 		(newValue) => {
@@ -108,6 +126,7 @@ export const useTaskStore = defineStore(StoreName.Task, () => {
 		reorderColumnTasks,
 		editTask,
 		deleteTask,
+		deleteTasksByColumnId,
 		getTasksByColumnId,
 	};
 });

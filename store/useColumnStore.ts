@@ -2,6 +2,7 @@ import { defineStore } from "pinia";
 import { StorageKey } from "~/constants/storage";
 import columnsData from "~/data/columns.json";
 import { StoreName } from "~/store/constants";
+import { useTaskStore } from "~/store/useTaskStore";
 import { BoardId, Column, ColumnId } from "~/types";
 
 const getColumnsFromStorage = () => {
@@ -12,6 +13,9 @@ const getColumnsFromStorage = () => {
 
 export const useColumnStore = defineStore(StoreName.Column, () => {
 	const columns = ref<Column[]>(getColumnsFromStorage());
+
+	const taskStore = useTaskStore();
+	const { deleteTasksByColumnId } = taskStore;
 
 	const getColumnsByBoardId = (boardId: BoardId | null) => {
 		if (!boardId) return [];
@@ -32,15 +36,23 @@ export const useColumnStore = defineStore(StoreName.Column, () => {
 	};
 
 	const editColumns = (boardId: BoardId, newColumns: Column[]) => {
-		deleteColumns(boardId);
+		deleteColumnsByBoardId(boardId);
 
 		addColumns(newColumns);
 	};
 
-	const deleteColumns = (boardId: BoardId) => {
-		columns.value = columns.value.filter(
-			(column) => column.boardId !== boardId,
-		);
+	const deleteColumnsByBoardId = (boardId: BoardId) => {
+		const result = [] as Column[];
+
+		for (const column of columns.value) {
+			if (column.boardId !== boardId) {
+				result.push(column);
+			} else {
+				deleteTasksByColumnId(column.id);
+			}
+		}
+
+		columns.value = result;
 	};
 
 	watch(
@@ -56,7 +68,7 @@ export const useColumnStore = defineStore(StoreName.Column, () => {
 		getColumn,
 		addColumns,
 		editColumns,
-		deleteColumns,
+		deleteColumnsByBoardId,
 		getColumnsByBoardId,
 	};
 });
