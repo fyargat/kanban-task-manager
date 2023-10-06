@@ -1,9 +1,12 @@
 class Storage {
 	set = <T>(key: string, data: T) =>
-		localStorage.setItem(key, JSON.stringify(data));
+		typeof window !== "undefined"
+			? localStorage.setItem(key, JSON.stringify(data))
+			: null;
 
 	get = <T>(key: string): T | null => {
-		const data = localStorage.getItem(key);
+		const data =
+			typeof window !== "undefined" ? localStorage.getItem(key) : null;
 
 		if (!data) {
 			return null;
@@ -14,11 +17,11 @@ class Storage {
 
 	clear = (key = "false") => {
 		if (key) {
-			localStorage.removeItem(key);
+			typeof window !== "undefined" && localStorage.removeItem(key);
 			return;
 		}
 
-		localStorage.clear();
+		typeof window !== "undefined" && localStorage.clear();
 	};
 }
 
