@@ -29,7 +29,7 @@ const { theme } = storeToRefs(themeStore);
 		display: flex;
 		flex-direction: column;
 		height: 100vh;
-		background-color: var(--color-bg);
+		background-color: var(--color-background);
 	}
 
 	&__main {
