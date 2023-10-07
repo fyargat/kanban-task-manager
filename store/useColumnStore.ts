@@ -36,7 +36,7 @@ export const useColumnStore = defineStore(StoreName.Column, () => {
 	};
 
 	const editColumns = (boardId: BoardId, newColumns: Column[]) => {
-		deleteColumnsByBoardId(boardId);
+		columns.value = columns.value.filter((v) => v.boardId !== boardId);
 
 		addColumns(newColumns);
 	};

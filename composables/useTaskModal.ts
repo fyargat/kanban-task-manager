@@ -7,9 +7,9 @@ import { useColumnStore } from "~/store/useColumnStore";
 import { useSubtaskStore } from "~/store/useSubtaskStore";
 import { useTaskStore } from "~/store/useTaskStore";
 import { ColumnId, Subtask, SubtaskId, Task } from "~/types";
-import { SubtaskWithValidationStatus } from "~/types/validation";
-import { getInitSubtask } from "~/utils/subtask";
-import { getTaskTemplate } from "~/utils/task";
+import { TaskModalSubtask } from "~/types/modal";
+import { getInitSubtaskData } from "~/utils/subtask";
+import { getInitTaskData } from "~/utils/task";
 
 interface Props {
 	event: TaskModalEvent;
@@ -39,19 +39,19 @@ export const useTaskModal = ({ event, onClose }: Props) => {
 
 	const task =
 		event === TaskModalEvent.TaskAdd
-			? getTaskTemplate(columns.value[0].id, columnTasksCount.value)
+			? getInitTaskData(columns.value[0].id, columnTasksCount.value)
 			: { ...selectedTask.value! };
 	const taskData = reactive<Task>(task);
 
 	const subtasks =
 		event === TaskModalEvent.TaskAdd
-			? [getInitSubtask(taskData.id)]
+			? [getInitSubtaskData(taskData.id)]
 			: getSubtasksByTaskId(selectedTaskId.value!).map((v) => ({
 					...v,
 					validationStatus: ValidationStatus.Idle,
 			  }));
 
-	const subtasksData = ref<SubtaskWithValidationStatus[]>(subtasks);
+	const subtasksData = ref<TaskModalSubtask[]>(subtasks);
 
 	const taskNameValidationStatus = ref<ValidationStatus>(ValidationStatus.Idle);
 
@@ -61,7 +61,7 @@ export const useTaskModal = ({ event, onClose }: Props) => {
 			: ValidationStatus.Idle;
 
 		subtasksData.value = subtasksData.value.map((v) => {
-			const result = { ...v } as SubtaskWithValidationStatus;
+			const result = { ...v } as TaskModalSubtask;
 
 			if (isEmpty(v.name)) {
 				result.validationStatus = ValidationStatus.Invalid;
@@ -126,7 +126,7 @@ export const useTaskModal = ({ event, onClose }: Props) => {
 	const addSubtask = () => {
 		if (subtasksData.value.length >= MAX_TASKS) return;
 
-		const subtaskData = getInitSubtask(taskData.id);
+		const subtaskData = getInitSubtaskData(taskData.id);
 		subtasksData.value.push(subtaskData);
 	};
 

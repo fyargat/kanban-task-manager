@@ -1,7 +1,7 @@
 import { v4 } from "uuid";
 import { Board } from "~/types";
 
-export const getBoardTemplate = (): Board => ({
+export const getInitBoardData = (): Board => ({
 	id: v4(),
 	name: "",
 });
