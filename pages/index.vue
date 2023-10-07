@@ -5,6 +5,7 @@
 		<main class="page__main">
 			<SidebarDesktop v-if="!isMobile" />
 			<AppBoard />
+			<button>dsjflksdjf</button>
 		</main>
 	</div>
 </template>
