@@ -14,6 +14,7 @@
 					v-model="item.name"
 					:remove="() => remove(item.id)"
 					:validation-status="item.validationStatus!"
+					:is-disabled="(item as BoardModalColumn)?.isRemoveDisabled ?? false"
 					@update-input="updateInput(item.id, $event)"
 				/>
 			</li>
@@ -32,10 +33,7 @@
 <script setup lang="ts">
 import PrimaryButton from "~/components/PrimaryButton/PrimaryButton.vue";
 import RemovableInputField from "~/components/RemovableInputField/RemovableInputField.vue";
-import {
-	ColumnWithValidationStatus,
-	SubtaskWithValidationStatus,
-} from "~/types/validation";
+import { BoardModalColumn, TaskModalSubtask } from "~/types/modal";
 
 interface Props<T> {
 	title: string;
@@ -46,14 +44,9 @@ interface Props<T> {
 	remove: (id: string) => void;
 }
 
-withDefaults(
-	defineProps<
-		Props<ColumnWithValidationStatus | SubtaskWithValidationStatus>
-	>(),
-	{
-		isHideButton: false,
-	},
-);
+withDefaults(defineProps<Props<BoardModalColumn | TaskModalSubtask>>(), {
+	isHideButton: false,
+});
 
 const emit = defineEmits(["update-item"]);
 

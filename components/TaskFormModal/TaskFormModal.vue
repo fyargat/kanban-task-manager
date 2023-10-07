@@ -66,13 +66,13 @@ import SelectBox from "~/components/SelectBox/SelectBox.vue";
 import { MAX_TASKS } from "~/constants/task";
 import { ValidationStatus } from "~/constants/validation";
 import { Column, ColumnId, SubtaskId, Task } from "~/types";
-import { SubtaskWithValidationStatus } from "~/types/validation";
+import { TaskModalSubtask } from "~/types/modal";
 
 interface Props {
 	title: string;
 	buttonText: string;
 	task: Task;
-	subtasks: SubtaskWithValidationStatus[];
+	subtasks: TaskModalSubtask[];
 	columns: Column[];
 	taskNameValidationStatus: ValidationStatus;
 	onClose: () => void;

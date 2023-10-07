@@ -9,10 +9,11 @@ import { BoardModalEvent } from "~/constants/modal";
 import { ValidationStatus } from "~/constants/validation";
 import { useBoardStore } from "~/store/useBoardStore";
 import { useColumnStore } from "~/store/useColumnStore";
+import { useTaskStore } from "~/store/useTaskStore";
 import { Board, Column, ColumnId } from "~/types";
-import { ColumnWithValidationStatus } from "~/types/validation";
-import { getBoardTemplate } from "~/utils/board";
-import { getInitColumn } from "~/utils/column";
+import { BoardModalColumn } from "~/types/modal";
+import { getInitBoardData } from "~/utils/board";
+import { getInitColumnData } from "~/utils/column";
 import { isValidationInvalid } from "~/utils/validation";
 
 interface Props {
@@ -28,24 +29,32 @@ export const useBoardModal = ({ event, onClose }: Props) => {
 	const columnStore = useColumnStore();
 	const { addColumns, editColumns, getColumnsByBoardId } = columnStore;
 
+	const taskStore = useTaskStore();
+	const { getTaskCountByColumnId } = taskStore;
+
 	const board =
 		event === BoardModalEvent.BoardAdd
-			? getBoardTemplate()
+			? getInitBoardData()
 			: ({ ...selectedBoard.value } as Board);
 
 	const boardData = reactive<Board>(board);
 
-	const columns =
+	const columns: BoardModalColumn[] =
 		event === BoardModalEvent.BoardAdd
-			? [getInitColumn(boardData.id, Color.Aqua)]
+			? [getInitColumnData(boardData.id, Color.Aqua)]
 			: [
-					...getColumnsByBoardId(selectedBoardId.value).map((v) => ({
-						...v,
-						validationStatus: ValidationStatus.Idle,
-					})),
+					...getColumnsByBoardId(selectedBoardId.value).map((v) => {
+						const isRemoveDisabled = Boolean(getTaskCountByColumnId(v.id));
+
+						return {
+							...v,
+							validationStatus: ValidationStatus.Idle,
+							isRemoveDisabled,
+						};
+					}),
 			  ];
 
-	const columnsData = ref<ColumnWithValidationStatus[]>(columns);
+	const columnsData = ref<BoardModalColumn[]>(columns);
 	const boardNameValidationStatus = ref<ValidationStatus>(
 		ValidationStatus.Idle,
 	);
@@ -56,7 +65,7 @@ export const useBoardModal = ({ event, onClose }: Props) => {
 			: ValidationStatus.Idle;
 
 		columnsData.value = columnsData.value.map((v, index) => {
-			const result = { ...v } as ColumnWithValidationStatus;
+			const result = { ...v } as BoardModalColumn;
 
 			if (isEmpty(v.name)) {
 				result.validationStatus = ValidationStatus.Invalid;
@@ -92,24 +101,30 @@ export const useBoardModal = ({ event, onClose }: Props) => {
 
 		if (isInvalid()) return;
 
-		const columnsWithName = columnsData.value
+		const columns = columnsData.value
 			.filter((v) => !isEmpty(v.name))
-			.map(({ validationStatus: _, ...v }) => ({
-				...v,
-			})) as Column[];
+			.map(
+				({
+					validationStatus: _validationStatus,
+					isRemoveDisabled: _isRemoveDisabled,
+					...v
+				}) => ({
+					...v,
+				}),
+			) as Column[];
 
 		if (event === BoardModalEvent.BoardAdd) {
 			createBoard(boardData);
-			addColumns(columnsWithName);
+			addColumns(columns);
 		}
 
 		if (event === BoardModalEvent.BoardEdit) {
 			editBoard(selectedBoardId.value!, boardData);
-			editColumns(selectedBoardId.value!, columnsWithName);
+			editColumns(selectedBoardId.value!, columns);
 		}
 
 		if (event === BoardModalEvent.ColumnAdd) {
-			editColumns(selectedBoardId.value!, columnsWithName);
+			editColumns(selectedBoardId.value!, columns);
 		}
 
 		onClose();
@@ -130,7 +145,7 @@ export const useBoardModal = ({ event, onClose }: Props) => {
 
 		const color = COLUMN_COLORS[columnsLength];
 
-		const columnData = getInitColumn(boardData.id, color);
+		const columnData = getInitColumnData(boardData.id, color);
 		columnsData.value.push(columnData);
 	};
 
@@ -150,6 +165,9 @@ export const useBoardModal = ({ event, onClose }: Props) => {
 
 	const removeColumn = (id: ColumnId) => {
 		if (columnsData.value.length <= MIN_COLUMNS) return;
+
+		const column = columnsData.value.find((v) => v.id === id);
+		if (column?.isRemoveDisabled) return;
 
 		columnsData.value = columnsData.value.filter((column) => column.id !== id);
 	};

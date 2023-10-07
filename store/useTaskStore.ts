@@ -42,6 +42,10 @@ export const useTaskStore = defineStore(StoreName.Task, () => {
 		return task;
 	};
 
+	const getTaskCountByColumnId = (columnId: ColumnId) => {
+		return getTasksByColumnId(columnId).length;
+	};
+
 	const getTasksByColumnId = (columnId: ColumnId) => {
 		return tasks.value
 			.filter((v) => v.columnId === columnId)
@@ -122,6 +126,7 @@ export const useTaskStore = defineStore(StoreName.Task, () => {
 
 		selectTask,
 		getTask,
+		getTaskCountByColumnId,
 		createTask,
 		reorderColumnTasks,
 		editTask,

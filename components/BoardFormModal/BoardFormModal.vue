@@ -46,13 +46,13 @@ import RemovableInputList from "~/components/RemovableInputList/RemovableInputLi
 import { MAX_COLUMNS } from "~/constants/column";
 import { ValidationStatus } from "~/constants/validation";
 import { Board, ColumnId } from "~/types";
-import { ColumnWithValidationStatus } from "~/types/validation";
+import { BoardModalColumn } from "~/types/modal";
 
 interface Props {
 	title: string;
 	buttonText: string;
 	board: Board;
-	columns: ColumnWithValidationStatus[];
+	columns: BoardModalColumn[];
 	boardNameValidationStatus?: ValidationStatus;
 	onClose: () => void;
 	onSubmit: () => void;

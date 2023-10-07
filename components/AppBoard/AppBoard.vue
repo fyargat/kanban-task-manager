@@ -4,7 +4,7 @@
 			<perfect-scrollbar
 				v-dragscroll
 				:class="{
-					'app-board__container--full': isHidden,
+					'app-board__container--full': isBoardFull,
 					'app-board__container--no-boards': !boards.length,
 				}"
 				class="app-board__container"
@@ -50,6 +50,7 @@
 </template>
 
 <script setup lang="ts">
+import { useMediaQuery } from "@vueuse/core";
 import { storeToRefs } from "pinia";
 import BoardColumn from "~/components/BoardColumn/BoardColumn.vue";
 import PrimaryButton from "~/components/PrimaryButton/PrimaryButton.vue";
@@ -64,7 +65,16 @@ const modalStore = useModalStore();
 const { setModal } = modalStore;
 
 const sidebarStore = useSidebarStore();
-const { isHidden } = storeToRefs(sidebarStore);
+const { isHidden: isSidebarHidden } = storeToRefs(sidebarStore);
+const isMobile = useMediaQuery("(max-width: 767px)");
+
+const isBoardFull = computed(() => {
+	if (isMobile.value) {
+		return true;
+	}
+
+	return isSidebarHidden.value;
+});
 
 const boardStore = useBoardStore();
 const { selectedBoardId, boards } = storeToRefs(boardStore);
