@@ -9,6 +9,7 @@
 </template>
 
 <script setup lang="ts">
+import { useToast } from "vue-toastification";
 import { storeToRefs } from "pinia";
 import DeleteModal from "~/components/DeleteModal/DeleteModal.vue";
 import { useModalStore } from "~/store/useModalStore";
@@ -27,8 +28,11 @@ const taskStore = useTaskStore();
 const { selectedTask } = storeToRefs(taskStore);
 const { deleteTask } = taskStore;
 
+const toast = useToast();
+
 const handleConfirmDeletion = () => {
 	deleteTask();
 	closeModal();
+	toast.success("Task deleted");
 };
 </script>
