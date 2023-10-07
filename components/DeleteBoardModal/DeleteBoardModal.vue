@@ -10,6 +10,7 @@
 
 <script setup lang="ts">
 import { storeToRefs } from "pinia";
+import { useToast } from "vue-toastification";
 
 import DeleteModal from "~/components/DeleteModal/DeleteModal.vue";
 import { useBoardStore } from "~/store/useBoardStore";
@@ -27,9 +28,11 @@ const { closeModal } = modalStore;
 const boardStore = useBoardStore();
 const { selectedBoard } = storeToRefs(boardStore);
 const { deleteBoard } = boardStore;
+const toast = useToast();
 
 const handleConfirmDeletion = () => {
 	deleteBoard();
 	closeModal();
+	toast.success("Board deleted");
 };
 </script>

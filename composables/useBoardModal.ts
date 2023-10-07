@@ -1,4 +1,5 @@
 import { storeToRefs } from "pinia";
+import { useToast } from "vue-toastification";
 import {
 	COLUMN_COLORS,
 	Color,
@@ -22,6 +23,8 @@ interface Props {
 }
 
 export const useBoardModal = ({ event, onClose }: Props) => {
+	const toast = useToast();
+
 	const boardStore = useBoardStore();
 	const { selectedBoard, selectedBoardId } = storeToRefs(boardStore);
 	const { createBoard, editBoard } = boardStore;
@@ -99,7 +102,10 @@ export const useBoardModal = ({ event, onClose }: Props) => {
 	const submit = () => {
 		validate();
 
-		if (isInvalid()) return;
+		if (isInvalid()) {
+			toast.error("Invalid form data. Please check your input and try again");
+			return;
+		}
 
 		const columns = columnsData.value
 			.filter((v) => !isEmpty(v.name))
@@ -116,15 +122,18 @@ export const useBoardModal = ({ event, onClose }: Props) => {
 		if (event === BoardModalEvent.BoardAdd) {
 			createBoard(boardData);
 			addColumns(columns);
+			toast.success("Board created");
 		}
 
 		if (event === BoardModalEvent.BoardEdit) {
 			editBoard(selectedBoardId.value!, boardData);
 			editColumns(selectedBoardId.value!, columns);
+			toast.success("Board edited");
 		}
 
 		if (event === BoardModalEvent.ColumnAdd) {
 			editColumns(selectedBoardId.value!, columns);
+			toast.success("Board edited");
 		}
 
 		onClose();
