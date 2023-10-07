@@ -1,45 +1,52 @@
 <template>
-	<perfect-scrollbar
-		v-dragscroll
-		:class="{
-			'app-board__container--full': isHidden,
-			'app-board__container--no-boards': !boards.length,
-		}"
-		class="app-board__container"
-	>
-		<template v-if="boards.length">
-			<ul v-if="columns.length" class="app-board__columns">
-				<li
-					v-for="column in columns"
-					:key="column.id"
-					class="app-board__column"
-				>
-					<BoardColumn :column="column" />
-				</li>
-			</ul>
-
-			<div v-if="columns.length < MAX_COLUMNS" class="app-board__new-column">
-				<button
-					type="button"
-					class="app-board__new-column-button"
-					@click="handleColumnAdd"
-				>
-					+ New Column
-				</button>
-			</div>
-		</template>
-		<div v-else class="app-board__no-boards">
-			<p class="app-board__no-boards-text">
-				This board is empty. Create new board to get started.
-			</p>
-			<PrimaryButton
-				class="app-board__no-boards-button"
-				@click="handleBoardAdd"
+	<div>
+		<ClientOnly>
+			<perfect-scrollbar
+				v-dragscroll
+				:class="{
+					'app-board__container--full': isHidden,
+					'app-board__container--no-boards': !boards.length,
+				}"
+				class="app-board__container"
 			>
-				+ Create New Board
-			</PrimaryButton>
-		</div>
-	</perfect-scrollbar>
+				<template v-if="boards.length">
+					<ul v-if="columns.length" class="app-board__columns">
+						<li
+							v-for="column in columns"
+							:key="column.id"
+							class="app-board__column"
+						>
+							<BoardColumn :column="column" />
+						</li>
+					</ul>
+
+					<div
+						v-if="columns.length < MAX_COLUMNS"
+						class="app-board__new-column"
+					>
+						<button
+							type="button"
+							class="app-board__new-column-button"
+							@click="handleColumnAdd"
+						>
+							+ New Column
+						</button>
+					</div>
+				</template>
+				<div v-else class="app-board__no-boards">
+					<p class="app-board__no-boards-text">
+						This board is empty. Create new board to get started.
+					</p>
+					<PrimaryButton
+						class="app-board__no-boards-button"
+						@click="handleBoardAdd"
+					>
+						+ Create New Board
+					</PrimaryButton>
+				</div>
+			</perfect-scrollbar>
+		</ClientOnly>
+	</div>
 </template>
 
 <script setup lang="ts">
