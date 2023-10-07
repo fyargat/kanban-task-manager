@@ -2,7 +2,7 @@
 	<div>
 		<div
 			:class="{
-				'sidebar-desktop__container--hide': isHidden,
+				'sidebar-desktop__container--hide': isSidebarHidden,
 			}"
 			class="sidebar-desktop__container"
 		>
@@ -71,7 +71,7 @@ const modalStore = useModalStore();
 const { setModal } = modalStore;
 
 const sidebarStore = useSidebarStore();
-const { isHidden } = storeToRefs(sidebarStore);
+const { isHidden: isSidebarHidden } = storeToRefs(sidebarStore);
 const { show, hide } = sidebarStore;
 
 const boardStore = useBoardStore();
