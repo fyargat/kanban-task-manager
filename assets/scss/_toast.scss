@@ -1,0 +1,14 @@
+@import "~/assets/scss/vars";
+
+$vt-color-success: $green;
+$vt-text-color-success: $white;
+$vt-color-error: $red;
+$vt-font-family: $font;
+
+@import "vue-toastification/src/scss/variables";
+@import "vue-toastification/src/scss/toastContainer";
+@import "vue-toastification/src/scss/toast";
+@import "vue-toastification/src/scss/closeButton";
+@import "vue-toastification/src/scss/progressBar";
+@import "vue-toastification/src/scss/icon";
+@import "vue-toastification/src/scss/animations/bounce";

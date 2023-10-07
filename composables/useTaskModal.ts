@@ -1,4 +1,5 @@
 import { storeToRefs } from "pinia";
+import { useToast } from "vue-toastification";
 import { TaskModalEvent } from "~/constants/modal";
 import { MAX_TASKS, MIN_TASKS } from "~/constants/task";
 import { ValidationStatus } from "~/constants/validation";
@@ -17,6 +18,8 @@ interface Props {
 }
 
 export const useTaskModal = ({ event, onClose }: Props) => {
+	const toast = useToast();
+
 	const boardStore = useBoardStore();
 	const { selectedBoardId } = storeToRefs(boardStore);
 
@@ -85,9 +88,12 @@ export const useTaskModal = ({ event, onClose }: Props) => {
 	const submit = () => {
 		validate();
 
-		if (isInvalid()) return;
+		if (isInvalid()) {
+			toast.error("Invalid form data. Please check your input and try again");
+			return;
+		}
 
-		const subtasksWithName = subtasksData.value
+		const subtasks = subtasksData.value
 			.filter((v) => !isEmpty(v.name))
 			.map(({ validationStatus: _, ...v }) => ({
 				...v,
@@ -95,12 +101,14 @@ export const useTaskModal = ({ event, onClose }: Props) => {
 
 		if (event === TaskModalEvent.TaskAdd) {
 			createTask(taskData);
-			addSubtasks(subtasksWithName);
+			addSubtasks(subtasks);
+			toast.success("Task created");
 		}
 
 		if (event === TaskModalEvent.TaskEdit) {
 			editTask(selectedTaskId.value!, task);
-			editSubtasksByTaskId(selectedTaskId.value!, subtasksWithName);
+			editSubtasksByTaskId(selectedTaskId.value!, subtasks);
+			toast.success("Task edited");
 		}
 
 		onClose();
