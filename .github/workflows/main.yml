@@ -1,20 +1,19 @@
-name: Main
+name: Build & Deploy
 
 on:
   push:
-  #   branches:
-  #     - deploy
-  #   tags:
-  #     - v*
-  # pull_request:
+    branches:
+      - main
+    tags:
+      - v*
 
 env:
   IMAGE_NAME: kanban
-#
-jobs:
-  push:
-    runs-on: ubuntu-latest
 
+jobs:
+  build:
+    name: Build & Push
+    runs-on: ubuntu-latest
     permissions:
       packages: write
       contents: read
@@ -44,3 +43,24 @@ jobs:
           echo VERSION=$VERSION
           docker tag $IMAGE_NAME $IMAGE_ID:$VERSION
           docker push $IMAGE_ID:$VERSION
+
+  deploy:
+    name: Deploy
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: executing remote ssh commands using password
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          debug: true
+          script_stop: true
+          envs: IMAGE_NAME
+          script: |
+            docker pull ghcr.io/fyargat/kanban:latest
+            docker stop "$IMAGE_NAME"
+            docker container prune -f
+            docker run -dp 3000:3000 --rm --name "$IMAGE_NAME"  ghcr.io/fyargat/kanban:latest
