@@ -10,6 +10,9 @@ export default defineNuxtConfig({
 	},
 	pages: true,
 	app: {
+		head: {
+			title: "Kanban Task Manager",
+		},
 		buildAssetsDir: "assets",
 	},
 	experimental: {
