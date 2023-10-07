@@ -12,6 +12,7 @@ export default defineNuxtConfig({
 	app: {
 		head: {
 			title: "Kanban Task Manager",
+			link: [{ rel: "icon", href: "/favicon.svg" }],
 		},
 		buildAssetsDir: "assets",
 	},
