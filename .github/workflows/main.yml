@@ -111,6 +111,8 @@ jobs:
           docker --version
           docker ps
           echo 4
+          echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u $ --password-stdin
+          echo 5
 
         # run: |
         #   docker --version
