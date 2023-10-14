@@ -45,7 +45,7 @@
     "prettier": "^3.0.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "sass": "^1.68.0",
+    "sass": "^1.69.0",
     "scss-reset": "^1.4.2",
     "storybook": "next",
     "stylelint": "^15.10.3",
