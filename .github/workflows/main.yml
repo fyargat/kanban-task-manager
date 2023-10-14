@@ -74,7 +74,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      DOCKER_HOST: "ssh://$USERNAME@$HOST"
+      DOCKER_HOST: "ssh://${{ secrets.USERNAME }}@${{ secrets.HOST }}"
       DOCKER_USERNAME: ${{ secrets.CI_REGISTRY_USER }}
       DOCKER_PASSWORD: ${{ secrets.CI_REGISTRY_PASSWORD }}
       SERVER: ${{ secrets.SERVER }}
