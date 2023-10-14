@@ -49,18 +49,23 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
 
+    env:
+      DOCKER_HOST: "ssh://${{ secrets.USERNAME }}@${{ secrets.HOST }}"
+
     steps:
-      - name: executing remote ssh commands using password
-        uses: appleboy/ssh-action@v1.0.0
-        with:
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.USERNAME }}
-          password: ${{ secrets.PASSWORD }}
-          debug: true
-          script_stop: true
-          envs: IMAGE_NAME
-          script: |
-            docker pull ghcr.io/fyargat/kanban:latest
-            docker stop "$IMAGE_NAME"
-            docker container prune -f
-            docker run -dp 3000:3000 --rm --name "$IMAGE_NAME"  ghcr.io/fyargat/kanban:latest
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: SSH
+        run: |
+          mkdir -p ~/.ssh
+          chmod 700 ~/.ssh
+          ssh-keyscan ${{ secrets.HOST }} >> ~/.ssh/known_hosts
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" | tr -d '\r' > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+
+      - name: Log in to registry
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u $ --password-stdin
+
+      - name: Docker stack deploy
+        run: docker stack deploy -c docker-compose.yml --with-registry-auth proxy
