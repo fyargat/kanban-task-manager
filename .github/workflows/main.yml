@@ -82,20 +82,33 @@ jobs:
 
       - name: Set up Docker
 
+        # run: |
+        #   echo test
+        #   echo "$DOCKER_HOST"
+        #   eval $(ssh-agent -s)
+        #   echo 1
+        #   echo "${{ secrets.SSH_PRIVATE_KEY }}" | tr -d '\r' | ssh-add -
+        #   echo 2
+        #   mkdir -p ~/.ssh
+        #   echo 3
+        #   chmod 700 ~/.ssh
+        #   echo 4
+        #   docker --version
+        #   docker ps
+        #   echo 5
+
         run: |
           echo test
           echo "$DOCKER_HOST"
-          eval $(ssh-agent -s)
+          ssh-keyscan ${{ secrets.SERVER }} >> ~/.ssh/known_hosts
           echo 1
-          echo "${{ secrets.SSH_PRIVATE_KEY }}" | tr -d '\r' | ssh-add -
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" | tr -d '\r' > ~/.ssh/id_rsa
           echo 2
-          mkdir -p ~/.ssh
+          chmod 600 ~/.ssh/id_rsa
           echo 3
-          chmod 700 ~/.ssh
-          echo 4
           docker --version
           docker ps
-          echo 5
+          echo 4
 
         # run: |
         #   docker --version
