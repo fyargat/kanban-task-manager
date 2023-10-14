@@ -87,6 +87,7 @@ jobs:
       - name: Set up Docker
 
         run: |
+          - echo test
           - echo "$DOCKER_HOST"
 
         # run: |
