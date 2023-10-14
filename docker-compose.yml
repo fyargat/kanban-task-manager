@@ -1,7 +1,8 @@
-version: "3"
+version: "3.8"
 services:
-  my-app:
-    build:
-      context: .
+  kanban:
+    image: ghcr.io/fyargat/kanban:latest
     ports:
-      - "3000:3000"
+      - target: 3000
+        published: 3000
+        mode: host

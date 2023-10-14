@@ -113,6 +113,7 @@ jobs:
           echo 4
           echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u $ --password-stdin
           echo 5
+          docker stack deploy -c docker-compose.yml --with-registry-auth test
 
         # run: |
         #   docker --version
