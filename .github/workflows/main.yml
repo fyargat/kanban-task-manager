@@ -75,10 +75,6 @@ jobs:
 
     env:
       DOCKER_HOST: "ssh://${{ secrets.USERNAME }}@${{ secrets.HOST }}"
-      DOCKER_USERNAME: ${{ secrets.CI_REGISTRY_USER }}
-      DOCKER_PASSWORD: ${{ secrets.CI_REGISTRY_PASSWORD }}
-      SERVER: ${{ secrets.SERVER }}
-      SERVER_USER: ${{ secrets.SERVER_USER }}
 
     steps:
       - name: Checkout code
@@ -89,15 +85,15 @@ jobs:
         run: |
           echo test
           echo "$DOCKER_HOST"
+          eval $(ssh-agent -s)
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" | tr -d '\r' | ssh-add -
+          mkdir -p ~/.ssh
+          chmod 700 ~/.ssh
+          '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+          echo docker --version
 
         # run: |
         #   docker --version
         #   docker login -u ${{ secrets.CI_REGISTRY_USER }} -p ${{ secrets.CI_REGISTRY_PASSWORD }} ${{ secrets.CI_REGISTRY }}
 
       # - name: Deploy
-      #   run: |
-      #     - eval $(ssh-agent -s)
-      #     - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
-      #     - mkdir -p ~/.ssh
-      #     - chmod 700 ~/.ssh
-      #     - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
