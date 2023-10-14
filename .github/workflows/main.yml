@@ -65,11 +65,6 @@ jobs:
   #           docker container prune -f
   #           docker run -dp 3000:3000 --rm --name "$IMAGE_NAME"  ghcr.io/fyargat/kanban:latest
 
-  # ssh-keyscan ${{ secrets.SERVER }} >> ~/.ssh/known_hosts
-  # echo "${{ secrets.SSH_PRIVATE_KEY }}" | tr -d '\r' > ~/.ssh/id_rsa
-  # chmod 600 ~/.ssh/id_rsa
-  # docker stack deploy -c docker-compose.prod.yml --with-registry-auth outlinet
-
   deploy:
     runs-on: ubuntu-latest
 
@@ -80,43 +75,16 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Set up Docker
-
-        # run: |
-        #   echo test
-        #   echo "$DOCKER_HOST"
-        #   eval $(ssh-agent -s)
-        #   echo 1
-        #   echo "${{ secrets.SSH_PRIVATE_KEY }}" | tr -d '\r' | ssh-add -
-        #   echo 2
-        #   mkdir -p ~/.ssh
-        #   echo 3
-        #   chmod 700 ~/.ssh
-        #   echo 4
-        #   docker --version
-        #   docker ps
-        #   echo 5
-
+      - name: SSH
         run: |
-          echo test
-          echo "$DOCKER_HOST"
           mkdir -p ~/.ssh
           chmod 700 ~/.ssh
           ssh-keyscan ${{ secrets.HOST }} >> ~/.ssh/known_hosts
-          echo 1
           echo "${{ secrets.SSH_PRIVATE_KEY }}" | tr -d '\r' > ~/.ssh/id_rsa
-          echo 2
           chmod 600 ~/.ssh/id_rsa
-          echo 3
-          docker --version
-          docker ps
-          echo 4
-          echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u $ --password-stdin
-          echo 5
-          docker stack deploy -c docker-compose.yml --with-registry-auth test
 
-        # run: |
-        #   docker --version
-        #   docker login -u ${{ secrets.CI_REGISTRY_USER }} -p ${{ secrets.CI_REGISTRY_PASSWORD }} ${{ secrets.CI_REGISTRY }}
+      - name: Log in to registry
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u $ --password-stdin
 
-      # - name: Deploy
+      - name: Docker stack deploy
+        run: docker stack deploy -c docker-compose.yml --with-registry-auth proxy
