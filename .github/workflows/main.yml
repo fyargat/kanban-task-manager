@@ -100,6 +100,8 @@ jobs:
         run: |
           echo test
           echo "$DOCKER_HOST"
+          mkdir -p ~/.ssh
+          chmod 700 ~/.ssh
           ssh-keyscan ${{ secrets.HOST }} >> ~/.ssh/known_hosts
           echo 1
           echo "${{ secrets.SSH_PRIVATE_KEY }}" | tr -d '\r' > ~/.ssh/id_rsa
