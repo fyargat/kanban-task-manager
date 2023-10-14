@@ -93,8 +93,6 @@ jobs:
           echo 3
           chmod 700 ~/.ssh
           echo 4
-          '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
-          echo 5
           echo docker --version
 
         # run: |
