@@ -93,7 +93,7 @@ jobs:
           echo 3
           chmod 700 ~/.ssh
           echo 4
-          echo docker --version
+          docker --version
 
         # run: |
         #   docker --version
