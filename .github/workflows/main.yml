@@ -54,7 +54,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: SSH
         run: |
@@ -70,4 +70,4 @@ jobs:
       - name: Docker stack deploy
         run: |
           docker pull ghcr.io/fyargat/kanban:latest
-          docker stack deploy -c docker-compose.yml --with-registry-auth proxy
+          docker stack deploy -c docker-compose.yml --with-registry-auth portfolio
