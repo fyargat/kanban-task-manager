@@ -1,8 +1,9 @@
-version: "3"
+version: "3.8"
 services:
-  kanban:
+  app:
     image: ghcr.io/fyargat/kanban:latest
-    ports:
-      - target: 3001
-        published: 3001
-        mode: host
+
+networks:
+  default:
+    name: portfolio_network
+    external: true
