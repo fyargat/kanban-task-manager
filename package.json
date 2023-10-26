@@ -16,7 +16,8 @@
     "prepare": "husky install",
     "lint-staged": "lint-staged",
     "storybook": "storybook dev --port 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "postversion": "git push && git push --tags"
   },
   "devDependencies": {
     "@nuxt/devtools": "latest",
